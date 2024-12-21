@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../img/apple-icon.png">
   <link rel="icon" type="image/png" href="../img/favicon.png">
   <title>
-    Produk
+    Elearning
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -25,8 +25,8 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
-        <i class="fas fa-fw fa-shopping-cart"></i>
+      <a class="navbar-brand m-0" href="../pages/dashboard.php">
+        <i class="fas fa-fw fa-shopping-cart"></i> 
         <span class="ms-1 font-weight-bold">Elearning</span>
       </a>
     </div>
@@ -34,10 +34,10 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/dashboard.php">
+          <a class="nav-link  active" href="../pages/dashboard.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>PPPPPP</title>
+                <title>shop </title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -54,10 +54,10 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/produk.php">
+          <a class="nav-link  " href="../pages/produk.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>office</title>
+                <title>Toko</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/histori.php">
+          <a class="nav-link  " href="#">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -158,72 +158,96 @@
             <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
-        
       </ul>
     </div>
     
+    </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
-    
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Materi</li>
+        <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg bg-transparent shadow-none position-absolute px-4 w-100 z-index-2">
+      <div class="container-fluid py-1">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
           </ol>
-        
+          <h6 class="text-white font-weight-bolder ms-2">Dashboard</h6>
+        </nav>
+        <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-
-              <h6>Materi</h6>
-                </form>
-
+    <div class="container-fluid">
+      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../img/APOTEK_2.jpg'); background-position-y: 50%;">
+        <span class="mask bg-gradient-primary opacity-6"></span>
+      </div>
+      <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div class="row gx-4">
+          <div class="col-auto">
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">Selamat datang Guru di Elearning .</h5>
+              <p class="mb-0 font-weight-bold text-sm">Siswa</p>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr class="text-xs font-weight-bold opacity-6">
-                      <th>No</th>
-                      <th class="align-middle text-left">Nama Pelajaran</th>
-                      <th class="align-middle text-left">Guru</th>
-                      <th class="align-middle text-left">Materi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- <?php
-                      $qry_produk = mysqli_query($conn,"SELECT * FROM produk ORDER BY id_produk DESC");
-                      $no=0;
-                      while($data_produk=mysqli_fetch_array($qry_produk)){
-                      $no++;?>
-                      <tr class="text-xs font-weight-bold">
-                          <td class="align-middle text-left"><?=$no?></td>
-                          <td class="align-middle text-left"><?=$data_produk['nama_produk']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['deskripsi']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['harga']?></td> 
-                          <td><img src="assets/foto_produk/<?=$data_produk['foto_produk']?>" width="100px";></td>
-                          <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success" href="ubah_produk.php?id_produk=<?=$data_produk['id_produk']?>" >Ubah</a>
-
-                          <a href="hapus_produk.php?id_produk=<?=$data_produk['id_produk']?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
-                      </tr>
-                      <?php
-                      }
-                      ?> -->
-                  </tbody>
-                </table>
-              </div>
+          </div>
+       
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
+
+    <!-- biar displaynya flex -->
+    <div class="col-12 mt-4">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-1">Elearning</h6> 
+            </div>
+              <div class="row">
+                <div class="col-xl-0 col-md-0 mb-xl-0 mb-0">
+                  <div class="card card-blog card-plain">
+                    <div class="position-relative">
+                    </div>
+                    <div class="card-body px-1 pb-0">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="avatar-group mt-2"> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+        <div class="col-md-3">
+        <div class="card" >
+        {{-- <img src="resources/foto_produk/" class="card-img-top">
+        <div class="card-body">
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
+        <a href="beli_produk.php?id_produk=" class="btn btn-primary">Beli Obat</a> --}}
+        </div>
+        </div>
+        </div>
+        </div>
 
 
       
+
+
+
+        
   <!--   Core JS Files   -->
   <script src="../js/core/popper.min.js"></script>
   <script src="../js/core/bootstrap.min.js"></script>
@@ -245,4 +269,3 @@
 </body>
 
 </html>
-              c:\laragon\www\Apotek1\assets

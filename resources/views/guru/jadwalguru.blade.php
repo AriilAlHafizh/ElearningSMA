@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../img/apple-icon.png">
   <link rel="icon" type="image/png" href="../img/favicon.png">
-  <title>
-    Produk
-  </title>
+  <title>Jadwal</title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -37,7 +35,7 @@
           <a class="nav-link  " href="../pages/dashboard.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>PPPPPP</title>
+                <title>shop </title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -54,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/produk.php">
+          <a class="nav-link  " href="../pages/produk.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -91,11 +89,11 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Nilai</span>
+            <span class="nav-link-text ms-1">Nilai  </span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/pelanggan.php">
+          <a class="nav-link  active" href="../pages/pelanggan.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -111,6 +109,7 @@
                 </g>
               </svg>
             </div>
+           
             <span class="nav-link-text ms-1">Jadwal</span>
           </a>
         </li>
@@ -168,7 +167,7 @@
     
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Materi</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Jadwal</li>
           </ol>
         
     <!-- End Navbar -->
@@ -178,9 +177,51 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
 
-              <h6>Materi</h6>
+              <h6>Jadwal</h6>
+               <!-- Button trigger modal -->
+               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Tambah Jadwal
+                </button>
+                <form action="" method="post">
+
                 </form>
 
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Jadwal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="POST" action="../pages/proses_tambah_produk.php" enctype="multipart/form-data">
+                          <section class="base">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"></label>
+                          <input type="hidden" name="id_produk" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
+                          <input type="text" name="nama_produk" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Hari</label>
+                          <input type="text" name="deskripsi" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Waktu</label>
+                          <input type="text" name="harga" class="form-control">
+                        </div>
+                        <div>
+                            <input type="submit" name="simpan" value="Tambah Produk" class="btn btn-outline-primary">
+                        </div>
+                      </section>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
@@ -189,30 +230,29 @@
                     <tr class="text-xs font-weight-bold opacity-6">
                       <th>No</th>
                       <th class="align-middle text-left">Nama Pelajaran</th>
-                      <th class="align-middle text-left">Guru</th>
-                      <th class="align-middle text-left">Materi</th>
+                      <th class="align-middle text-left">Hari</th>
+                      <th class="align-middle text-left">Waktu</th>
                     </tr>
                   </thead>
                   <tbody>
                     <!-- <?php
-                      $qry_produk = mysqli_query($conn,"SELECT * FROM produk ORDER BY id_produk DESC");
+                      $qry_pelanggan=mysqli_query($conn,"select * from pelanggan");
                       $no=0;
-                      while($data_produk=mysqli_fetch_array($qry_produk)){
+                      while($data_pelanggan=mysqli_fetch_array($qry_pelanggan)){
                       $no++;?>
                       <tr class="text-xs font-weight-bold">
                           <td class="align-middle text-left"><?=$no?></td>
-                          <td class="align-middle text-left"><?=$data_produk['nama_produk']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['deskripsi']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['harga']?></td> 
-                          <td><img src="assets/foto_produk/<?=$data_produk['foto_produk']?>" width="100px";></td>
+                          <td class="align-middle text-left"><?=$data_pelanggan['nama']?></td>
+                          <td class="align-middle text-left"><?=$data_pelanggan['alamat']?></td>
+                          <td class="align-middle text-left"><?=$data_pelanggan['telp']?></td> 
                           <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success" href="ubah_produk.php?id_produk=<?=$data_produk['id_produk']?>" >Ubah</a>
+                          <a class="btn btn-success" href="ubah_pelanggan.php?id_pelanggan=<?=$data_pelanggan['id_pelanggan']?>" >Ubah</a>
 
-                          <a href="hapus_produk.php?id_produk=<?=$data_produk['id_produk']?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
-                      </tr>
-                      <?php
+                    //       <a href="hapus_pelanggan.php?id_pelanggan=<?=$data_pelanggan['id_pelanggan']?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
+                    //   </tr>
+                    //   <?php
                       }
-                      ?> -->
+                    //   ?> -->
                   </tbody>
                 </table>
               </div>
@@ -245,4 +285,3 @@
 </body>
 
 </html>
-              c:\laragon\www\Apotek1\assets

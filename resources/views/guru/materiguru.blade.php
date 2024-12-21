@@ -179,7 +179,51 @@
             <div class="card-header pb-0">
 
               <h6>Materi</h6>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Tambah Obat
+                </button>
+                <form action="" method="post">
+
                 </form>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Materi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="POST" action="../pages/proses_tambah_produk.php" enctype="multipart/form-data">
+                          <section class="base">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"></label>
+                          <input type="hidden" name="id_produk" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
+                          <input type="text" name="nama_produk" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Guru</label>
+                          <input type="text" name="deskripsi" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Materi</label>
+                          <input type="file" name="file" class="form-control"> <br>
+                        </div>
+                        <div>
+                            <input type="submit" name="simpan" value="Tambah Produk" class="btn btn-outline-primary">
+                        </div>
+                      </section>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
 
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -245,4 +289,3 @@
 </body>
 
 </html>
-              c:\laragon\www\Apotek1\assets
