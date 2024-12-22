@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/dashboard.php">
+          <a class="nav-link  " href="{{route('guru.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -52,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/produk.php">
+          <a class="nav-link  " href="{{route('materi.guru')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -72,7 +72,7 @@
           </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  active" href="../pages/histori.php">
+            <a class="nav-link  active" href="{{route('nilai.dashboard')}}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>box-3d-50</title>
@@ -93,7 +93,7 @@
             </a>
           </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/pelanggan.php">
+          <a class="nav-link  " href="{{route('jadwal.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -116,7 +116,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/logout.php">
+          <a class="nav-link  " href="{{route('profile.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -233,29 +233,6 @@
                       <th class="align-middle text-left">Indeks</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <!-- <?php
-                      $qry_asben = mysqli_query($conn,"SELECT produk.nama_produk, tgl_transaksi, qty, produk.harga, produk.foto_produk, subtotal FROM detail_transaksi JOIN produk ON detail_transaksi.id_produk_fk = produk.id_produk order by id_detail_transaksi desc;");
-                      $no=0;
-                      while($dt_asben = mysqli_fetch_array($qry_asben)){
-                      $no++;?>
-
-                      <tr class="text-xs font-weight-bold">
-                          <td class="align-middle text-left"><?=$no?></td>
-                          <td class="align-middle text-left"><?=$dt_asben['nama_produk']?></td>
-                          <td><img src="assets/foto_produk/<?=$dt_asben['foto_produk']?>" width="100px";></td>
-                          <td class="align-middle text-left"><?=$dt_asben['qty']?></td>
-                          <td class="align-middle text-left"><?=$dt_asben['harga']?></td>
-                          <td class="align-middle text-left"><?=$dt_asben['subtotal']?></td> 
-                          <td class="text-xs font-weight-bold"> -->
-                          
-
-                        
-                      </tr>
-                      <?php
-                      }
-                      ?>
-                  </tbody>
                 </table>
               </div>
             </div>

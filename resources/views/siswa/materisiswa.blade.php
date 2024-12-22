@@ -34,10 +34,10 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/dashboard.php">
+          <a class="nav-link  " href={{route(')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>PPPPPP</title>
+                <title>WELLL</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -193,27 +193,6 @@
                       <th class="align-middle text-left">Materi</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <!-- <?php
-                      $qry_produk = mysqli_query($conn,"SELECT * FROM produk ORDER BY id_produk DESC");
-                      $no=0;
-                      while($data_produk=mysqli_fetch_array($qry_produk)){
-                      $no++;?>
-                      <tr class="text-xs font-weight-bold">
-                          <td class="align-middle text-left"><?=$no?></td>
-                          <td class="align-middle text-left"><?=$data_produk['nama_produk']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['deskripsi']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['harga']?></td> 
-                          <td><img src="assets/foto_produk/<?=$data_produk['foto_produk']?>" width="100px";></td>
-                          <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success" href="ubah_produk.php?id_produk=<?=$data_produk['id_produk']?>" >Ubah</a>
-
-                          <a href="hapus_produk.php?id_produk=<?=$data_produk['id_produk']?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
-                      </tr>
-                      <?php
-                      }
-                      ?> -->
-                  </tbody>
                 </table>
               </div>
             </div>
@@ -245,4 +224,4 @@
 </body>
 
 </html>
-              c:\laragon\www\Apotek1\assets
+              
