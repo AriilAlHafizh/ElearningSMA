@@ -34,7 +34,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/dashboard.php">
+          <a class="nav-link" href="{{route('guru.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>PPPPPP</title>
@@ -54,7 +54,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/produk.php">
+          <a class="nav-link  active" href="{{route('materi.guru')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/histori.php">
+          <a class="nav-link  " href="{{route('nilai.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -95,7 +95,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/pelanggan.php">
+          <a class="nav-link  " href="{{route('jadwal.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -118,7 +118,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/logout.php">
+          <a class="nav-link  " href="{{route('profile.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -181,10 +181,10 @@
               <h6>Materi</h6>
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Tambah Obat
+                  Tambah Materi
                 </button>
-                <form action="" method="post">
-
+                <form action="materi.guru.create" method="post">
+                  @csrf
                 </form>
 
                 <!-- Modal -->
@@ -196,26 +196,27 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form method="POST" action="../pages/proses_tambah_produk.php" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('materi.guru.store') }}" enctype="multipart/form-data">
+                          @csrf
                           <section class="base">
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label"></label>
-                          <input type="hidden" name="id_produk" class="form-control">
+                          <input type="hidden" name="id" class="form-control">
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
-                          <input type="text" name="nama_produk" class="form-control">
+                          <input type="text" name="nama_mapel" class="form-control">
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Guru</label>
-                          <input type="text" name="deskripsi" class="form-control">
+                          <input type="text" name="guru_id" class="form-control">
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Materi</label>
                           <input type="file" name="file" class="form-control"> <br>
                         </div>
                         <div>
-                            <input type="submit" name="simpan" value="Tambah Produk" class="btn btn-outline-primary">
+                            <input type="submit" name="simpan" value="Tambah Materi" class="btn btn-outline-primary">
                         </div>
                       </section>
                       </form>
@@ -238,26 +239,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <?php
-                      $qry_produk = mysqli_query($conn,"SELECT * FROM produk ORDER BY id_produk DESC");
-                      $no=0;
-                      while($data_produk=mysqli_fetch_array($qry_produk)){
-                      $no++;?>
-                      <tr class="text-xs font-weight-bold">
-                          <td class="align-middle text-left"><?=$no?></td>
-                          <td class="align-middle text-left"><?=$data_produk['nama_produk']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['deskripsi']?></td>
-                          <td class="align-middle text-left"><?=$data_produk['harga']?></td> 
-                          <td><img src="assets/foto_produk/<?=$data_produk['foto_produk']?>" width="100px";></td>
-                          <td class="text-xs font-weight-bold">
-                          <a class="btn btn-success" href="ubah_produk.php?id_produk=<?=$data_produk['id_produk']?>" >Ubah</a>
-
-                          <a href="hapus_produk.php?id_produk=<?=$data_produk['id_produk']?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
-                      </tr>
-                      <?php
-                      }
-                      ?> -->
-                  </tbody>
+               
+            </tbody>
                 </table>
               </div>
             </div>

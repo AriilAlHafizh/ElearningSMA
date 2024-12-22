@@ -10,4 +10,14 @@ class guru extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $table = "guru";
+    protected $primaryKey = "id";
+    protected $fillable = [
+        'id','nama','gender','email','no_hp','alamat'];
+    
+        public function materi ()
+        {
+            return $this->hasMany(materi::class,'guru_id','id');
+        }
 }
