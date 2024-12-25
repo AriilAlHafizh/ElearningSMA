@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admincontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\matericontroller;
 use App\Http\Controllers\siswa;
@@ -27,6 +28,17 @@ Route::get('/dashboardsiswa', [siswa::class, 'dashboardsiswa'])->name('siswa.das
 Route::get('/nilaisiswa', [siswa::class, 'nilaisiswa'])->name('nilai.siswa');
 Route::get('/jadwalsiswa', [siswa::class, 'jadwalsiswa'])->name('jadwal.siswa');
 Route::get('/profilesiswa', [siswa::class, 'profilesiswa'])->name('profile.siswa');
+
+//admin 
+Route::get('/admin', function () {
+    return view('..\admin\dashboardadmin');});
+Route::get('/materiadmin', [admincontroller::class, 'indexadmin'])->name('materi.admin');
+Route::get('/dashboardadmin', [admincontroller::class, 'dashboardadmin'])->name('admin.dashboard');
+Route::get('/dataguru', [admincontroller::class, 'dataguru'])->name('admin.guru');
+Route::get('/datasiswa', [admincontroller::class, 'datasiswa'])->name('admin.siswa');
+Route::get('/nilaiadmin', [admincontroller::class, 'nilaiadmin'])->name('nilai.admin');
+Route::get('/jadwaladmin', [admincontroller::class, 'jadwaladmin'])->name('jadwal.admin');
+Route::get('/profileadmin', [admincontroller::class, 'profileadmin'])->name('profile.admin');
 
 
  

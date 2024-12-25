@@ -4,21 +4,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../img/favicon.png">
   <title>
     Materi
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="../css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="../css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="../css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -34,7 +34,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{{route('guru.dashboard')}}">
+          <a class="nav-link" href="{{route('admin.dashboard')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>Dashboard</title>
@@ -54,7 +54,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="guruadmin.php">
+          <a class="nav-link  " href="{{ route('admin.guru') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>Guru</title>
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="siswaadmin.php">
+          <a class="nav-link  " href="{{ route('admin.siswa') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>Siswa</title>
@@ -94,7 +94,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href="{{route('materi.guru')}}">
+          <a class="nav-link  active" href="{{ route('materi.admin') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -114,7 +114,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('nilai.dashboard')}}">
+          <a class="nav-link  " href="{{ route('nilai.admin') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -135,7 +135,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('jadwal.dashboard')}}">
+          <a class="nav-link  " href="{{ route('jadwal.admin') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -158,7 +158,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('profile.dashboard')}}">
+          <a class="nav-link  " href="{{ route('profile.admin') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -179,7 +179,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../assets/pages/logout.php">
+          <a class="nav-link  " href="../pages/logout.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
@@ -340,10 +340,10 @@
 
 
       <!--   Core JS Files   -->
-      <script src="../assets/js/core/popper.min.js"></script>
-      <script src="../assets/js/core/bootstrap.min.js"></script>
-      <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script src="../js/core/popper.min.js"></script>
+      <script src="../js/core/bootstrap.min.js"></script>
+      <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+      <script src="../js/plugins/smooth-scrollbar.min.js"></script>
       <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -356,7 +356,7 @@
       <!-- Github buttons -->
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+      <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>
