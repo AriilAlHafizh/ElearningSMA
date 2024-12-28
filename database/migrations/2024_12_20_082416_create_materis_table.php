@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('materi', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_kelas');
             $table->string('nama_mapel');
             $table->longText('isi_materi');
             $table->unsignedBigInteger('guru_id');

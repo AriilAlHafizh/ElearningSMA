@@ -18,6 +18,6 @@ class guru extends Model
     
         public function materi ()
         {
-            return $this->hasMany(materi::class,'guru_id','id');
+            return $this->hasMany(Materi::class,'guru_id','id');
         }
 }
