@@ -14,10 +14,10 @@ class materi extends Model
     protected $table = "materi";
     protected $primaryKey = "id";
     protected $fillable = [
-        'nama_mapel','isi_materi','guru_id' ];
+       'nama_kelas', 'nama_mapel','isi_materi','guru_id' ];
 
     public function guru()
     {
-        return $this->belongsTo(guru::class,'guru_id','id');
+        return $this->belongsTo(Guru::class,'guru_id','id');
     }
 }

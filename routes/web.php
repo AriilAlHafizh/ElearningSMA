@@ -9,12 +9,14 @@ use App\Http\Controllers\siswa;
 Route::get('/', function () {
     return view('..\guru\dashboardguru');});
 Route::get('/materiguru', [matericontroller::class, 'index'])->name('materi.guru');
-Route::get('/materiguru/create', [matericontroller::class, 'create'])->name('materi.guru.create');
 Route::get('/dashboardguru', [matericontroller::class, 'dashboard'])->name('guru.dashboard');
 Route::get('/nilai', [matericontroller::class, 'nilai'])->name('nilai.dashboard');
 Route::get('/jadwal', [matericontroller::class, 'jadwal'])->name('jadwal.dashboard');
 Route::get('/profile', [matericontroller::class, 'profile'])->name('profile.dashboard');
 Route::post('/materiguru', [MateriController::class, 'store'])->name('materi.guru.store');
+
+
+
 
 Route::get('/nilaiguru', function () {
     return view('guru\nilaiguru');
@@ -41,4 +43,4 @@ Route::get('/jadwaladmin', [admincontroller::class, 'jadwaladmin'])->name('jadwa
 Route::get('/profileadmin', [admincontroller::class, 'profileadmin'])->name('profile.admin');
 
 
- 
+Route::get('/materi/{id}/download', [MateriController::class, 'download'])->name('materi.download');

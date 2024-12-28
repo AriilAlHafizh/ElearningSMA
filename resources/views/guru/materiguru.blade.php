@@ -233,7 +233,7 @@
                                 data-bs-target="#exampleModal">
                                 Tambah Materi
                             </button>
-                            <form action="materi.guru.create" method="post">
+                            <form action="" method="post">
                                 @csrf
                             </form>
 
@@ -259,7 +259,7 @@
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Kelas</label>
-                                                        <input type="text" name="nama_mapel" class="form-control">
+                                                        <input type="text" name="nama_kelas" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Mata
@@ -274,7 +274,7 @@
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Materi</label>
-                                                        <input type="file" name="file" class="form-control">
+                                                        <input type="file" name="isi_materi" class="form-control">
                                                         <br>
                                                     </div>
                                                     <div>
@@ -304,16 +304,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td class="align-middle text-left">1</td>
-                                        <td class="align-middle text-left">12 MIPA 7</td>
-                                        <td class="align-middle text-left">Matematika</td>
-                                        <td class="align-middle text-left">Bu Putra</td>
-                                        <td class="align-middle text-left">Welllllllllllllllllllllllllllllll</td>
-                                        <td class="text-xs font-weight-bold">
-                                            <a class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#EditMateri">Ubah</a>
-                                            <a class="btn btn-danger" href="">Hapus</a>
-                                        </td>
+                                    @foreach ($dtmateri as $key => $item)
+                    <tr>
+                      <td>{{ $key + 1 }}</td>
+                      <td>{{ $item->nama_kelas }}</td>
+                      <td>{{ $item->nama_mapel }}</td>
+                      <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
+                      <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>Download</a></td>
+                      <td>
+                        <a class="btn btn-success" data-bs-toggle="modal"
+                          data-bs-target="#EditMateri">Ubah</a>
+                        <a class="btn btn-danger" href="">Hapus</a>
+                      </td>
+                    </tr>
+                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
