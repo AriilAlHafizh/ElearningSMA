@@ -303,22 +303,26 @@
                                             <th class="align-middle text-left">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
                                     @foreach ($dtmateri as $key => $item)
-                    <tr>
-                      <td>{{ $key + 1 }}</td>
-                      <td>{{ $item->nama_kelas }}</td>
-                      <td>{{ $item->nama_mapel }}</td>
-                      <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
-                      <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>Download</a></td>
-                      <td>
-                        <a class="btn btn-success" data-bs-toggle="modal"
-                          data-bs-target="#EditMateri">Ubah</a>
-                        <a class="btn btn-danger" href="">Hapus</a>
-                      </td>
-                    </tr>
-                    @endforeach
-
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->nama_kelas }}</td>
+                                            <td>{{ $item->nama_mapel }}</td>
+                                            <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
+                                            <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>Download</a></td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri">Ubah</a>
+                                                    <form action="{{ route('materi.guru.destroy', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method("DELETE")
+                                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -328,49 +332,57 @@
             </div>
 
             <!-- Edit Modal -->
+            @foreach ($dtmateri as $key => $item)
             <div class="modal fade" id="EditMateri" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Tambah Materi</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Materi</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="{{ route('materi.guru.store') }}"
-                                enctype="multipart/form-data">
+                            <form action="{{ route('materi.guru.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <section class="base">
+                                @method('PUT')
+                                <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label"></label>
-                                        <input type="hidden" name="id" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Kelas</label>
-                                        <input type="text" name="nama_mapel" class="form-control">
+                                        <label for="nama_kelas" class="form-label">Nama Kelas</label>
+                                        <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" value="{{ $item->nama_kelas }}" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
-                                        <input type="text" name="nama_mapel" class="form-control">
+                                        <label for="nama_mapel" class="form-label">Nama Mapel</label>
+                                        <input type="text" class="form-control" id="nama_mapel" name="nama_mapel" value="{{ $item->nama_mapel }}" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Guru</label>
-                                        <input type="text" name="guru_id" class="form-control">
+                                        <label for="guru_id" class="form-label">Guru</label>
+                                        <select class="form-select" id="guru_id" name="guru_id">
+                                            <option value="" selected>Tidak ada guru</option>
+                                            @foreach($gurus as $guru)
+                                            <option value="{{ $guru->id }}" {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
+                                                {{ $guru->nama }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Materi</label>
-                                        <input type="file" name="file" class="form-control"> <br>
+                                        <label for="isi_materi" class="form-label">File Materi (PDF/Word/PowerPoint)</label>
+                                        <input type="file" class="form-control" id="isi_materi" name="isi_materi">
+                                        @if($item->isi_materi)
+                                        <small>File saat ini: <a href="{{ asset('uploads/' . $item->isi_materi) }}" target="_blank">{{ $item->isi_materi }}</a></small>
+                                        @endif
                                     </div>
-                                    <div>
-                                        <input type="submit" name="simpan" value="Simpan"
-                                            class="btn btn-outline-primary">
-                                    </div>
-                                </section>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
+            @endforeach
             </div>
             </form>
         </div>
