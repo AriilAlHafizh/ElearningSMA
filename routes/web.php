@@ -14,6 +14,8 @@ Route::get('/nilai', [matericontroller::class, 'nilai'])->name('nilai.dashboard'
 Route::get('/jadwal', [matericontroller::class, 'jadwal'])->name('jadwal.dashboard');
 Route::get('/profile', [matericontroller::class, 'profile'])->name('profile.dashboard');
 Route::post('/materiguru', [MateriController::class, 'store'])->name('materi.guru.store');
+Route::put('/materiguru/{id}', [MateriController::class, 'update'])->name('materi.guru.update');
+Route::delete('/materiguru/{id}', [MateriController::class, 'destroy'])->name('materi.guru.destroy');
 
 
 
