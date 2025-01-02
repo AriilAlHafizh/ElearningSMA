@@ -43,6 +43,9 @@ Route::get('/datasiswa', [admincontroller::class, 'datasiswa'])->name('admin.sis
 Route::get('/nilaiadmin', [admincontroller::class, 'nilaiadmin'])->name('nilai.admin');
 Route::get('/jadwaladmin', [admincontroller::class, 'jadwaladmin'])->name('jadwal.admin');
 Route::get('/profileadmin', [admincontroller::class, 'profileadmin'])->name('profile.admin');
+Route::post('/dataguru', [admincontroller::class, 'storeguru'])->name('admin.guru.store');
+Route::put('/dataguru/{id}', [adminController::class, 'update'])->name('admin.guru.update');
+Route::delete('/dataguru/{id}', [adminController::class, 'destroyguru'])->name('admin.guru.destroy');
 
 
 Route::get('/materi/{id}/download', [MateriController::class, 'download'])->name('materi.download');

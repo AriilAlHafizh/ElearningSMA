@@ -224,7 +224,7 @@
                 Tambah Guru
               </button>
               <form action="materi.guru.create" method="post">
-
+                @csrf
               </form>
 
               <!-- Modal -->
@@ -236,40 +236,37 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="{{ route('materi.guru.store') }}" enctype="multipart/form-data">
+                      <form method="POST" action="{{ route('admin.guru.store') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <section class="base">
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">ID</label>
-                            <input type="text" name="id" class="form-control">
+                            <label for="exampleInputEmail1" class="form-label"></label>
+                            <input type="hidden" name="id" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nama</label>
-                            <input type="text" name="nama_mapel" class="form-control">
+                            <input type="text" name="nama" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="text" name="guru_id" class="form-control">
+                            <input type="text" name="email" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                            <input type="Text" name="file" class="form-control"> <br>
+                            <input type="Text" name="alamat" class="form-control"> <br>
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">No.Telp</label>
-                            <input type="Text" name="file" class="form-control"> <br>
+                            <input type="Text" name="no_hp" class="form-control"> <br>
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                            <select class="form-select" aria-label="Default select example">
-                              <option selected>Pilih</option>
-                              <option value="Pria">Pria</option>
-                              <option value="Wanita">Wanita</option>
-                            </select><br>
+                            <input type="Text" name="gender" class="form-control"> <br>
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Foto</label>
-                            <input type="file" name="file" class="form-control"> <br>
+                            <input type="file" name="foto" class="form-control"> <br>
                           </div>
                           <div>
                             <input type="submit" name="simpan" value="Tambah Guru" class="btn btn-outline-primary">
@@ -287,7 +284,7 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-xs font-weight-bold opacity-6">
-                      <th class="align-middle text-left">ID</th>
+                      <th class="align-middle text-left">No</th>
                       <th class="align-middle text-left">Nama</th>
                       <th class="align-middle text-left">Email</th>
                       <th class="align-middle text-left">Alamat</th>
@@ -297,18 +294,34 @@
                       <th class="align-middle text-left">Aksi</th>
                     </tr>
                   </thead>
+                  @foreach ($dtguru as $key => $item)
                   <tbody>
-                    <td class="align-middle text-left">GURU01</td>
-                    <td class="align-middle text-left">Budi</td>
-                    <td class="align-middle text-left">budi@gmail.com</td>
-                    <td class="align-middle text-left">Jl.Welllllllllllllllllllllllllllllll</td>
-                    <td class="align-middle text-left">08112334556</td>
-                    <td class="align-middle text-left">Laki-laki</td>
-                    <td><img src="../img/team-1.jpg" width="100px" ;></td>
-                    <td class="text-xs font-weight-bold">
-                      <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditGuru">Ubah</a>
-                      <a class="btn btn-danger" href="">Hapus</a>
-                    </td>
+                    <tr>
+                      <td>{{ $key + 1 }}</td>
+                      <td>{{ $item->nama }}</td>
+                      <td>{{ $item->email }}</td>
+                      <td>{{ $item->alamat }}</td>
+                      <td>{{ $item->no_hp }}</td>
+                      <td>{{ $item->gender }}</td>
+                      <td>
+                        @if($item->foto)
+                        <img src="{{ asset('storage/photos/'.$item->foto) }}" alt="Foto Guru" style="width: 50px; height: 50px; object-fit: cover;">
+                        @else
+                        <span>No Photo</span>
+                        @endif
+                      </td>
+                      <td class="text-xs font-weight-bold">
+                        <div class="d-flex gap-2">
+                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditGuru">Ubah</a>
+                          <form action="{{ route('admin.guru.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -317,6 +330,7 @@
         </div>
       </div>
       <!-- Edit Modal -->
+      @foreach ($dtguru as $key => $guru)
       <div class="modal fade" id="EditGuru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -325,40 +339,38 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="{{ route('materi.guru.store') }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('admin.guru.update', $guru->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <section class="base">
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">ID</label>
-                    <input type="text" name="id" class="form-control">
-                  </div>
+
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nama</label>
-                    <input type="text" name="nama_mapel" class="form-control">
+                    <input type="text" name="nama" class="form-control" value="{{ $item->nama }}" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="text" name="guru_id" class="form-control">
+                    <input type="text" name="email" class="form-control" value="{{ $item->email }}">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                    <input type="Text" name="file" class="form-control"> <br>
+                    <input type="Text" name="alamat" class="form-control" value="{{ $item->alamat }}"> <br>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">No.Telp</label>
-                    <input type="Text" name="file" class="form-control"> <br>
+                    <input type="Text" name="no_hp" class="form-control" value="{{ $item->no_hp}}"> <br>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Pilih</option>
-                      <option value="Pria">Pria</option>
-                      <option value="Wanita">Wanita</option>
-                    </select><br>
+                    <input type="Text" name="gender" class="form-control" value="{{ $item->gender }}"> <br>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Foto</label>
-                    <input type="file" name="file" class="form-control"> <br>
+                    <input type="file" name="file" class="form-control" value="{{ $item->foto }}">
+                    <br>
+                    @if($guru->foto)
+                    <img src="{{ asset('storage/'.$guru->foto) }}" alt="Guru Foto" width="100">
+                    @endif
                   </div>
                   <div>
                     <input type="submit" name="simpan" value="Simpan" class="btn btn-outline-primary">
@@ -368,6 +380,7 @@
             </div>
           </div>
         </div>
+        @endforeach
       </div>
       </form>
 
