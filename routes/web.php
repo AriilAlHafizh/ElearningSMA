@@ -46,6 +46,9 @@ Route::delete('/datasiswa/{id}', [siswacontroller::class, 'destroysiswa'])->name
 Route::get('/admin', function () {
     return view('..\admin\dashboardadmin');});
 Route::get('/materiadmin', [admincontroller::class, 'indexadmin'])->name('materi.admin');
+Route::post('/materiadmin', [admincontroller::class, 'materistore'])->name('materi.admin.store');
+Route::put('/materiadmin/{id}', [admincontroller::class, 'materiupdate'])->name('materi.admin.update');
+Route::delete('/materiadmin/{id}', [admincontroller::class, 'materidestroy'])->name('materi.admin.destroy');
 Route::get('/dashboardadmin', [admincontroller::class, 'dashboardadmin'])->name('admin.dashboard');
 Route::get('/dataguru', [admincontroller::class, 'dataguru'])->name('admin.guru');
 Route::get('/nilaiadmin', [admincontroller::class, 'nilaiadmin'])->name('nilai.admin');

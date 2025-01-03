@@ -162,7 +162,7 @@
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Mata
                                                             Pelajaran</label>
-                                                        <select name="materi_id" id="materiDropdown">
+                                                        <select name="materi_id" id="materiDropdown" class="form-select">
                                                             <option value="1">ipa</option>
                                                             <option value="2">Bahasa Inggris</option>
                                                         </select>

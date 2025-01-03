@@ -20,7 +20,7 @@ return new class extends Migration
             // Membuat hubungan foreign key 
             $table->foreign('materi_id')
             ->references('id')
-            ->on('nilai')
+            ->on('materi')
             ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
         });
     }
