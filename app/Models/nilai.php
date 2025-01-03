@@ -14,10 +14,12 @@ class nilai extends Model
     protected $table = "nilai";
     protected $primaryKey = "id";
     protected $fillable = [
-       'nilai', 'materi_id' ];
+       'nilai', 'materi_id'];
 
     public function materi()
     {
         return $this->belongsTo(Materi::class,'materi_id','id');
     }
+
+
 }

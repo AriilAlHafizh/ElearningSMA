@@ -10,5 +10,11 @@ class siswa extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $casts = ['gender' => gender::class,];
+    
+    protected $table = "siswa";
+    protected $primaryKey = "id";
+    protected $fillable = [
+        'nis','nama','tgl_lahir','gender','email','no_hp','alamat','foto'];
+    
+
 }

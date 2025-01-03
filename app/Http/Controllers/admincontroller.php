@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\guru;
+use App\Models\materi;
+use App\Models\nilai;
+use App\Models\siswa;
 
 
 class admincontroller extends Controller
@@ -18,13 +22,6 @@ class admincontroller extends Controller
     {
         $dtguru = Guru::all(); // Mengambil data guru dari database
         return view('admin.guruadmin', compact('dtguru')); // Kirim data guru ke view
-    }
-
-
-    public function datasiswa()
-    {
-
-        return view('admin.siswaadmin');
     }
 
     public function storeguru(Request $request)
@@ -60,6 +57,7 @@ class admincontroller extends Controller
         // Redirect ke halaman guru dengan pesan sukses
         return redirect()->route('admin.guru')->with('success', 'Guru berhasil ditambahkan!');
     }
+
     public function update(Request $request, string $id)
     {
         // Validasi data yang masuk

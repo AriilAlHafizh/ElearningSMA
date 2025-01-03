@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('materi_id');
             $table->timestamps();
 
-            // Membuat hubungan foreign key ke tabel materis
+            // Membuat hubungan foreign key 
             $table->foreign('materi_id')
             ->references('id')
             ->on('nilai')
