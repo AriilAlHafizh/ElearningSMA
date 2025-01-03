@@ -22,7 +22,7 @@ return new class extends Migration
             // Membuat hubungan foreign key ke tabel materis
             $table->foreign('guru_id')
             ->references('id')
-            ->on('materi')
+            ->on('guru')
             ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
         });
     }

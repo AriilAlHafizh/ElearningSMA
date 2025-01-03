@@ -124,10 +124,11 @@
 
               <h6>Materi</h6>
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
                 Tambah Materi
               </button>
-              <form action="materi.guru.create" method="post">
+              <form action="" method="post">
                 @csrf
               </form>
 
@@ -140,12 +141,18 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="{{ route('materi.guru.store') }}" enctype="multipart/form-data">
+                      <form method="POST" action="{{ route('materi.admin.store') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <section class="base">
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label"></label>
                             <input type="hidden" name="id" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1"
+                              class="form-label">Kelas</label>
+                            <input type="text" name="nama_kelas" class="form-control">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
@@ -157,7 +164,7 @@
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Materi</label>
-                            <input type="file" name="file" class="form-control"> <br>
+                            <input type="file" name="isi_materi" class="form-control"> <br>
                           </div>
                           <div>
                             <input type="submit" name="simpan" value="Tambah Materi" class="btn btn-outline-primary">
@@ -176,22 +183,34 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-xs font-weight-bold opacity-6">
-                      <th class="align-middle text-left">No</th>
+                      <th>No</th>
+                      <th class="align-middle text-left">Kelas</th>
                       <th class="align-middle text-left">Nama Pelajaran</th>
                       <th class="align-middle text-left">Guru</th>
                       <th class="align-middle text-left">Materi</th>
                       <th class="align-middle text-left">Aksi</th>
                     </tr>
                   </thead>
+                  @foreach ($dtmateriadmin as $key => $item)
                   <tbody>
-                    <td class="align-middle text-left">1</td>
-                    <td class="align-middle text-left">Matematika</td>
-                    <td class="align-middle text-left">Bu Putra</td>
-                    <td class="align-middle text-left">Welllllllllllllllllllllllllllllll</td>
-                    <td class="text-xs font-weight-bold">
-                      <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri">Ubah</a>
-                      <a class="btn btn-danger" href="">Hapus</a>
-                    </td>
+                    <tr>
+                      <td>{{ $key + 1 }}</td>
+                      <td>{{ $item->nama_kelas }}</td>
+                      <td>{{ $item->nama_mapel }}</td>
+                      <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
+                      <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>Download</a></td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri">Ubah</a>
+                          <form action="{{ route('materi.admin.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -201,66 +220,82 @@
       </div>
 
       <!-- Edit Modal -->
-      <div class="modal fade" id="EditMateri" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Tambah Materi</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form method="POST" action="{{ route('materi.guru.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <section class="base">
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label"></label>
-                            <input type="hidden" name="id" class="form-control">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
-                            <input type="text" name="nama_mapel" class="form-control">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Guru</label>
-                            <input type="text" name="guru_id" class="form-control">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Materi</label>
-                            <input type="file" name="file" class="form-control"> <br>
-                          </div>
-                          <div>
-                            <input type="submit" name="simpan" value="Tambah Materi" class="btn btn-outline-primary">
-                          </div>
-                        </section>
-                      </form>
-                    </div>
+      @foreach ($dtmateriadmin as $key => $item)
+      <div class="modal fade" id="EditMateri" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Materi</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{{ route('materi.admin.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="nama_kelas" class="form-label">Nama Kelas</label>
+                    <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" value="{{ $item->nama_kelas }}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="nama_mapel" class="form-label">Nama Mapel</label>
+                    <input type="text" class="form-control" id="nama_mapel" name="nama_mapel" value="{{ $item->nama_mapel }}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="guru_id" class="form-label">Guru</label>
+                    <select class="form-select" id="guru_id" name="guru_id">
+                      <option value="" selected>Tidak ada guru</option>
+                      @foreach($guruadmin as $guru)
+                      <option value="{{ $guru->id }}" {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
+                        {{ $guru->nama }}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="isi_materi" class="form-label">File Materi (PDF/Word/PowerPoint)</label>
+                    <input type="file" class="form-control" id="isi_materi" name="isi_materi">
+                    @if($item->isi_materi)
+                    <small>File saat ini: <a href="{{ asset('uploads/' . $item->isi_materi) }}" target="_blank">{{ $item->isi_materi }}</a></small>
+                    @endif
                   </div>
                 </div>
-              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
               </form>
             </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      </form>
+    </div>
 
 
 
 
-      <!--   Core JS Files   -->
-      <script src="../js/core/popper.min.js"></script>
-      <script src="../js/core/bootstrap.min.js"></script>
-      <script src="../js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="../js/plugins/smooth-scrollbar.min.js"></script>
-      <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-          var options = {
-            damping: '0.5'
-          }
-          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    <!--   Core JS Files   -->
+    <script src="../js/core/popper.min.js"></script>
+    <script src="../js/core/bootstrap.min.js"></script>
+    <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
         }
-      </script>
-      <!-- Github buttons -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-      <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

@@ -23,19 +23,19 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('alamat');
             $table->string('foto')->nullable();
-            // $table->unsignedBigInteger('nilai_id');
-            // $table->unsignedBigInteger('materi_id');
+            $table->unsignedBigInteger('nilai_id')->constrained('nilai')->nullable();
+            $table->unsignedBigInteger('materi_id')->constrained('materi')->nullable();
             $table->timestamps();
 
-            // $table->foreign('nilai_id')
-            // ->references('id')
-            // ->on('siswa')
-            // ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
+            $table->foreign('nilai_id')
+            ->references('id')
+            ->on('nilai')
+            ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
 
-            // $table->foreign('materi_id')
-            // ->references('id')
-            // ->on('siswa')
-            // ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
+            $table->foreign('materi_id')
+            ->references('id')
+            ->on('materi')
+            ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
 
         });
     }
