@@ -20,4 +20,9 @@ class materi extends Model
     {
         return $this->belongsTo(Guru::class,'guru_id','id');
     }
+
+    public function nilai()
+        {
+            return $this->hasMany(Nilai::class,'materi_id','id');
+        }
 }

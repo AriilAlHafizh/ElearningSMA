@@ -89,7 +89,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('nilai.dashboard') }}">
+                    <a class="nav-link  active" href="{{ route('nilai.guru') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -232,7 +232,7 @@
                                 Tambah Nilai
                             </button>
                             <form action="" method="post">
-
+                                @csrf
                             </form>
 
                             <!-- Modal -->
@@ -246,14 +246,15 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="../pages/proses_tambah_produk.php"
+                                            <form method="POST" action="{{ route('nilai.guru.store') }}"
                                                 enctype="multipart/form-data">
+                                                @csrf
                                                 <section class="base">
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label"></label>
-                                                        <input type="hidden" name="id_produk" class="form-control">
+                                                        <input type="hidden" name="id" class="form-control">
                                                     </div>
-                                                    <div class="mb-3">
+                                                    <!-- <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">NIS</label>
                                                         <input type="text" name="nama_produk"
                                                             class="form-control">
@@ -269,22 +270,19 @@
                                                             class="form-label">Kelas</label>
                                                         <input type="text" name="nama_produk"
                                                             class="form-control">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Mata
                                                             Pelajaran</label>
-                                                        <input type="text" name="nama_produk"
-                                                            class="form-control">
+                                                        <select name="materi_id" id="materiDropdown">
+                                                            <option value="1">ipa</option>
+                                                            <option value="2">Bahasa Inggris</option>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Nilai</label>
-                                                        <input type="text" name="deskripsi" class="form-control">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Indeks</label>
-                                                        <input type="text" name="harga" class="form-control">
+                                                        <input type="text" name="nilai" class="form-control">
                                                     </div>
                                                     <div>
                                                         <input type="submit" name="simpan" value="Tambah Nilai"
@@ -302,29 +300,34 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
-                                            <th class="align-middle text-left">No</th>
-                                            <th class="align-middle text-left">NIS</th>
-                                            <th class="align-middle text-left">Nama Siswa</th>
-                                            <th class="align-middle text-left">Kelas</th>
-                                            <th class="align-middle text-left">Mata Pelajaran</th>
+                                            <th>No</th>
+                                            <!-- <th class="align-middle text-left">NIS</th> -->
+                                            <!-- <th class="align-middle text-left">Nama Siswa</th>
+                                            <th class="align-middle text-left">Kelas</th> -->
                                             <th class="align-middle text-left">Nilai</th>
-                                            <th class="align-middle text-left">Indeks</th>
+                                            <th class="align-middle text-left">Mata Pelajaran</th>
+                                            <!-- <th class="align-middle text-left">Indeks</th> -->
                                             <th class="align-middle text-left">Aksi</th>
                                         </tr>
                                     </thead>
+                                    @foreach ($dtnilai as $key => $item)
                                     <tbody>
-                                        <td class="align-middle text-left">1</td>
-                                        <td class="align-middle text-left">212121212</td>
-                                        <td class="align-middle text-left">ARGA</td>
-                                        <td class="align-middle text-left">12 MIPA 7</td>
-                                        <td class="align-middle text-left">Matematika</td>
-                                        <td class="align-middle text-left">90</td>
-                                        <td class="align-middle text-left">A</td>
-                                        <td class="text-xs font-weight-bold">
-                                            <a class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#EditNilai">Ubah</a>
-                                            <a class="btn btn-danger" href="">Hapus</a>
-                                        </td>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->nilai }}</td>
+                                            <!-- <td>{{ $item->nama_mapel }}</td> -->
+                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri">Ubah</a>
+                                                    <form action="" method="POST">
+                                                        @csrf
+                                                        @method("DELETE")
+                                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
