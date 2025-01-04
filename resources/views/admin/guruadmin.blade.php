@@ -217,7 +217,7 @@
                       </td>
                       <td class="text-xs font-weight-bold">
                         <div class="d-flex gap-2">
-                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditGuru">Ubah</a>
+                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditGuru{{$item->id}}">Ubah</a>
                           <form action="{{ route('admin.guru.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method("DELETE")
@@ -236,7 +236,7 @@
       </div>
       <!-- Edit Modal -->
       @foreach ($dtguru as $key => $guru)
-      <div class="modal fade" id="EditGuru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="EditGuru{{$guru->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -248,30 +248,29 @@
                 @csrf
                 @method('PUT')
                 <section class="base">
-
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nama</label>
-                    <input type="text" name="nama" class="form-control" value="{{ $item->nama }}" required>
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="text" name="nama" class="form-control" value="{{ $guru->nama }}" required>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="text" name="email" class="form-control" value="{{ $item->email }}">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" name="email" class="form-control" value="{{ $guru->email }}">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                    <input type="Text" name="alamat" class="form-control" value="{{ $item->alamat }}"> <br>
+                    <label for="alamat" class="form-label">Alamat</label>
+                    <input type="Text" name="alamat" class="form-control" value="{{ $guru->alamat }}"> <br>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">No.Telp</label>
-                    <input type="Text" name="no_hp" class="form-control" value="{{ $item->no_hp}}"> <br>
+                    <label for="no_hp" class="form-label">No.Telp</label>
+                    <input type="Text" name="no_hp" class="form-control" value="{{ $guru->no_hp}}"> <br>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                    <input type="Text" name="gender" class="form-control" value="{{ $item->gender }}"> <br>
+                    <label for="gender" class="form-label">Jenis Kelamin</label>
+                    <input type="Text" name="gender" class="form-control" value="{{ $guru->gender }}"> <br>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Foto</label>
-                    <input type="file" name="file" class="form-control" value="{{ $item->foto }}">
+                    <label for="foto" class="form-label">Foto</label>
+                    <input type="file" name="foto" class="form-control" value="{{ $guru->foto }}">
                     <br>
                     @if($guru->foto)
                     <img src="{{ asset('storage/'.$guru->foto) }}" alt="Guru Foto" width="100">
@@ -285,9 +284,9 @@
             </div>
           </div>
         </div>
-        @endforeach
       </div>
-      </form>
+      @endforeach
+
 
 
 

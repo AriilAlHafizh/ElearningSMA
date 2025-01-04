@@ -195,8 +195,64 @@ class admincontroller extends Controller
 
     public function nilaiadmin()
     {
-        return view('admin.nilaiadmin');
+        $dtnilai = nilai::with('materi','siswa')->get();
+        $materis = materi::all(); // Mengambil semua data materi
+        $siswas = siswa::all();
+
+
+        return view('admin.nilaiadmin',compact('dtnilai','materis','siswas'));
     }
+
+    public function storenilaiadmin(Request $request)
+    {
+        $request->validate([
+            'nilai' => 'required|string|max:255',
+            'materi_id' => 'required|string|max:20',
+            'siswa_id' => 'required|string|max:20',
+        ]);
+
+        // Simpan data ke database (gunakan model jika sudah ada)
+        nilai::create([
+            'nilai' => $request->nilai,
+            'materi_id' => $request->materi_id,
+            'siswa_id' => $request->siswa_id,
+        ]);
+
+
+        return redirect()->route('nilai.admin')->with('success', 'Nilai berhasil ditambahkan!');
+    }
+
+    public function updatenilaiadmin(Request $request, string $id)
+    {
+        // Validasi data yang masuk
+        $request->validate([
+            'nilai' => 'required|string|max:255',
+            'materi_id' => 'required|string|max:20',
+            'siswa_id' => 'required|string|max:20',
+        ]);
+
+        $nilai = nilai::findOrFail($id);
+
+        $nilai->update([
+            'nilai' => $request->nilai,
+            'materi_id' => $request->materi_id,
+            'siswa_id' => $request->siswa_id,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Data jadwal berhasil diperbarui.');
+    }
+
+    public function destroynilaiadmin(string $id)
+    {
+        $nilai = Nilai::findOrFail($id); 
+        $nilai->delete();
+
+        return redirect()->back()->with('success', 'Guru berhasil dihapus.');
+
+        
+    }
+
 
     public function jadwaladmin()
     {

@@ -85,6 +85,63 @@ class siswacontroller extends Controller
     return redirect()->route('admin.siswa')->with('success', 'Siswa berhasil ditambahkan!');
 }
 
+public function updatesiswa(Request $request, string $id)
+    {
+        // Validasi data yang masuk
+        $request->validate([
+            'nis' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'gender' => 'required|in:pria,wanita',
+            'email' => 'required|email|max:255',
+            'no_hp' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        // Cari guru berdasarkan ID
+        $siswa = Siswa::findOrFail($id);
+
+        // Cek apakah ada file yang diunggah
+        if ($request->hasFile('foto')) {
+            // Hapus file lama jika ada
+            if ($siswa->foto && file_exists(public_path('uploads/' . $siswa->foto))) {
+                unlink(public_path('uploads/' . $siswa->foto));
+            }
+
+            // Upload file baru
+            $file = $request->file('foto');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
+
+            // Update nama file di database
+            $siswa->foto = $fileName;
+        }
+
+        // Perbarui data lain
+        $siswa->update([
+            'nis' => $request->nis,
+            'nama' => $request->nama,
+            'tgl_lahir' => $request->tgl_lahir,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Data guru berhasil diperbarui.');
+    }
+
+    public function destroysiswa(string $id)
+    {
+        $siswa = Siswa::findOrFail($id); // Pastikan model Materi ada
+        $siswa->delete();
+
+        return redirect()->back()->with('success', 'Siswa berhasil dihapus.');
+
+        
+    }
 
 
 
