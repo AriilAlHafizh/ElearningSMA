@@ -201,7 +201,7 @@
                       <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>Download</a></td>
                       <td>
                         <div class="d-flex gap-2">
-                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri">Ubah</a>
+                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
                           <form action="{{ route('materi.admin.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method("DELETE")
@@ -221,7 +221,7 @@
 
       <!-- Edit Modal -->
       @foreach ($dtmateriadmin as $key => $item)
-      <div class="modal fade" id="EditMateri" tabindex="-1" aria-labelledby="exampleModalLabel"
+      <div class="modal fade" id="EditMateri{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -270,9 +270,8 @@
             </div>
           </div>
         </div>
-        @endforeach
       </div>
-      </form>
+      @endforeach
     </div>
 
 

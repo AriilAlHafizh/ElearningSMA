@@ -23,11 +23,11 @@ class materi extends Model
 
     public function nilai()
         {
-            return $this->hasMany(Nilai::class,'materi_id','id');
+            return $this->hasMany(Nilai::class,'nilai_id','id');
         }
 
         public function jadwal()
         {
-            return $this->hasMany(Jadwal::class,'materi_id','id');
+            return $this->hasMany(Jadwal::class,'jadwal_id','id');
         }
 }

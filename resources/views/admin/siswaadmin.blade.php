@@ -189,7 +189,7 @@
                                                         <input type="text" name="no_hp" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Jenis
+                                                        <label for="gender" class="form-label">Jenis
                                                             Kelamin</label>
                                                         <select name="gender" class="form-select">
                                                             <option value="pria">PRIA</option>
@@ -197,7 +197,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
+                                                        <label for="foto"
                                                             class="form-label">Foto</label>
                                                         <input type="file" name="foto" class="form-control">
                                                         <br>
@@ -231,41 +231,41 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtsiswa as $key => $item)
-                                        <tbody>
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->nis }}</td>
-                                                <td>{{ $item->tgl_lahir }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->no_hp }}</td>
-                                                <td>{{ $item->gender }}</td>
-                                                <td>
-                                                    @if ($item->foto)
-                                                        <img src="{{ asset('storage/photos/' . $item->foto) }}"
-                                                            alt="Foto Siswa"
-                                                            style="width: 50px; height: 50px; object-fit: cover;">
-                                                    @else
-                                                        <span>No Photo</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-xs font-weight-bold">
-                                                    <div class="d-flex gap-2">
-                                                        <a class="btn btn-success" data-bs-toggle="modal"
-                                                            data-bs-target="#EditSiswa">Ubah</a>
-                                                        <form action="{{ route('admin.guru.destroy', $item->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="submit" class="btn btn-danger"
-                                                                value="Delete">
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                    @endforeach
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->nis }}</td>
+                                            <td>{{ $item->tgl_lahir }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->alamat }}</td>
+                                            <td>{{ $item->no_hp }}</td>
+                                            <td>{{ $item->gender }}</td>
+                                            <td>
+                                                @if ($item->foto)
+                                                <img src="{{ asset('storage/photos/' . $item->foto) }}"
+                                                    alt="Foto Siswa"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                                @else
+                                                <span>No Photo</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-xs font-weight-bold">
+                                                <div class="d-flex gap-2">
+                                                    <a class="btn btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#EditSiswa{{ $item->id }}">Ubah</a>
+                                                    <form action="{{ route('admin.siswa.destroy', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" class="btn btn-danger"
+                                                            value="Delete">
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -274,7 +274,8 @@
             </div>
 
             <!-- Edit Modal -->
-            <div class="modal fade" id="EditSiswa" tabindex="-1" aria-labelledby="exampleModalLabel"
+            @foreach ($dtsiswa as $key => $item)
+            <div class="modal fade" id="EditSiswa{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -284,45 +285,49 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="{{ route('materi.guru.store') }}"
+                            <form method="POST" action="{{ route('admin.siswa.update', $item->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <section class="base">
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">ID</label>
-                                        <input type="text" name="id" class="form-control">
+                                        <label for="nis" class="form-label">NIS</label>
+                                        <input type="text" name="nis" class="form-control" value="{{ $item->nis }}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                        <input type="text" name="nama_mapel" class="form-control">
+                                        <input type="text" name="nama" class="form-control" value="{{ $item->nama }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                                        <input type="text" name="tgl_lahir" class="form-control" value="{{ $item->tgl_lahir }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="text" name="guru_id" class="form-control">
+                                        <input type="text" name="email" class="form-control" value="{{ $item->email }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                        <input type="Text" name="file" class="form-control"> <br>
+                                        <input type="Text" name="alamat" class="form-control" value="{{ $item->alamat }}"> <br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">No.Telp</label>
-                                        <input type="Text" name="file" class="form-control"> <br>
+                                        <input type="Text" name="no_hp" class="form-control" value="{{ $item->no_hp}}"> <br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Pilih</option>
-                                            <option value="pria">Pria</option>
-                                            <option value="wanita">Wanita</option>
-                                        </select> <br>
+                                        <input type="Text" name="gender" class="form-control" value="{{ $item->gender }}"> <br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Foto</label>
-                                        <input type="file" name="file" class="form-control"> <br>
+                                        <input type="file" name="file" class="form-control" value="{{ $item->foto }}">
+                                        <br>
+                                        @if($item->foto)
+                                        <img src="{{ asset('storage/'.$item->foto) }}" alt="Siswa Foto" width="100">
+                                        @endif
                                     </div>
                                     <div>
-                                        <input type="submit" name="simpan" value="Simpan"
-                                            class="btn btn-outline-primary">
+                                        <input type="submit" name="simpan" value="Simpan" class="btn btn-outline-primary">
                                     </div>
                                 </section>
                             </form>
@@ -330,7 +335,7 @@
                     </div>
                 </div>
             </div>
-            </form>
+            @endforeach
 
 
 

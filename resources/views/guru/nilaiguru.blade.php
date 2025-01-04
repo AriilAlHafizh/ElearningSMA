@@ -142,34 +142,32 @@
                                                         <label for="exampleInputEmail1" class="form-label"></label>
                                                         <input type="hidden" name="id" class="form-control">
                                                     </div>
-                                                    <!-- <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">NIS</label>
-                                                        <input type="text" name="nama_produk"
-                                                            class="form-control">
-                                                    </div>
                                                     <div class="mb-3">
+                                                        <label for="siswa_id" class="form-label">NIS</label>
+                                                        <select name="siswa_id" id="siswa_id" class="form-select">
+                                                            <option value="">Pilih NIS Siswa</option>
+                                                            @foreach ($siswas as $siswa)
+                                                            <option value="{{ $siswa->id }}">{{ $siswa->nis }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <!-- <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Nama
                                                             Siswa</label>
                                                         <input type="text" name="nama_produk"
                                                             class="form-control">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Kelas</label>
-                                                        <input type="text" name="nama_produk"
-                                                            class="form-control">
                                                     </div> -->
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Mata
-                                                            Pelajaran</label>
-                                                        <select name="materi_id" id="materiDropdown" class="form-select">
-                                                            <option value="1">ipa</option>
-                                                            <option value="2">Bahasa Inggris</option>
+                                                        <label for="materi_id" class="form-label">Mata Pelajaran</label>
+                                                        <select name="materi_id" id="materi_id" class="form-select">
+                                                            <option value="">Pilih Mata Pelajaran</option>
+                                                            @foreach ($materis as $materi)
+                                                            <option value="{{ $materi->id }}">{{ $materi->nama_mapel }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Nilai</label>
+                                                        <label for="nilai" class="form-label">Nilai</label>
                                                         <input type="text" name="nilai" class="form-control">
                                                     </div>
                                                     <div>
@@ -189,12 +187,10 @@
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
-                                            <!-- <th class="align-middle text-left">NIS</th> -->
-                                            <!-- <th class="align-middle text-left">Nama Siswa</th>
-                                            <th class="align-middle text-left">Kelas</th> -->
-                                            <th class="align-middle text-left">Nilai</th>
+                                            <th class="align-middle text-left">NIS</th>
+                                            <th class="align-middle text-left">Nama</th>
                                             <th class="align-middle text-left">Mata Pelajaran</th>
-                                            <!-- <th class="align-middle text-left">Indeks</th> -->
+                                            <th class="align-middle text-left">Nilai</th>
                                             <th class="align-middle text-left">Aksi</th>
                                         </tr>
                                     </thead>
@@ -202,12 +198,14 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->siswa ->nis ?? '-' }}</td>
+                                            <td>{{ $item->siswa ->nama ?? '-' }}</td>
+                                            <td>{{ $item->materi->nama_mapel ?? '-'  }}</td>
                                             <td>{{ $item->nilai }}</td>
-                                            <!-- <td>{{ $item->nama_mapel }}</td> -->
-                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->                                            <td>
+                                            <td>
                                                 <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri">Ubah</a>
-                                                    <form action="" method="POST">
+                                                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditNilai{{$item->id}}">Ubah</a>
+                                                    <form action="{{ route('nilai.guru.destroy', $item->id) }}" method="POST">
                                                         @csrf
                                                         @method("DELETE")
                                                         <input type="submit" class="btn btn-danger" value="Delete">
@@ -215,7 +213,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -225,58 +223,59 @@
             </div>
 
             <!-- Edit Modal -->
-            <div class="modal fade" id="EditNilai" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="../assets/pages/proses_tambah_produk.php"
-                                enctype="multipart/form-data">
-                                <section class="base">
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label"></label>
-                                        <input type="hidden" name="id_produk" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">NIS</label>
-                                        <input type="text" name="nama_produk" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Nama Siswa</label>
-                                        <input type="text" name="nama_produk" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Kelas</label>
-                                        <input type="text" name="nama_produk" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
-                                        <input type="text" name="nama_produk" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Nilai</label>
-                                        <input type="text" name="deskripsi" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Indeks</label>
-                                        <input type="text" name="harga" class="form-control">
-                                    </div>
-                                    <div>
-                                        <input type="submit" name="simpan" value="Simpan"
-                                            class="btn btn-outline-primary">
-                                    </div>
-                                </section>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+      @foreach ($dtnilai as $key => $item)
+      <div class="modal fade" id="EditNilai{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+              <form action="{{ route('nilai.guru.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="materi_id" class="form-label">Nama Pelajaran</label>
+                    <select class="form-select" id="materi_id" name="materi_id">
+                      <option value="" selected>Tidak Mata Pelajaran</option>
+                      @foreach($materis as $materi)
+                      <option value="{{ $materi->id }}" {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
+                        {{ $materi->nama_mapel }}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="siswa_id" class="form-label">NIS</label>
+                    <select class="form-select" id="siswa_id" name="siswa_id">
+                      <option value="" selected>Tidak NIS</option>
+                      @foreach($siswas as $siswa)
+                      <option value="{{ $siswa->id }}" {{ $siswa->id == $item->siswa_id ? 'selected' : '' }}>
+                        {{ $siswa->nis }}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="nilai" class="form-label">Nilai</label>
+                    <input type="text" class="form-control" id="nilai" name="nilai" value="{{ $item->nilai }}" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+      </div>
+      @endforeach
+    </div>
 
 
 

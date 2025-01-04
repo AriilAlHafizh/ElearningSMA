@@ -145,7 +145,7 @@
                         <section class="base">
                           <div class="mb-3">
                             <label for="materi_id" class="form-label">Mata Pelajaran</label>
-                            <select name="materi_id" id="materi_id" class="form-control">
+                            <select name="materi_id" id="materi_id" class="form-select">
                               <option value="">Pilih Mata Pelajaran</option>
                               @foreach ($materis as $materi)
                               <option value="{{ $materi->id }}">{{ $materi->nama_mapel }}</option>
@@ -154,7 +154,7 @@
                           </div>
                           <div class="mb-3">
                             <label for="guru_id" class="form-label">Guru</label>
-                            <select name="guru_id" id="guru_id" class="form-control">
+                            <select name="guru_id" id="guru_id" class="form-select">
                               <option value="">Pilih Guru</option>
                               @foreach ($gurus as $guru)
                               <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
@@ -209,7 +209,7 @@
                       <td>{{ $item->jam_selesai }}</td>
                       <td>
                         <div class="d-flex gap-2">
-                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditJadwal">Ubah</a>
+                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditJadwal{{ $item->id }}">Ubah</a>
                           <form action="{{ route('admin.jadwal.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method("DELETE")
@@ -230,64 +230,66 @@
 
       <!-- Edit Modal -->
       @foreach ($dtjadwal as $key => $item)
-      <div class="modal fade" id="EditJadwal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="EditJadwal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Tambah Jadwal</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="{{ route('admin.jadwal.update', $item->id) }}" enctype="multipart/form-data">
+              <form action="{{ route('admin.jadwal.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <section class="base">
+                <div class="modal-body">
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"></label>
-                    <input type="hidden" name="id" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="materi_id" class="form-label">Mata Pelajaran</label>
-                    <select name="materi_id" id="materi_id" class="form-control">
-                      <option value="">Pilih Mata Pelajaran</option>
-                      @foreach ($materis as $materi)
-                      <option value="{{ $materi->id }}">{{ $materi->nama_mapel }}</option>
+                    <label for="materi_id" class="form-label">Nama Pelajaran</label>
+                    <select class="form-select" id="materi_id" name="materi_id">
+                      <option value="" selected>Tidak Mata Pelajaran</option>
+                      @foreach($materis as $materi)
+                      <option value="{{ $materi->id }}" {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
+                        {{ $materi->nama_mapel }}
+                      </option>
                       @endforeach
                     </select>
                   </div>
                   <div class="mb-3">
                     <label for="guru_id" class="form-label">Guru</label>
-                    <select name="guru_id" id="guru_id" class="form-control">
-                      <option value="">Pilih Guru</option>
-                      @foreach ($gurus as $guru)
-                      <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                    <select class="form-select" id="guru_id" name="guru_id">
+                      <option value="" selected>Tidak ada guru</option>
+                      @foreach($gurus as $guru)
+                      <option value="{{ $guru->id }}" {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
+                        {{ $guru->nama }}
+                      </option>
                       @endforeach
                     </select>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Hari</label>
-                    <input type="text" name="hari" class="form-control">
+                    <label for="hari" class="form-label">Hari</label>
+                    <input type="text" class="form-control" id="hari" name="hari" value="{{ $item->hari }}" required>
                   </div>
                   <div class="mb-3">
                     <label for="jam_mulai" class="form-label">Jam Mulai</label>
-                    <input type="time" name="jam_mulai" class="form-control">
+                    <input type="time" class="form-control" id="jam_mulai" name="jam_mulai" value="{{ $item->jam_mulai }}" required>
                   </div>
                   <div class="mb-3">
                     <label for="jam_selesai" class="form-label">Jam Selesai</label>
-                    <input type="time" name="jam_selesai" class="form-control">
+                    <input type="time" class="form-control" id="jam_selesai" name="jam_selesai" value="{{ $item->jam_selesai }}" required>
                   </div>
-                  <div>
-                    <input type="submit" name="simpan" value="simpan" class="btn btn-outline-primary">
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                   </div>
-                </section>
+                </div>
               </form>
             </div>
           </div>
         </div>
-        @endforeach
       </div>
+      @endforeach
     </div>
-
 
 
 

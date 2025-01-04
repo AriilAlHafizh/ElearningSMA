@@ -23,6 +23,14 @@ Route::delete('/materiguru/{id}', [MateriController::class, 'destroy'])->name('m
 //nilai guru
 Route::get('/nilai', [nilaicontroller::class, 'create'])->name('nilai.guru'); 
 Route::post('/nilai', [nilaicontroller::class, 'storenilai'])->name('nilai.guru.store');
+Route::put('/nilai/{id}', [nilaicontroller::class, 'updatenilai'])->name('nilai.guru.update');
+Route::delete('/nilai/{id}', [nilaicontroller::class, 'destroynilai'])->name('nilai.guru.destroy');
+
+//nilai admin
+Route::get('/nilaiadmin', [admincontroller::class, 'nilaiadmin'])->name('nilai.admin');
+Route::post('/nilaiadmin', [admincontroller::class, 'storenilaiadmin'])->name('nilai.admin.store');
+Route::put('/nilaiadmin/{id}', [admincontroller::class, 'updatenilaiadmin'])->name('nilai.admin.update');
+Route::delete('/nilaiadmin/{id}', [admincontroller::class, 'destroynilaiadmin'])->name('nilai.admin.destroy');
 
 
 Route::get('/nilaiguru', function () {
@@ -52,7 +60,6 @@ Route::put('/materiadmin/{id}', [admincontroller::class, 'materiupdate'])->name(
 Route::delete('/materiadmin/{id}', [admincontroller::class, 'materidestroy'])->name('materi.admin.destroy');
 Route::get('/dashboardadmin', [admincontroller::class, 'dashboardadmin'])->name('admin.dashboard');
 Route::get('/dataguru', [admincontroller::class, 'dataguru'])->name('admin.guru');
-Route::get('/nilaiadmin', [admincontroller::class, 'nilaiadmin'])->name('nilai.admin');
 Route::get('/profileadmin', [admincontroller::class, 'profileadmin'])->name('profile.admin');
 Route::post('/dataguru', [admincontroller::class, 'storeguru'])->name('admin.guru.store');
 Route::put('/dataguru/{id}', [adminController::class, 'update'])->name('admin.guru.update');
