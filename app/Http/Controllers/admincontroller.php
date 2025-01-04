@@ -263,4 +263,20 @@ class admincontroller extends Controller
     {
         return view('admin.profileadmin');
     }
+
+    public function downloadadmin($id)
+    {
+        // Ambil data materi berdasarkan ID
+        $materi = Materi::findOrFail($id);
+
+        // Lokasi file materi yang ingin diunduh
+        $filePath = public_path($materi->isi_materi);
+
+        // Cek apakah file ada
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
+        }
+    }
 }

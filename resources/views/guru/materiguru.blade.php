@@ -145,22 +145,28 @@
                                                         <input type="hidden" name="id" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
+                                                        <label for="nama_kelas"
                                                             class="form-label">Kelas</label>
                                                         <input type="text" name="nama_kelas" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Mata
+                                                        <label for="nama_mapel" class="form-label">Mata
                                                             Pelajaran</label>
                                                         <input type="text" name="nama_mapel" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Guru</label>
-                                                        <input type="text" name="guru_id" class="form-control">
+                                                        <label for="guru_id" class="form-label">Guru</label>
+                                                        <select class="form-select" id="guru_id" name="guru_id">
+                                                            <option value="" selected>Tidak ada guru</option>
+                                                            @foreach($gurus as $guru)
+                                                            <option value="{{ $guru->id }}" {{ $guru->id == $guru->guru_id ? 'selected' : '' }}>
+                                                                {{ $guru->nama }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1"
+                                                        <label for="isi_materi"
                                                             class="form-label">Materi</label>
                                                         <input type="file" name="isi_materi" class="form-control">
                                                         <br>
@@ -198,7 +204,7 @@
                                             <td>{{ $item->nama_kelas }}</td>
                                             <td>{{ $item->nama_mapel }}</td>
                                             <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
-                                            <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>Download</a></td>
+                                            <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>{{ $item->isi_materi}}</a></td>
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
