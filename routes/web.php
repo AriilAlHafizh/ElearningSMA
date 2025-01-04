@@ -76,4 +76,5 @@ Route::delete('/jadwaladmin/{id}', [jadwalController::class, 'destroyjadwal'])->
 
 
 
-Route::get('/materi/{id}/download', [MateriController::class, 'download'])->name('materi.download');
+Route::get('/materiguru/{id}/download', [MateriController::class, 'download'])->name('materi.download');
+Route::get('/materiadmin/{id}/download', [AdminController::class, 'downloadadmin'])->name('materi.download.admin');

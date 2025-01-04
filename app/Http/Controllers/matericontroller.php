@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\materi;
 use App\Models\guru;
+use App\Models\jadwal;
 
 
 class matericontroller extends Controller
@@ -14,11 +15,11 @@ class matericontroller extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $dtmateri = materi::with('guru')->get();
+    {
+        $dtmateri = Materi::with('guru')->get();
         $gurus = Guru::all(); // Mengambil semua data guru
 
-        return view('guru.materiguru',compact('dtmateri','gurus'));
+        return view('guru.materiguru', compact('dtmateri', 'gurus'));
     }
 
     /**
@@ -37,7 +38,11 @@ class matericontroller extends Controller
 
     public function jadwal()
     {
-        return view('guru.jadwalguru');
+        $dtjadwal = jadwal::with('materi', 'guru')->get();
+        $materis = materi::all(); // Mengambil semua data materi
+        $gurus = guru::all();
+
+        return view('guru.jadwalguru', compact('dtjadwal', 'materis', 'gurus'));
     }
 
     public function profile()
@@ -56,15 +61,17 @@ class matericontroller extends Controller
             'guru_id' => 'required|string|max:20',
         ]);
 
-        // Simpan file materi
-        $file = $request->file('isi_materi')->store('materi', 'public');
+         // Simpan file materi ke folder public/uploads
+        $file = $request->file('isi_materi');
+        $fileName = time() . '_' . $file->getClientOriginalName(); // Tambahkan timestamp untuk nama unik
+        $filePath = $file->move(public_path('uploads'), $fileName);
 
         // Simpan data ke database (gunakan model jika sudah ada)
         materi::create([
             'nama_kelas' => $request->nama_kelas,
             'nama_mapel' => $request->nama_mapel,
             'guru_id' => $request->guru_id,
-            'isi_materi' => $file,  // Simpan path file
+            'isi_materi' => 'uploads/' . $fileName, // Simpan path relatif
         ]);
 
 
@@ -110,10 +117,10 @@ class matericontroller extends Controller
             unlink(public_path('uploads/' . $materi->isi_materi));
         }
 
-        // Upload file baru
-        $file = $request->file('isi_materi');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('uploads'), $fileName);
+         // Simpan file materi ke folder public/uploads
+         $file = $request->file('isi_materi');
+         $fileName = time() . '_' . $file->getClientOriginalName(); // Tambahkan timestamp untuk nama unik
+         $filePath = $file->move(public_path('uploads'), $fileName);
 
         // Update nama file di database
         $materi->isi_materi = $fileName;
@@ -126,8 +133,8 @@ class matericontroller extends Controller
         'guru_id' => $request->guru_id,
     ]);
 
-    // Redirect dengan pesan sukses
-    return redirect()->back()->with('success', 'Materi berhasil diperbarui.');
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Materi berhasil diperbarui.');
     }
 
     /**
@@ -139,22 +146,20 @@ class matericontroller extends Controller
         $materi->delete();
 
         return redirect()->back()->with('success', 'Materi berhasil dihapus.');
-
-        
     }
     public function download($id)
     {
-       // Ambil data materi berdasarkan ID
-    $materi = Materi::findOrFail($id);
+        // Ambil data materi berdasarkan ID
+        $materi = Materi::findOrFail($id);
 
-    // Lokasi file materi yang ingin diunduh
-    $filePath = public_path('uploads/' . $materi->isi_materi);
+        // Lokasi file materi yang ingin diunduh
+        $filePath = public_path($materi->isi_materi);
 
-    // Cek apakah file ada
-    if (file_exists($filePath)) {
-        return response()->download($filePath);
-    } else {
-        return redirect()->back()->with('error', 'File tidak ditemukan.');
-    }
+        // Cek apakah file ada
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
+        }
     }
 }
