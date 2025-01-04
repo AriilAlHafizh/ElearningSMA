@@ -25,4 +25,9 @@ class materi extends Model
         {
             return $this->hasMany(Nilai::class,'materi_id','id');
         }
+
+        public function jadwal()
+        {
+            return $this->hasMany(Jadwal::class,'materi_id','id');
+        }
 }

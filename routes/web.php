@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\matericontroller;
 use App\Http\Controllers\nilaicontroller;
 use App\Http\Controllers\siswacontroller;
+use App\Http\Controllers\jadwalcontroller;
 
 
 //guru
@@ -52,11 +53,18 @@ Route::delete('/materiadmin/{id}', [admincontroller::class, 'materidestroy'])->n
 Route::get('/dashboardadmin', [admincontroller::class, 'dashboardadmin'])->name('admin.dashboard');
 Route::get('/dataguru', [admincontroller::class, 'dataguru'])->name('admin.guru');
 Route::get('/nilaiadmin', [admincontroller::class, 'nilaiadmin'])->name('nilai.admin');
-Route::get('/jadwaladmin', [admincontroller::class, 'jadwaladmin'])->name('jadwal.admin');
 Route::get('/profileadmin', [admincontroller::class, 'profileadmin'])->name('profile.admin');
 Route::post('/dataguru', [admincontroller::class, 'storeguru'])->name('admin.guru.store');
 Route::put('/dataguru/{id}', [adminController::class, 'update'])->name('admin.guru.update');
 Route::delete('/dataguru/{id}', [adminController::class, 'destroyguru'])->name('admin.guru.destroy');
+
+
+//jadwal admin
+Route::post('/jadwaladmin', [jadwalcontroller::class, 'storejadwal'])->name('admin.jadwal.store');
+Route::get('/jadwaladmin', [jadwalcontroller::class, 'jadwaladmin'])->name('jadwal.admin');
+Route::put('/jadwaladmin/{id}', [jadwalController::class, 'updatejadwal'])->name('admin.jadwal.update');
+Route::delete('/jadwaladmin/{id}', [jadwalController::class, 'destroyjadwal'])->name('admin.jadwal.destroy');
+
 
 
 

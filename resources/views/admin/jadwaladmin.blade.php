@@ -140,33 +140,45 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="../pages/proses_tambah_produk.php" enctype="multipart/form-data">
+                      <form method="POST" action="{{ route('admin.jadwal.store') }}" enctype="multipart/form-data">
+                        @csrf
                         <section class="base">
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label"></label>
-                            <input type="hidden" name="id_produk" class="form-control">
+                            <label for="materi_id" class="form-label">Mata Pelajaran</label>
+                            <select name="materi_id" id="materi_id" class="form-control">
+                              <option value="">Pilih Mata Pelajaran</option>
+                              @foreach ($materis as $materi)
+                              <option value="{{ $materi->id }}">{{ $materi->nama_mapel }}</option>
+                              @endforeach
+                            </select>
                           </div>
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
-                            <input type="text" name="nama_produk" class="form-control">
+                            <label for="guru_id" class="form-label">Guru</label>
+                            <select name="guru_id" id="guru_id" class="form-control">
+                              <option value="">Pilih Guru</option>
+                              @foreach ($gurus as $guru)
+                              <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                              @endforeach
+                            </select>
                           </div>
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Guru</label>
-                            <input type="text" name="nama_produk" class="form-control">
+                            <label for="hari" class="form-label">Hari</label>
+                            <input type="text" name="hari" class="form-control">
                           </div>
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Hari</label>
-                            <input type="text" name="deskripsi" class="form-control">
+                            <label for="jam_mulai" class="form-label">Jam Mulai</label>
+                            <input type="time" name="jam_mulai" class="form-control">
                           </div>
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Waktu</label>
-                            <input type="text" name="harga" class="form-control">
+                            <label for="jam_selesai" class="form-label">Jam Selesai</label>
+                            <input type="time" name="jam_selesai" class="form-control">
                           </div>
                           <div>
                             <input type="submit" name="simpan" value="Tambah Jadwal" class="btn btn-outline-primary">
                           </div>
                         </section>
                       </form>
+
                     </div>
                   </div>
                 </div>
@@ -181,20 +193,33 @@
                       <th class="align-middle text-left">Nama Pelajaran</th>
                       <th class="align-middle text-left">Guru</th>
                       <th class="align-middle text-left">Hari</th>
-                      <th class="align-middle text-left">Waktu</th>
+                      <th class="align-middle text-left">Jam Mulai</th>
+                      <th class="align-middle text-left">Jam Selesai</th>
                       <th class="align-middle text-left">Aksi</th>
                     </tr>
                   </thead>
+                  @foreach ($dtjadwal as $key => $item)
                   <tbody>
-                    <td class="align-middle text-left">1</td>
-                    <td class="align-middle text-left">Matematika</td>
-                    <td class="align-middle text-left">Bu Putra</td>
-                    <td class="align-middle text-left">Jumat</td>
-                    <td class="align-middle text-left">14:30 - 16:30</td>
-                    <td class="text-xs font-weight-bold">
-                      <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditJadwal">Ubah</a>
-                      <a class="btn btn-danger" href="">Hapus</a>
-                    </td>
+                    <tr>
+                      <td>{{ $key + 1 }}</td>
+                      <td>{{ $item->materi->nama_mapel ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
+                      <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
+                      <td>{{ $item->hari }}</td>
+                      <td>{{ $item->jam_mulai }}</td>
+                      <td>{{ $item->jam_selesai }}</td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditJadwal">Ubah</a>
+                          <form action="{{ route('admin.jadwal.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                          </form>
+                        </div>
+                      </td>
+
+                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -204,6 +229,7 @@
       </div>
 
       <!-- Edit Modal -->
+      @foreach ($dtjadwal as $key => $item)
       <div class="modal fade" id="EditJadwal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -212,27 +238,43 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="../pages/proses_tambah_produk.php" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('admin.jadwal.update', $item->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <section class="base">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"></label>
-                    <input type="hidden" name="id_produk" class="form-control">
+                    <input type="hidden" name="id" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Mata Pelajaran</label>
-                    <input type="text" name="nama_produk" class="form-control">
+                    <label for="materi_id" class="form-label">Mata Pelajaran</label>
+                    <select name="materi_id" id="materi_id" class="form-control">
+                      <option value="">Pilih Mata Pelajaran</option>
+                      @foreach ($materis as $materi)
+                      <option value="{{ $materi->id }}">{{ $materi->nama_mapel }}</option>
+                      @endforeach
+                    </select>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Guru</label>
-                    <input type="text" name="nama_produk" class="form-control">
+                    <label for="guru_id" class="form-label">Guru</label>
+                    <select name="guru_id" id="guru_id" class="form-control">
+                      <option value="">Pilih Guru</option>
+                      @foreach ($gurus as $guru)
+                      <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                      @endforeach
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Hari</label>
-                    <input type="text" name="deskripsi" class="form-control">
+                    <input type="text" name="hari" class="form-control">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Waktu</label>
-                    <input type="text" name="harga" class="form-control">
+                    <label for="jam_mulai" class="form-label">Jam Mulai</label>
+                    <input type="time" name="jam_mulai" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label for="jam_selesai" class="form-label">Jam Selesai</label>
+                    <input type="time" name="jam_selesai" class="form-control">
                   </div>
                   <div>
                     <input type="submit" name="simpan" value="simpan" class="btn btn-outline-primary">
@@ -242,6 +284,7 @@
             </div>
           </div>
         </div>
+        @endforeach
       </div>
     </div>
 

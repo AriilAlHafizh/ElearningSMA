@@ -20,4 +20,9 @@ class guru extends Model
         {
             return $this->hasMany(Materi::class,'guru_id','id');
         }
+
+        public function jadwal ()
+        {
+            return $this->hasMany(Jadwal::class,'guru_id','id');
+        }    
 }
