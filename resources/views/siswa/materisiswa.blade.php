@@ -51,7 +51,7 @@
                     <a class="nav-link  active" href="{{ route('materi.siswa') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-book" ></i>
+                            <i class="fa-solid fa-book"></i>
                         </div>
                         <span class="nav-link-text ms-1">Materi</span>
                     </a>
@@ -136,7 +136,11 @@
                                         <td class="align-middle text-left">12 MIPA 7</td>
                                         <td class="align-middle text-left">Matematika</td>
                                         <td class="align-middle text-left">Bu Putra</td>
-                                        <td class="align-middle text-left">Welllllllllllllllllllllllllllllll</td>
+                                        <td class="align-middle text-left"><button type="button"
+                                                class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                Lihat Materi
+                                            </button></td>
                                     </tbody>
                                 </table>
                             </div>
@@ -145,27 +149,58 @@
                 </div>
             </div>
 
+            <!-- Materi Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Materi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Matriks</h5>
+                                    <p class="card-text text-justify">Bab 2 matriks 7x7</p>
+                                    <a href="#" class="btn btn-primary">Download</a>
+                                </div>
+                            </div>
+                            {{-- nanti hapus aja yang dibawah ini--}}
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Matriks</h5>
+                                    <p class="card-text text-justify">Bab 2 matriks 7x7</p>
+                                    <a href="#" class="btn btn-primary">Download</a>
+                                </div>
+                            </div>
+                            {{-- sampai sini --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-
-            <!--   Core JS Files   -->
-            <script src="../js/core/popper.min.js"></script>
-            <script src="../js/core/bootstrap.min.js"></script>
-            <script src="../js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../js/plugins/smooth-scrollbar.min.js"></script>
-            <script>
-                var win = navigator.platform.indexOf('Win') > -1;
-                if (win && document.querySelector('#sidenav-scrollbar')) {
-                    var options = {
-                        damping: '0.5'
-                    }
-                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        <!--   Core JS Files   -->
+        <script src="../js/core/popper.min.js"></script>
+        <script src="../js/core/bootstrap.min.js"></script>
+        <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+        <script>
+            var win = navigator.platform.indexOf('Win') > -1;
+            if (win && document.querySelector('#sidenav-scrollbar')) {
+                var options = {
+                    damping: '0.5'
                 }
-            </script>
-            <!-- Github buttons -->
-            <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

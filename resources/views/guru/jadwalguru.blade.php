@@ -128,16 +128,18 @@
                                             </tr>
                                         </thead>
                                         @foreach ($dtjadwal as $key => $item)
-                                        <tbody>
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->materi->nama_mapel ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
-                                                <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
-                                                <td>{{ $item->hari }}</td>
-                                                <td>{{ $item->jam_mulai }}</td>
-                                                <td>{{ $item->jam_selesai }}</td>
-                                            </tr>
-                                            @endforeach
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                                    <!-- Pastikan relasi ke guru sudah benar -->
+                                                    <td>{{ $item->guru->nama ?? '-' }}</td>
+                                                    <!-- Pastikan relasi ke guru sudah benar -->
+                                                    <td>{{ $item->hari }}</td>
+                                                    <td>{{ $item->jam_mulai }}</td>
+                                                    <td>{{ $item->jam_selesai }}</td>
+                                                </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
