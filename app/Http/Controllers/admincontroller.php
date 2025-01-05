@@ -8,6 +8,7 @@ use App\Models\guru;
 use App\Models\materi;
 use App\Models\nilai;
 use App\Models\siswa;
+use App\Models\gender;
 
 
 class admincontroller extends Controller
@@ -106,7 +107,7 @@ class admincontroller extends Controller
         // Validasi input data (optional)
         $request->validate([
             'nama' => 'required|string|max:255',
-            'gender' => 'required|string|max:255',
+            'gender' => 'required|in:pria,wanita',
             'email' => 'required|string|max:255',
             'no_hp' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
@@ -140,7 +141,7 @@ class admincontroller extends Controller
         // Validasi data yang masuk
         $request->validate([
             'nama' => 'required|string|max:255',
-            'gender' => 'required|string|max:255',
+            'gender' => 'required|in:pria,wanita',
             'email' => 'required|string|max:255',
             'no_hp' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',

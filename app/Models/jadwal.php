@@ -14,12 +14,12 @@ class jadwal extends Model
     protected $table = "jadwal";
     protected $primaryKey = "id";
     protected $fillable = [
-       'hari', 'jam_mulai','jam_selesai','materi_id','guru_id'];
+       'hari', 'jam_mulai','jam_selesai','materi_id'];
 
-       public function guru()
-       {
-           return $this->belongsTo(Guru::class,'guru_id','id');
-       }
+    //    public function guru()
+    //    {
+    //        return $this->belongsTo(Guru::class,'guru_id','id');
+    //    }
 
        public function materi()
        {

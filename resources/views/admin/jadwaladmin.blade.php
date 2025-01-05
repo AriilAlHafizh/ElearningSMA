@@ -95,7 +95,7 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link  " href="../pages/logout.php">
                         <div
@@ -156,18 +156,9 @@
                                                         <select name="materi_id" id="materi_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
                                                             @foreach ($materis as $materi)
-                                                                <option value="{{ $materi->id }}">
-                                                                    {{ $materi->nama_mapel }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="guru_id" class="form-label">Guru</label>
-                                                        <select name="guru_id" id="guru_id" class="form-select">
-                                                            <option value="">Pilih Guru</option>
-                                                            @foreach ($gurus as $guru)
-                                                                <option value="{{ $guru->id }}">
-                                                                    {{ $guru->nama }}</option>
+                                                            <option value="{{ $materi->id }}">
+                                                                {{ $materi->nama_mapel }}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -203,6 +194,7 @@
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
+                                            <th class="align-middle text-left">Kelas</th>
                                             <th class="align-middle text-left">Nama Pelajaran</th>
                                             <th class="align-middle text-left">Guru</th>
                                             <th class="align-middle text-left">Hari</th>
@@ -212,32 +204,31 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtjadwal as $key => $item)
-                                        <tbody>
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
-                                                <!-- Pastikan relasi ke guru sudah benar -->
-                                                <td>{{ $item->guru->nama ?? '-' }}</td>
-                                                <!-- Pastikan relasi ke guru sudah benar -->
-                                                <td>{{ $item->hari }}</td>
-                                                <td>{{ $item->jam_mulai }}</td>
-                                                <td>{{ $item->jam_selesai }}</td>
-                                                <td>
-                                                    <div class="d-flex gap-2">
-                                                        <a class="btn btn-success" data-bs-toggle="modal"
-                                                            data-bs-target="#EditJadwal{{ $item->id }}">Ubah</a>
-                                                        <form action="{{ route('admin.jadwal.destroy', $item->id) }}"
-                                                            method="POST" id="deleteform">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="submit" class="btn btn-danger"
-                                                                value="Delete" id="delete">
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
+                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td>{{ $item->materi->guru->nama ?? '-' }}</td>
+                                            <td>{{ $item->hari }}</td>
+                                            <td>{{ $item->jam_mulai }}</td>
+                                            <td>{{ $item->jam_selesai }}</td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <a class="btn btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#EditJadwal{{ $item->id }}">Ubah</a>
+                                                    <form action="{{ route('admin.jadwal.destroy', $item->id) }}"
+                                                        method="POST" id="deleteform{{$item->id}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" class="btn btn-danger"
+                                                            value="Delete" id="delete">
+                                                    </form>
+                                                </div>
+                                            </td>
 
-                                            </tr>
-                                    @endforeach
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -248,71 +239,59 @@
 
             <!-- Edit Modal -->
             @foreach ($dtjadwal as $key => $item)
-                <div class="modal fade" id="EditJadwal{{ $item->id }}" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true" >
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('admin.jadwal.update', $item->id) }}" method="POST"
-                                    enctype="multipart/form-data" id="editform">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="materi_id" class="form-label">Nama Pelajaran</label>
-                                            <select class="form-select" id="materi_id" name="materi_id">
-                                                <option value="" selected>Tidak Mata Pelajaran</option>
-                                                @foreach ($materis as $materi)
-                                                    <option value="{{ $materi->id }}"
-                                                        {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
-                                                        {{ $materi->nama_mapel }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="guru_id" class="form-label">Guru</label>
-                                            <select class="form-select" id="guru_id" name="guru_id">
-                                                <option value="" selected>Tidak ada guru</option>
-                                                @foreach ($gurus as $guru)
-                                                    <option value="{{ $guru->id }}"
-                                                        {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
-                                                        {{ $guru->nama }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="hari" class="form-label">Hari</label>
-                                            <input type="text" class="form-control" id="hari" name="hari"
-                                                value="{{ $item->hari }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="jam_mulai" class="form-label">Jam Mulai</label>
-                                            <input type="time" class="form-control" id="jam_mulai"
-                                                name="jam_mulai" value="{{ $item->jam_mulai }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="jam_selesai" class="form-label">Jam Selesai</label>
-                                            <input type="time" class="form-control" id="jam_selesai"
-                                                name="jam_selesai" value="{{ $item->jam_selesai }}" required>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
-                                        </div>
+            <div class="modal fade" id="EditJadwal{{ $item->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('admin.jadwal.update', $item->id) }}" method="POST"
+                                enctype="multipart/form-data" id="editform{{$item->id}}">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="materi_id" class="form-label">Nama Pelajaran</label>
+                                        <select class="form-select" id="materi_id" name="materi_id">
+                                            <option value="" selected>Tidak Mata Pelajaran</option>
+                                            @foreach ($materis as $materi)
+                                            <option value="{{ $materi->id }}"
+                                                {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
+                                                {{ $materi->nama_mapel }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="mb-3">
+                                        <label for="hari" class="form-label">Hari</label>
+                                        <input type="text" class="form-control" id="hari" name="hari"
+                                            value="{{ $item->hari }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jam_mulai" class="form-label">Jam Mulai</label>
+                                        <input type="time" class="form-control" id="jam_mulai"
+                                            name="jam_mulai" value="{{ $item->jam_mulai }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jam_selesai" class="form-label">Jam Selesai</label>
+                                        <input type="time" class="form-control" id="jam_selesai"
+                                            name="jam_selesai" value="{{ $item->jam_selesai }}" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
 
@@ -324,77 +303,79 @@
         <script src="../js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../js/plugins/smooth-scrollbar.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            {{-- notif delete --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#delete', function(e) {
-                        e.preventDefault();
-                        var link = $(this).attr('class');
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            text: "Anda tidak dapat mengembalikan data ini!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $('#deleteform').submit();
-                                Swal.fire({
-                                    title: "Data Berhasil DiHapus!",
-                                    icon: "success"
-                                });
-                            }
-                        });
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {{-- notif delete --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#delete', function(e) {
+                    e.preventDefault();
+                    var formId = $(this).closest('form').attr('id');
+
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        text: "Anda tidak dapat mengembalikan data ini!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#' + formId).submit();
+                            Swal.fire({
+                                title: "Data Berhasil DiHapus!",
+                                icon: "success"
+                            });
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
+        </script>
+        {{-- notif tambah --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#tambah', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman form langsung
 
-            {{-- notif tambah --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#tambah', function(e) {
-                        e.preventDefault(); // Mencegah pengiriman form langsung
-
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            icon: "question",
-                            showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#tambahform').submit();
-                            }
-                        });
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Submit!",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim form secara manual
+                            $('#tambahform').submit();
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
 
-            {{-- notif edit --}}
-             <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#edit', function(e) {
-                        e.preventDefault(); // Mencegah pengiriman form langsung
+        {{-- notif edit --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#edit', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman form langsung
 
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            icon: "question",
-                            showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#editform').submit();
-                            }
-                        });
+                    var formId = $(this).closest('form').attr('id');
+
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Submit!",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#' + formId).submit();
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
 
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
@@ -405,10 +386,6 @@
                 Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
         </script>
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

@@ -147,8 +147,8 @@
                                                         <select name="siswa_id" id="siswa_id" class="form-select">
                                                             <option value="">Pilih NIS Siswa</option>
                                                             @foreach ($siswas as $siswa)
-                                                                <option value="{{ $siswa->id }}">{{ $siswa->nis }}
-                                                                </option>
+                                                            <option value="{{ $siswa->id }}">{{ $siswa->nis }}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -158,8 +158,9 @@
                                                         <select name="materi_id" id="materi_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
                                                             @foreach ($materis as $materi)
-                                                                <option value="{{ $materi->id }}">
-                                                                    {{ $materi->nama_mapel }}</option>
+                                                            <option value="{{ $materi->id }}">
+                                                                {{ $materi->nama_mapel }}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -192,28 +193,28 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtnilai as $key => $item)
-                                        <tbody>
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->siswa->nis ?? '-' }}</td>
-                                                <td>{{ $item->siswa->nama ?? '-' }}</td>
-                                                <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
-                                                <td>{{ $item->nilai }}</td>
-                                                <td>
-                                                    <div class="d-flex gap-2">
-                                                        <a class="btn btn-success" data-bs-toggle="modal"
-                                                            data-bs-target="#EditNilai{{ $item->id }}">Ubah</a>
-                                                        <form action="{{ route('nilai.guru.destroy', $item->id) }}"
-                                                            method="POST" id="deleteform">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="submit" class="btn btn-danger"
-                                                                value="Delete" id="delete">
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                    @endforeach
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->siswa->nis ?? '-' }}</td>
+                                            <td>{{ $item->siswa->nama ?? '-' }}</td>
+                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td>{{ $item->nilai }}</td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <a class="btn btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#EditNilai{{ $item->id }}">Ubah</a>
+                                                    <form action="{{ route('nilai.guru.destroy', $item->id) }}"
+                                                        method="POST" id="deleteform{{$item->id}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" class="btn btn-danger"
+                                                            value="Delete" id="delete">
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -224,61 +225,61 @@
 
             <!-- Edit Modal -->
             @foreach ($dtnilai as $key => $item)
-                <div class="modal fade" id="EditNilai{{ $item->id }}" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('nilai.guru.update', $item->id) }}" method="POST"
-                                    enctype="multipart/form-data" id="editform">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="materi_id" class="form-label">Nama Pelajaran</label>
-                                            <select class="form-select" id="materi_id" name="materi_id">
-                                                <option value="" selected>Tidak Mata Pelajaran</option>
-                                                @foreach ($materis as $materi)
-                                                    <option value="{{ $materi->id }}"
-                                                        {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
-                                                        {{ $materi->nama_mapel }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="siswa_id" class="form-label">NIS</label>
-                                            <select class="form-select" id="siswa_id" name="siswa_id">
-                                                <option value="" selected>Tidak NIS</option>
-                                                @foreach ($siswas as $siswa)
-                                                    <option value="{{ $siswa->id }}"
-                                                        {{ $siswa->id == $item->siswa_id ? 'selected' : '' }}>
-                                                        {{ $siswa->nis }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="nilai" class="form-label">Nilai</label>
-                                            <input type="text" class="form-control" id="nilai" name="nilai"
-                                                value="{{ $item->nilai }}" required>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
-                                        </div>
+            <div class="modal fade" id="EditNilai{{ $item->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('nilai.guru.update', $item->id) }}" method="POST"
+                                enctype="multipart/form-data" id="editform{{$item->id}}">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="materi_id" class="form-label">Nama Pelajaran</label>
+                                        <select class="form-select" id="materi_id" name="materi_id">
+                                            <option value="" selected>Tidak Mata Pelajaran</option>
+                                            @foreach ($materis as $materi)
+                                            <option value="{{ $materi->id }}"
+                                                {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
+                                                {{ $materi->nama_mapel }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="mb-3">
+                                        <label for="siswa_id" class="form-label">NIS</label>
+                                        <select class="form-select" id="siswa_id" name="siswa_id">
+                                            <option value="" selected>Tidak NIS</option>
+                                            @foreach ($siswas as $siswa)
+                                            <option value="{{ $siswa->id }}"
+                                                {{ $siswa->id == $item->siswa_id ? 'selected' : '' }}>
+                                                {{ $siswa->nis }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nilai" class="form-label">Nilai</label>
+                                        <input type="text" class="form-control" id="nilai" name="nilai"
+                                            value="{{ $item->nilai }}" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
 
@@ -291,77 +292,79 @@
         <script src="../js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../js/plugins/smooth-scrollbar.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            {{-- notif delete --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#delete', function(e) {
-                        e.preventDefault();
-                        var link = $(this).attr('class');
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            text: "Anda tidak dapat mengembalikan data ini!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $('#deleteform').submit();
-                                Swal.fire({
-                                    title: "Data Berhasil DiHapus!",
-                                    icon: "success"
-                                });
-                            }
-                        });
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {{-- notif delete --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#delete', function(e) {
+                    e.preventDefault();
+                    var formId = $(this).closest('form').attr('id');
+
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        text: "Anda tidak dapat mengembalikan data ini!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#' + formId).submit();
+                            Swal.fire({
+                                title: "Data Berhasil DiHapus!",
+                                icon: "success"
+                            });
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
+        </script>
+        {{-- notif tambah --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#tambah', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman form langsung
 
-            {{-- notif tambah --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#tambah', function(e) {
-                        e.preventDefault(); // Mencegah pengiriman form langsung
-
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            icon: "question",
-                            showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#tambahform').submit();
-                            }
-                        });
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Submit!",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim form secara manual
+                            $('#tambahform').submit();
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
 
-            {{-- notif edit --}}
-             <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#edit', function(e) {
-                        e.preventDefault(); // Mencegah pengiriman form langsung
+        {{-- notif edit --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#edit', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman form langsung
 
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            icon: "question",
-                            showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#editform').submit();
-                            }
-                        });
+                    var formId = $(this).closest('form').attr('id');
+
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Submit!",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#' + formId).submit();
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
 
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
@@ -372,10 +375,6 @@
                 Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
         </script>
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>
