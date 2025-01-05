@@ -259,10 +259,7 @@ class admincontroller extends Controller
         return view('admin.jadwaladmin');
     }
 
-    public function profileadmin()
-    {
-        return view('admin.profileadmin');
-    }
+    
 
     public function downloadadmin($id)
     {

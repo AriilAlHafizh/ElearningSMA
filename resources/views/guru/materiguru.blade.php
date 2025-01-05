@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST" action="{{ route('materi.guru.store') }}"
-                                                enctype="multipart/form-data">
+                                                enctype="multipart/form-data" id="tambahform">
                                                 @csrf
                                                 <section class="base">
                                                     <div class="mb-3">
@@ -173,7 +173,7 @@
                                                     </div>
                                                     <div>
                                                         <input type="submit" name="simpan" value="Tambah Materi"
-                                                            class="btn btn-outline-primary">
+                                                            class="btn btn-outline-primary" id="tambah">
                                                     </div>
                                                 </section>
                                             </form>
@@ -208,10 +208,10 @@
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('materi.guru.destroy', $item->id) }}" method="POST">
+                                                    <form action="{{ route('materi.guru.destroy', $item->id) }}" method="POST" id="deleteform">
                                                         @csrf
                                                         @method("DELETE")
-                                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                                        <input type="submit" class="btn btn-danger" value="Delete" id="delete">
                                                     </form>
                                                 </div>
                                             </td>
@@ -237,7 +237,7 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('materi.guru.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('materi.guru.update', $item->id) }}" method="POST" enctype="multipart/form-data" id="editform">
                                 @csrf
                                 @method('PUT')
                                 <div class="modal-body">
@@ -270,7 +270,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
                                 </div>
                             </form>
                         </div>
@@ -288,6 +288,78 @@
         <script src="../js/core/bootstrap.min.js"></script>
         <script src="../js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            {{-- notif delete --}}
+            <script type="text/javascript">
+                $(function() {
+                    $(document).on('click', '#delete', function(e) {
+                        e.preventDefault();
+                        var link = $(this).attr('class');
+                        Swal.fire({
+                            title: "Apakah Anda Yakin?",
+                            text: "Anda tidak dapat mengembalikan data ini!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, delete it!"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('#deleteform').submit();
+                                Swal.fire({
+                                    title: "Data Berhasil DiHapus!",
+                                    icon: "success"
+                                });
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            {{-- notif tambah --}}
+            <script type="text/javascript">
+                $(function() {
+                    $(document).on('click', '#tambah', function(e) {
+                        e.preventDefault(); // Mencegah pengiriman form langsung
+
+                        Swal.fire({
+                            title: "Apakah Anda Yakin?",
+                            icon: "question",
+                            showCancelButton: true,
+                            confirmButtonText: "Submit!",
+                            cancelButtonText: "Cancel"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Kirim form secara manual
+                                $('#tambahform').submit();
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            {{-- notif edit --}}
+             <script type="text/javascript">
+                $(function() {
+                    $(document).on('click', '#edit', function(e) {
+                        e.preventDefault(); // Mencegah pengiriman form langsung
+
+                        Swal.fire({
+                            title: "Apakah Anda Yakin?",
+                            icon: "question",
+                            showCancelButton: true,
+                            confirmButtonText: "Submit!",
+                            cancelButtonText: "Cancel"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Kirim form secara manual
+                                $('#editform').submit();
+                            }
+                        });
+                    });
+                });
+            </script>
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {

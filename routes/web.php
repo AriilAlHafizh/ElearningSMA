@@ -60,7 +60,6 @@ Route::put('/materiadmin/{id}', [admincontroller::class, 'materiupdate'])->name(
 Route::delete('/materiadmin/{id}', [admincontroller::class, 'materidestroy'])->name('materi.admin.destroy');
 Route::get('/dashboardadmin', [admincontroller::class, 'dashboardadmin'])->name('admin.dashboard');
 Route::get('/dataguru', [admincontroller::class, 'dataguru'])->name('admin.guru');
-Route::get('/profileadmin', [admincontroller::class, 'profileadmin'])->name('profile.admin');
 Route::post('/dataguru', [admincontroller::class, 'storeguru'])->name('admin.guru.store');
 Route::put('/dataguru/{id}', [adminController::class, 'update'])->name('admin.guru.update');
 Route::delete('/dataguru/{id}', [adminController::class, 'destroyguru'])->name('admin.guru.destroy');
