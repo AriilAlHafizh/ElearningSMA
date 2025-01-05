@@ -167,6 +167,12 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
+                                                            class="form-label">Password</label>
+                                                        <input type="Text" name="password" class="form-control">
+                                                        <br>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1"
                                                             class="form-label">Alamat</label>
                                                         <input type="Text" name="alamat" class="form-control">
                                                         <br>
@@ -211,6 +217,7 @@
                                             <th class="align-middle text-left">No</th>
                                             <th class="align-middle text-left">Nama</th>
                                             <th class="align-middle text-left">Email</th>
+                                            <th class="align-middle text-left">Password</th>
                                             <th class="align-middle text-left">Alamat</th>
                                             <th class="align-middle text-left">No. Telp</th>
                                             <th class="align-middle text-left">Jenis Kelamin</th>
@@ -224,6 +231,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->nama }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>{{ $item->password }}</td>
                                             <td>{{ $item->alamat }}</td>
                                             <td>{{ $item->no_hp }}</td>
                                             <td>{{ $item->gender }}</td>
@@ -284,6 +292,11 @@
                                         <label for="email" class="form-label">Email</label>
                                         <input type="text" name="email" class="form-control"
                                             value="{{ $guru->email }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="Text" name="password" class="form-control"
+                                            value="{{ $guru->password }}"> <br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="alamat" class="form-label">Alamat</label>

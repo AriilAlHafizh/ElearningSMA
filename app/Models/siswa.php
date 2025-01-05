@@ -14,7 +14,7 @@ class siswa extends Model
     protected $table = "siswa";
     protected $primaryKey = "id";
     protected $fillable = [
-        'nis','nama','tgl_lahir','gender','email','no_hp','alamat','foto','materi_id'];
+        'nis','nama','tgl_lahir','gender','email','password','no_hp','alamat','foto','materi_id'];
 
     public function materi()
     {

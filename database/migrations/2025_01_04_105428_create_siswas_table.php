@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('nama');
             $table->date('tgl_lahir');
             $table->enum('gender', [Gender::PRIA->value, Gender::WANITA->value]);
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('password')->nullable();
             $table->string('no_hp');
             $table->string('alamat');
             $table->string('foto')->nullable();
+            $table->enum('role', ['siswa'])->nullable(); // Kolom ENUM
             $table->unsignedBigInteger('materi_id')->constrained('materi')->nullable();
             $table->timestamps();
 

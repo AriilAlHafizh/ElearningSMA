@@ -14,7 +14,7 @@ class guru extends Model
     protected $table = "guru";
     protected $primaryKey = "id";
     protected $fillable = [
-        'nama','gender','email','no_hp','alamat','foto'];
+        'nama','gender','email','password','no_hp','alamat','foto'];
     
         public function materi ()
         {
