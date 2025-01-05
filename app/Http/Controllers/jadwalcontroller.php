@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\materi;
-use App\Models\guru;
 use App\Models\jadwal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,11 +11,11 @@ class jadwalcontroller extends Controller
 {
     public function jadwaladmin()
     {
-        $dtjadwal = jadwal::with('materi', 'guru')->get();
+        $dtjadwal = jadwal::with('materi')->get();
         $materis = materi::all(); // Mengambil semua data materi
-        $gurus = guru::all();
 
-        return view('admin.jadwaladmin', compact('dtjadwal', 'materis', 'gurus'));
+
+        return view('admin.jadwaladmin', compact('dtjadwal', 'materis'));
     }
 
     public function storejadwal(Request $request)
@@ -25,7 +24,6 @@ class jadwalcontroller extends Controller
             'hari' => 'required|string|max:255',
             'jam_mulai' => 'required|string|max:255',
             'jam_selesai' => 'required|string|max:255',
-            'guru_id' => 'required|string|max:255',
             'materi_id' => 'required|string|max:20',
         ]);
 
@@ -34,7 +32,6 @@ class jadwalcontroller extends Controller
             'hari' => $request->hari,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
-            'guru_id' => $request->guru_id,
             'materi_id' => $request->materi_id,
 
         ]);
@@ -50,7 +47,6 @@ class jadwalcontroller extends Controller
             'hari' => 'required|string|max:255',
             'jam_mulai' => 'required|string|max:255',
             'jam_selesai' => 'required|string|max:255',
-            'guru_id' => 'required|string|max:255',
             'materi_id' => 'required|string|max:20',
         ]);
 
@@ -60,7 +56,6 @@ class jadwalcontroller extends Controller
             'hari' => $request->hari,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
-            'guru_id' => $request->guru_id,
             'materi_id' => $request->materi_id,
         ]);
 

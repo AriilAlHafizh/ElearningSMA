@@ -38,11 +38,10 @@ class matericontroller extends Controller
 
     public function jadwal()
     {
-        $dtjadwal = jadwal::with('materi', 'guru')->get();
+        $dtjadwal = jadwal::with('materi')->get();
         $materis = materi::all(); // Mengambil semua data materi
-        $gurus = guru::all();
 
-        return view('guru.jadwalguru', compact('dtjadwal', 'materis', 'gurus'));
+        return view('guru.jadwalguru', compact('dtjadwal', 'materis'));
     }
 
     public function profile()

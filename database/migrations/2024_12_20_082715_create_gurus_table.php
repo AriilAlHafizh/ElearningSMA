@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\gender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::create('guru', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('gender');
+            $table->enum('gender', [Gender::PRIA->value, Gender::WANITA->value]);
             $table->string('email');
             $table->string('no_hp');
             $table->string('alamat');

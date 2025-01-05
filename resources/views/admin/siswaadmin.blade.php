@@ -221,40 +221,40 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtsiswa as $key => $item)
-                                        <tbody>
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->nis }}</td>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->tgl_lahir }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->no_hp }}</td>
-                                                <td>{{ $item->gender }}</td>
-                                                <td>
-                                                    @if ($item->foto)
-                                                        <img src="{{ asset('storage/photos/' . $item->foto) }}"
-                                                            alt="Foto Siswa"
-                                                            style="width: 50px; height: 50px; object-fit: cover;">
-                                                    @else
-                                                        <span>No Photo</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-xs font-weight-bold">
-                                                    <div class="d-flex gap-2">
-                                                        <a class="btn btn-success" data-bs-toggle="modal"
-                                                            data-bs-target="#EditSiswa{{ $item->id }}">Ubah</a>
-                                                        <form action="{{ route('admin.siswa.destroy', $item->id) }}"
-                                                            method="POST" id="deleteform{{ $item->id }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="submit" class="btn btn-danger"
-                                                                value="Delete" id="delete">
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item->nis }}</td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->tgl_lahir }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->alamat }}</td>
+                                            <td>{{ $item->no_hp }}</td>
+                                            <td>{{ $item->gender }}</td>
+                                            <td>
+                                                @if ($item->foto)
+                                                <img src="{{ asset('storage/photos/' . $item->foto) }}"
+                                                    alt="Foto Siswa"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                                @else
+                                                <span>No Photo</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-xs font-weight-bold">
+                                                <div class="d-flex gap-2">
+                                                    <a class="btn btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#EditSiswa{{ $item->id }}">Ubah</a>
+                                                    <form action="{{ route('admin.siswa.destroy', $item->id) }}"
+                                                        method="POST" id="deleteform{{ $item->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" class="btn btn-danger"
+                                                            value="Delete" id="delete">
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                     @endforeach
                                 </table>
                             </div>
@@ -265,83 +265,79 @@
 
             <!-- Edit Modal -->
             @foreach ($dtsiswa as $key => $item)
-                <div class="modal fade" id="EditSiswa{{ $item->id }}" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="POST" action="{{ route('admin.siswa.update', $item->id) }}"
-                                    enctype="multipart/form-data" id="editform{{ $item->id }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <section class="base">
-                                        <div class="mb-3">
-                                            <label for="nis" class="form-label">NIS</label>
-                                            <input type="text" name="nis" class="form-control"
-                                                value="{{ $item->nis }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                            <input type="text" name="nama" class="form-control"
-                                                value="{{ $item->nama }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                                            <input type="text" name="tgl_lahir" class="form-control"
-                                                value="{{ $item->tgl_lahir }}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                                            <input type="text" name="email" class="form-control"
-                                                value="{{ $item->email }}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                            <input type="Text" name="alamat" class="form-control"
-                                                value="{{ $item->alamat }}"> <br>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">No.Telp</label>
-                                            <input type="Text" name="no_hp" class="form-control"
-                                                value="{{ $item->no_hp }}"> <br>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="siswa_id" class="form-label">Jenis Kelamin</label>
-                                            <select class="form-select" id="siswa_id" name="siswa_id">
-                                                <option value="" selected>Tidak ada gender</option>
-                                                @foreach ($guruadmin as $guru)
-                                                    <option value="{{ $guru->id }}"
-                                                        {{ $guru->id == $item->siswa_id ? 'selected' : '' }}>
-                                                        {{ $guru->nama }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Foto</label>
-                                            <input type="file" name="file" class="form-control"
-                                                value="{{ $item->foto }}">
-                                            <br>
-                                            @if ($item->foto)
-                                                <img src="{{ asset('storage/' . $item->foto) }}" alt="Siswa Foto"
-                                                    width="100">
-                                            @endif
-                                        </div>
-                                        <div>
-                                            <input type="submit" name="simpan" value="Simpan"
-                                                class="btn btn-outline-primary" id="edit">
-                                        </div>
-                                    </section>
-                                </form>
-                            </div>
+            <div class="modal fade" id="EditSiswa{{ $item->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{{ route('admin.siswa.update', $item->id) }}"
+                                enctype="multipart/form-data" id="editform{{ $item->id }}">
+                                @csrf
+                                @method('PUT')
+                                <section class="base">
+                                    <div class="mb-3">
+                                        <label for="nis" class="form-label">NIS</label>
+                                        <input type="text" name="nis" class="form-control"
+                                            value="{{ $item->nis }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Nama</label>
+                                        <input type="text" name="nama" class="form-control"
+                                            value="{{ $item->nama }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                                        <input type="text" name="tgl_lahir" class="form-control"
+                                            value="{{ $item->tgl_lahir }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="text" name="email" class="form-control"
+                                            value="{{ $item->email }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                                        <input type="Text" name="alamat" class="form-control"
+                                            value="{{ $item->alamat }}"> <br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">No.Telp</label>
+                                        <input type="Text" name="no_hp" class="form-control"
+                                            value="{{ $item->no_hp }}"> <br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="gender" class="form-label">Jenis
+                                            Kelamin</label>
+                                        <select name="gender" class="form-select" value="{{ $item->gender }}">
+                                            <option value="pria">PRIA</option>
+                                            <option value="wanita">WANITA</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Foto</label>
+                                        <input type="file" name="file" class="form-control"
+                                            value="{{ $item->foto }}">
+                                        <br>
+                                        @if ($item->foto)
+                                        <img src="{{ asset('storage/' . $item->foto) }}" alt="Siswa Foto"
+                                            width="100">
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <input type="submit" name="simpan" value="Simpan"
+                                            class="btn btn-outline-primary" id="edit">
+                                    </div>
+                                </section>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
 
 
@@ -359,7 +355,8 @@
                 $(function() {
                     $(document).on('click', '#delete', function(e) {
                         e.preventDefault();
-                        var link = $(this).attr('class');
+                        var formId = $(this).closest('form').attr('id');
+
                         Swal.fire({
                             title: "Apakah Anda Yakin?",
                             text: "Anda tidak dapat mengembalikan data ini!",
@@ -370,7 +367,7 @@
                             confirmButtonText: "Yes, delete it!"
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                $('#deleteform{{ $item->id }}').submit();
+                                $('#' + formId).submit();
                                 Swal.fire({
                                     title: "Data Berhasil DiHapus!",
                                     icon: "success"
@@ -380,7 +377,7 @@
                     });
                 });
             </script>
-
+            </script>
             {{-- notif tambah --}}
             <script type="text/javascript">
                 $(function() {
@@ -404,10 +401,12 @@
             </script>
 
             {{-- notif edit --}}
-             <script type="text/javascript">
+            <script type="text/javascript">
                 $(function() {
                     $(document).on('click', '#edit', function(e) {
                         e.preventDefault(); // Mencegah pengiriman form langsung
+
+                        var formId = $(this).closest('form').attr('id');
 
                         Swal.fire({
                             title: "Apakah Anda Yakin?",
@@ -417,8 +416,7 @@
                             cancelButtonText: "Cancel"
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#editform{{ $item->id }}').submit();
+                                $('#' + formId).submit();
                             }
                         });
                     });
@@ -434,10 +432,6 @@
                     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
                 }
             </script>
-            <!-- Github buttons -->
-            <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

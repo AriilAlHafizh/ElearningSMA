@@ -314,77 +314,80 @@
         <script src="../js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../js/plugins/smooth-scrollbar.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            {{-- notif delete --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#delete', function(e) {
-                        e.preventDefault();
-                        var link = $(this).attr('class');
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            text: "Anda tidak dapat mengembalikan data ini!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $('#deleteform{{ $item->id }}').submit();
-                                Swal.fire({
-                                    title: "Data Berhasil DiHapus!",
-                                    icon: "success"
-                                });
-                            }
-                        });
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {{-- notif delete --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#delete', function(e) {
+                    e.preventDefault();
+                    var formId = $(this).closest('form').attr('id');
+
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        text: "Anda tidak dapat mengembalikan data ini!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#' + formId).submit();
+                            Swal.fire({
+                                title: "Data Berhasil DiHapus!",
+                                icon: "success"
+                            });
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
+        </script>
+        {{-- notif tambah --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#tambah', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman form langsung
 
-            {{-- notif tambah --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#tambah', function(e) {
-                        e.preventDefault(); // Mencegah pengiriman form langsung
-
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            icon: "question",
-                            showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#tambahform').submit();
-                            }
-                        });
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Submit!",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim form secara manual
+                            $('#tambahform').submit();
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
 
-            {{-- notif edit --}}
-            <script type="text/javascript">
-                $(function() {
-                    $(document).on('click', '#edit', function(e) {
-                        e.preventDefault(); // Mencegah pengiriman form langsung
+        {{-- notif edit --}}
+        <script type="text/javascript">
+            $(function() {
+                $(document).on('click', '#edit', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman form langsung
 
-                        Swal.fire({
-                            title: "Apakah Anda Yakin?",
-                            icon: "question",
-                            showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Kirim form secara manual
-                                $('#editform').submit();
-                            }
-                        });
+                    var formId = $(this).closest('form').attr('id');
+
+                    Swal.fire({
+                        title: "Apakah Anda Yakin?",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Submit!",
+                        cancelButtonText: "Cancel"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#' + formId).submit();
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
+
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -394,10 +397,6 @@
                 Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
         </script>
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>
