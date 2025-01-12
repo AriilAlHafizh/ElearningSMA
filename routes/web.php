@@ -11,7 +11,7 @@ use App\Http\Controllers\logincontroller;
 
 //guru
 Route::get('/', function () {
-    return view('..\guru\dashboardguru');});
+    return view('login');});
 Route::get('/materiguru', [matericontroller::class, 'index'])->name('materi.guru');
 Route::get('/dashboardguru', [matericontroller::class, 'dashboard'])->name('guru.dashboard');
 Route::get('/jadwal', [matericontroller::class, 'jadwal'])->name('jadwal.dashboard');

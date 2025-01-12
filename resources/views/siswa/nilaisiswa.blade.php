@@ -124,21 +124,21 @@
                                             <th class="align-middle text-center">No</th>
                                             <th class="align-middle text-center">NIS</th>
                                             <th class="align-middle text-center">Nama Siswa</th>
-                                            <th class="align-middle text-center">Kelas</th>
                                             <th class="align-middle text-center">Mata Pelajaran</th>
                                             <th class="align-middle text-center">Nilai</th>
-                                            <th class="align-middle text-center">Indeks</th>
                                         </tr>
                                     </thead>
+                                    @foreach ($dtnilai as $key => $item)
                                     <tbody>
-                                        <td class="align-middle text-center">1</td>
-                                        <td class="align-middle text-center">212121212</td>
-                                        <td class="align-middle text-center">ARGA</td>
-                                        <td class="align-middle text-center">12 MIPA 7</td>
-                                        <td class="align-middle text-center">Matematika</td>
-                                        <td class="align-middle text-center">90</td>
-                                        <td class="align-middle text-center">A</td>
+                                        <tr>
+                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                            <td class="align-middle text-center">{{ $item->siswa->nis ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->siswa->nama ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->nilai }}</td>
+                                        </tr>
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>

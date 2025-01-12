@@ -131,17 +131,21 @@
                                             <th class="align-middle text-center">Materi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <td class="align-middle text-center">1</td>
-                                        <td class="align-middle text-center">12 MIPA 7</td>
-                                        <td class="align-middle text-center">Matematika</td>
-                                        <td class="align-middle text-center">Bu Putra</td>
-                                        <td class="align-middle text-center"><button type="button"
+                                    @foreach ($dtmateriadmin as $key => $item)
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
+                                                <td class="align-middle text-center">{{ $item->nama_mapel }}</td>
+                                                <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
+                                                <td class="align-middle text-center"><button type="button"
                                                 class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 Lihat Materi
-                                            </button></td>
+                                            </tr>
+                                    @endforeach
                                     </tbody>
+                                    
                                 </table>
                             </div>
                         </div>
@@ -162,20 +166,11 @@
                         <div class="modal-body">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Matriks</h5>
+                                    <h5 class="card-title text-center">MATEMATIKA</h5>
                                     <p class="card-text text-justify">Bab 2 matriks 7x7</p>
-                                    <a href="#" class="btn btn-primary">Download</a>
+                                    <a href="" class="btn btn-primary"  >Download</a>
                                 </div>
                             </div>
-                            {{-- nanti hapus aja yang dibawah ini--}}
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Matriks</h5>
-                                    <p class="card-text text-justify">Bab 2 matriks 7x7</p>
-                                    <a href="#" class="btn btn-primary">Download</a>
-                                </div>
-                            </div>
-                            {{-- sampai sini --}}
                         </div>
                     </div>
                 </div>
