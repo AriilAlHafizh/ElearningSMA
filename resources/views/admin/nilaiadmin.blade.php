@@ -194,22 +194,22 @@
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
-                                            <th class="align-middle text-left">NIS</th>
-                                            <th class="align-middle text-left">Nama</th>
-                                            <th class="align-middle text-left">Mata Pelajaran</th>
-                                            <th class="align-middle text-left">Nilai</th>
-                                            <th class="align-middle text-left">Aksi</th>
+                                            <th class="align-middle text-center">NIS</th>
+                                            <th class="align-middle text-center">Nama</th>
+                                            <th class="align-middle text-center">Mata Pelajaran</th>
+                                            <th class="align-middle text-center">Nilai</th>
+                                            <th class="align-middle text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     @foreach ($dtnilai as $key => $item)
                                     <tbody>
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->siswa->nis ?? '-' }}</td>
-                                            <td>{{ $item->siswa->nama ?? '-' }}</td>
-                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
-                                            <td>{{ $item->nilai }}</td>
-                                            <td>
+                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                            <td class="align-middle text-center">{{ $item->siswa->nis ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->siswa->nama ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->nilai }}</td>
+                                            <td class="align-middle text-center">
                                                 <div class="d-flex gap-2">
                                                     <a class="btn btn-success" data-bs-toggle="modal"
                                                         data-bs-target="#EditNilai{{ $item->id }}">Ubah</a>
@@ -316,7 +316,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Ya, Hapus!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#' + formId).submit();
@@ -340,8 +340,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                        confirmButtonText: "Submit!",
-                        cancelButtonText: "Cancel"
+                       confirmButtonText: "Simpan!",
+                            cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim form secara manual
@@ -364,8 +364,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                        confirmButtonText: "Submit!",
-                        cancelButtonText: "Cancel"
+                       confirmButtonText: "Simpan!",
+                            cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#' + formId).submit();

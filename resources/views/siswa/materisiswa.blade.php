@@ -125,18 +125,18 @@
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
-                                            <th class="align-middle text-left">Kelas</th>
-                                            <th class="align-middle text-left">Nama Pelajaran</th>
-                                            <th class="align-middle text-left">Guru</th>
-                                            <th class="align-middle text-left">Materi</th>
+                                            <th class="align-middle text-center">Kelas</th>
+                                            <th class="align-middle text-center">Nama Pelajaran</th>
+                                            <th class="align-middle text-center">Guru</th>
+                                            <th class="align-middle text-center">Materi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td class="align-middle text-left">1</td>
-                                        <td class="align-middle text-left">12 MIPA 7</td>
-                                        <td class="align-middle text-left">Matematika</td>
-                                        <td class="align-middle text-left">Bu Putra</td>
-                                        <td class="align-middle text-left"><button type="button"
+                                        <td class="align-middle text-center">1</td>
+                                        <td class="align-middle text-center">12 MIPA 7</td>
+                                        <td class="align-middle text-center">Matematika</td>
+                                        <td class="align-middle text-center">Bu Putra</td>
+                                        <td class="align-middle text-center"><button type="button"
                                                 class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 Lihat Materi

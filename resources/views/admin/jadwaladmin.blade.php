@@ -318,7 +318,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Ya, Hapus!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#' + formId).submit();
@@ -342,8 +342,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                        confirmButtonText: "Submit!",
-                        cancelButtonText: "Cancel"
+                        confirmButtonText: "Simpan!",
+                            cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim form secara manual
