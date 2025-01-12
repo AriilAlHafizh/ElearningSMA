@@ -190,22 +190,22 @@
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
-                                            <th class="align-middle text-left">Kelas</th>
-                                            <th class="align-middle text-left">Nama Pelajaran</th>
-                                            <th class="align-middle text-left">Guru</th>
-                                            <th class="align-middle text-left">Materi</th>
-                                            <th class="align-middle text-left">Aksi</th>
+                                            <th class="align-middle text-center">Kelas</th>
+                                            <th class="align-middle text-center">Nama Pelajaran</th>
+                                            <th class="align-middle text-center">Guru</th>
+                                            <th class="align-middle text-center">Materi</th>
+                                            <th class="align-middle text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     @foreach ($dtmateri as $key => $item)
                                     <tbody>
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->nama_kelas }}</td>
-                                            <td>{{ $item->nama_mapel }}</td>
-                                            <td>{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
-                                            <td> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>{{ $item->isi_materi}}</a></td>
-                                            <td>
+                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                            <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
+                                            <td class="align-middle text-center">{{ $item->nama_mapel }}</td>
+                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
+                                            <td class="align-middle text-center"> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>{{ $item->isi_materi}}</a></td>
+                                            <td class="align-middle text-center">
                                                 <div class="d-flex gap-2">
                                                     <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
                                                     <form action="{{ route('materi.guru.destroy', $item->id) }}" method="POST" id="deleteform{{$item->id}}">
@@ -304,7 +304,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Ya, Hapus!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#' + formId).submit();
@@ -328,8 +328,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                        confirmButtonText: "Submit!",
-                        cancelButtonText: "Cancel"
+                        confirmButtonText: "Simpan!",
+                        cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim form secara manual
@@ -352,8 +352,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                        confirmButtonText: "Submit!",
-                        cancelButtonText: "Cancel"
+                        confirmButtonText: "Simpan!",
+                        cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#' + formId).submit();

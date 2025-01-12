@@ -214,31 +214,31 @@
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
-                                            <th class="align-middle text-left">NIS</th>
-                                            <th class="align-middle text-left">Nama</th>
-                                            <th class="align-middle text-left">Tanggal Lahir</th>
-                                            <th class="align-middle text-left">Email</th>
-                                            <th class="align-middle text-left">Password</th>
-                                            <th class="align-middle text-left">Alamat</th>
-                                            <th class="align-middle text-left">No.Telp</th>
-                                            <th class="align-middle text-left">Jenis Kelamin</th>
-                                            <th class="align-middle text-left">Foto</th>
-                                            <th class="align-middle text-left">Aksi</th>
+                                            <th class="align-middle text-center">NIS</th>
+                                            <th class="align-middle text-center">Nama</th>
+                                            <th class="align-middle text-center">Tanggal Lahir</th>
+                                            <th class="align-middle text-center">Email</th>
+                                            <th class="align-middle text-center">Password</th>
+                                            <th class="align-middle text-center">Alamat</th>
+                                            <th class="align-middle text-center">No.Telp</th>
+                                            <th class="align-middle text-center">Jenis Kelamin</th>
+                                            <th class="align-middle text-center">Foto</th>
+                                            <th class="align-middle text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     @foreach ($dtsiswa as $key => $item)
                                     <tbody>
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->nis }}</td>
-                                            <td>{{ $item->nama }}</td>
-                                            <td>{{ $item->tgl_lahir }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->password }}</td>
-                                            <td>{{ $item->alamat }}</td>
-                                            <td>{{ $item->no_hp }}</td>
-                                            <td>{{ $item->gender }}</td>
-                                            <td>
+                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                            <td class="align-middle text-center">{{ $item->nis }}</td>
+                                            <td class="align-middle text-center">{{ $item->nama }}</td>
+                                            <td class="align-middle text-center">{{ $item->tgl_lahir }}</td>
+                                            <td class="align-middle text-center">{{ $item->email }}</td>
+                                            <td class="align-middle text-center">{{ $item->password }}</td>
+                                            <td class="align-middle text-center">{{ $item->alamat }}</td>
+                                            <td class="align-middle text-center">{{ $item->no_hp }}</td>
+                                            <td class="align-middle text-center">{{ $item->gender }}</td>
+                                            <td class="align-middle text-center">
                                                 @if ($item->foto)
                                                 <img src="{{ asset('storage/photos/' . $item->foto) }}"
                                                     alt="Foto Siswa"
@@ -376,7 +376,7 @@
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
+                            confirmButtonText: "Ya, Hapus!"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 $('#' + formId).submit();
@@ -400,8 +400,8 @@
                             title: "Apakah Anda Yakin?",
                             icon: "question",
                             showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
+                            confirmButtonText: "Simpan!",
+                            cancelButtonText: "Batalkan"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 // Kirim form secara manual
@@ -424,8 +424,8 @@
                             title: "Apakah Anda Yakin?",
                             icon: "question",
                             showCancelButton: true,
-                            confirmButtonText: "Submit!",
-                            cancelButtonText: "Cancel"
+                            confirmButtonText: "Simpan!",
+                            cancelButtonText: "Batalkan"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 $('#' + formId).submit();

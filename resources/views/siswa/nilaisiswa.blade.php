@@ -121,23 +121,23 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
-                                            <th class="align-middle text-left">No</th>
-                                            <th class="align-middle text-left">NIS</th>
-                                            <th class="align-middle text-left">Nama Siswa</th>
-                                            <th class="align-middle text-left">Kelas</th>
-                                            <th class="align-middle text-left">Mata Pelajaran</th>
-                                            <th class="align-middle text-left">Nilai</th>
-                                            <th class="align-middle text-left">Indeks</th>
+                                            <th class="align-middle text-center">No</th>
+                                            <th class="align-middle text-center">NIS</th>
+                                            <th class="align-middle text-center">Nama Siswa</th>
+                                            <th class="align-middle text-center">Kelas</th>
+                                            <th class="align-middle text-center">Mata Pelajaran</th>
+                                            <th class="align-middle text-center">Nilai</th>
+                                            <th class="align-middle text-center">Indeks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td class="align-middle text-left">1</td>
-                                        <td class="align-middle text-left">212121212</td>
-                                        <td class="align-middle text-left">ARGA</td>
-                                        <td class="align-middle text-left">12 MIPA 7</td>
-                                        <td class="align-middle text-left">Matematika</td>
-                                        <td class="align-middle text-left">90</td>
-                                        <td class="align-middle text-left">A</td>
+                                        <td class="align-middle text-center">1</td>
+                                        <td class="align-middle text-center">212121212</td>
+                                        <td class="align-middle text-center">ARGA</td>
+                                        <td class="align-middle text-center">12 MIPA 7</td>
+                                        <td class="align-middle text-center">Matematika</td>
+                                        <td class="align-middle text-center">90</td>
+                                        <td class="align-middle text-center">A</td>
                                     </tbody>
                                 </table>
                             </div>

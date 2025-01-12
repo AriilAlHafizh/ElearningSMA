@@ -6,6 +6,7 @@ use App\Http\Controllers\matericontroller;
 use App\Http\Controllers\nilaicontroller;
 use App\Http\Controllers\siswacontroller;
 use App\Http\Controllers\jadwalcontroller;
+use App\Http\Controllers\logincontroller;
 
 
 //guru
@@ -70,6 +71,9 @@ Route::post('/jadwaladmin', [jadwalcontroller::class, 'storejadwal'])->name('adm
 Route::get('/jadwaladmin', [jadwalcontroller::class, 'jadwaladmin'])->name('jadwal.admin');
 Route::put('/jadwaladmin/{id}', [jadwalController::class, 'updatejadwal'])->name('admin.jadwal.update');
 Route::delete('/jadwaladmin/{id}', [jadwalController::class, 'destroyjadwal'])->name('admin.jadwal.destroy');
+
+//login
+Route::get('/login', [logincontroller::class, 'indexlogin'])->name('login');
 
 
 

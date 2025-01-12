@@ -120,24 +120,24 @@
                                         <thead>
                                         <tr class="text-xs font-weight-bold opacity-6">
                                             <th>No</th>
-                                            <th class="align-middle text-left">Kelas</th>
-                                            <th class="align-middle text-left">Nama Pelajaran</th>
-                                            <th class="align-middle text-left">Guru</th>
-                                            <th class="align-middle text-left">Hari</th>
-                                            <th class="align-middle text-left">Jam Mulai</th>
-                                            <th class="align-middle text-left">Jam Selesai</th>
+                                            <th class="align-middle text-center">Kelas</th>
+                                            <th class="align-middle text-center">Nama Pelajaran</th>
+                                            <th class="align-middle text-center">Guru</th>
+                                            <th class="align-middle text-center">Hari</th>
+                                            <th class="align-middle text-center">Jam Mulai</th>
+                                            <th class="align-middle text-center">Jam Selesai</th>
                                         </tr>
                                         </thead>
                                         @foreach ($dtjadwal as $key => $item)
                                             <tbody>
                                                 <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
-                                            <td>{{ $item->materi->guru->nama ?? '-' }}</td>
-                                            <td>{{ $item->hari }}</td>
-                                            <td>{{ $item->jam_mulai }}</td>
-                                            <td>{{ $item->jam_selesai }}</td>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                            <td class="align-middle text-center">{{ $item->materi->nama_kelas ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->materi->guru->nama ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->hari }}</td>
+                                            <td class="align-middle text-center">{{ $item->jam_mulai }}</td>
+                                            <td class="align-middle text-center">{{ $item->jam_selesai }}</td>
                                                 </tr>
                                         @endforeach
                                         </tbody>
