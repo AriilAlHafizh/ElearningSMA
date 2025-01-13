@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
             $table->string('nilai')->nullable();
-            $table->unsignedBigInteger('materi_id')->constrained('materi');
+            $table->unsignedBigInteger('mapel_id')->constrained('mapel');
             $table->unsignedBigInteger('siswa_id')->constrained('siswa');
             $table->timestamps();
 
             // Membuat hubungan foreign key 
-            $table->foreign('materi_id')
+            $table->foreign('mapel_id')
             ->references('id')
-            ->on('materi')
+            ->on('mapel')
             ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
 
             $table->foreign('siswa_id')

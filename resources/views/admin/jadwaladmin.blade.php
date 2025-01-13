@@ -151,20 +151,26 @@
                                                 @csrf
                                                 <section class="base">
                                                     <div class="mb-3">
-                                                        <label for="materi_id" class="form-label">Mata
+                                                        <label for="mapel_id" class="form-label">Mata
                                                             Pelajaran</label>
-                                                        <select name="materi_id" id="materi_id" class="form-select">
+                                                        <select name="mapel_id" id="mapel_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
-                                                            @foreach ($materis as $materi)
-                                                            <option value="{{ $materi->id }}">
-                                                                {{ $materi->nama_mapel }}
+                                                            @foreach ($mapels as $mapel)
+                                                            <option value="{{ $mapel->id }}">
+                                                                {{ $mapel->nama_mapel }}
                                                             </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="hari" class="form-label">Hari</label>
-                                                        <input type="text" name="hari" class="form-control">
+                                                        <select name="hari" class="form-select">
+                                                            <option value="senin">SENIN</option>
+                                                            <option value="selasa">SELASA</option>
+                                                            <option value="rabu">RABU</option>
+                                                            <option value="kamis ">KAMIS</option>
+                                                            <option value="jumat">JUMAT</option>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="jam_mulai" class="form-label">Jam Mulai</label>
@@ -208,7 +214,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td>{{ $item->mapel->nama_mapel ?? '-' }}</td>
                                             <td>{{ $item->materi->guru->nama ?? '-' }}</td>
                                             <td>{{ $item->hari }}</td>
                                             <td>{{ $item->jam_mulai }}</td>
@@ -255,21 +261,26 @@
                                 @method('PUT')
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="materi_id" class="form-label">Nama Pelajaran</label>
-                                        <select class="form-select" id="materi_id" name="materi_id">
+                                        <label for="mapel_id" class="form-label">Nama Pelajaran</label>
+                                        <select class="form-select" id="mapel_id" name="mapel_id">
                                             <option value="" selected>Tidak Mata Pelajaran</option>
-                                            @foreach ($materis as $materi)
-                                            <option value="{{ $materi->id }}"
-                                                {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
-                                                {{ $materi->nama_mapel }}
+                                            @foreach ($mapels as $mapels)
+                                            <option value="{{ $mapels->id }}"
+                                                {{ $mapels->id == $item->mapel_id ? 'selected' : '' }}>
+                                                {{ $mapels->nama_mapel }}
                                             </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="hari" class="form-label">Hari</label>
-                                        <input type="text" class="form-control" id="hari" name="hari"
-                                            value="{{ $item->hari }}" required>
+                                        <select name="hari" class="form-select" value="{{ $item->hari }}">
+                                            <option value="senin">SENIN</option>
+                                            <option value="selasa">SELASA</option>
+                                            <option value="rabu">RABU</option>
+                                            <option value="kamis ">KAMIS</option>
+                                            <option value="jumat">JUMAT</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="jam_mulai" class="form-label">Jam Mulai</label>

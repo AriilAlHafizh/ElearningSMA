@@ -151,8 +151,8 @@
                                                         <input type="hidden" name="id" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">NIS</label>
-                                                        <input type="text" name="nis" class="form-control">
+                                                        <label for="nis" class="form-label">NIS</label>
+                                                        <input type="number" name="nis" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
@@ -182,7 +182,7 @@
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">No.Telp</label>
-                                                        <input type="text" name="no_hp" class="form-control">
+                                                        <input type="number" name="no_hp" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="gender" class="form-label">Jenis

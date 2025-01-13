@@ -153,13 +153,13 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="materi_id" class="form-label">Mata
+                                                        <label for="mapel_id" class="form-label">Mata
                                                             Pelajaran</label>
-                                                        <select name="materi_id" id="materi_id" class="form-select">
+                                                        <select name="mapel_id" id="mapel_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
-                                                            @foreach ($materis as $materi)
-                                                            <option value="{{ $materi->id }}">
-                                                                {{ $materi->nama_mapel }}
+                                                            @foreach ($mapels as $mapel)
+                                                            <option value="{{ $mapel->id }}">
+                                                                {{ $mapel->nama_mapel }}
                                                             </option>
                                                             @endforeach
                                                         </select>
@@ -198,7 +198,7 @@
                                             <td class="align-middle text-center">{{ $key + 1 }}</td>
                                             <td class="align-middle text-center">{{ $item->siswa->nis ?? '-' }}</td>
                                             <td class="align-middle text-center">{{ $item->siswa->nama ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel ?? '-' }}</td>
                                             <td class="align-middle text-center">{{ $item->nilai }}</td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex gap-2">
@@ -241,13 +241,13 @@
                                 @method('PUT')
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="materi_id" class="form-label">Nama Pelajaran</label>
-                                        <select class="form-select" id="materi_id" name="materi_id">
+                                        <label for="mapel_id" class="form-label">Nama Pelajaran</label>
+                                        <select class="form-select" id="mapel_id" name="mapel_id">
                                             <option value="" selected>Tidak Mata Pelajaran</option>
-                                            @foreach ($materis as $materi)
-                                            <option value="{{ $materi->id }}"
-                                                {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
-                                                {{ $materi->nama_mapel }}
+                                            @foreach ($mapels as $mapel)
+                                            <option value="{{ $mapel->id }}"
+                                                {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
+                                                {{ $mapel->nama_mapel }}
                                             </option>
                                             @endforeach
                                         </select>

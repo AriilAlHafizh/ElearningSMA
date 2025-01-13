@@ -159,9 +159,21 @@
                                                         <input type="text" name="nama_kelas" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Mata
-                                                            Pelajaran</label>
-                                                        <input type="text" name="nama_mapel" class="form-control">
+                                                        <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                                        <select class="form-select" id="mapel_id" name="mapel_id">
+                                                            <option value="" selected>Tidak ada Mata Pelajaran</option>
+                                                            @foreach ($mapeladmin as $mapel)
+                                                                <option value="{{ $mapel->id }}"
+                                                                    {{ $mapel->id == $mapel->mapel_id ? 'selected' : '' }}>
+                                                                    {{ $mapel->nama_mapel }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="nama_materi" class="form-label">Nama
+                                                            Materi</label>
+                                                        <input type="text" name="nama_materi" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="guru_id" class="form-label">Guru</label>
@@ -202,6 +214,7 @@
                                             <th>No</th>
                                             <th class="align-middle text-center">Kelas</th>
                                             <th class="align-middle text-center">Nama Pelajaran</th>
+                                            <th class="align-middle text-center">Nama Materi</th>
                                             <th class="align-middle text-center">Guru</th>
                                             <th class="align-middle text-center">Materi</th>
                                             <th class="align-middle text-center">Aksi</th>
@@ -212,7 +225,8 @@
                                             <tr>
                                                 <td class="align-middle text-center">{{ $key + 1 }}</td>
                                                 <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
-                                                <td class="align-middle text-center">{{ $item->nama_mapel }}</td>
+                                                <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}</td>
+                                                <td class="align-middle text-center">{{ $item->nama_materi }}</td>
                                                 <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
                                                 <!-- Pastikan relasi ke guru sudah benar -->
                                                 <td class="align-middle text-center"> <a href="{{ route('materi.download.admin', $item->id) }}"
@@ -264,9 +278,21 @@
                                                 name="nama_kelas" value="{{ $item->nama_kelas }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nama_mapel" class="form-label">Nama Mapel</label>
-                                            <input type="text" class="form-control" id="nama_mapel"
-                                                name="nama_mapel" value="{{ $item->nama_mapel }}" required>
+                                            <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                            <select class="form-select" id="mapel_id" name="mapel_id">
+                                                <option value="" selected>Tidak ada Mata Pelajaran</option>
+                                                @foreach ($mapeladmin as $mapel)
+                                                    <option value="{{ $mapel->id }}"
+                                                        {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
+                                                        {{ $mapel->nama_mapel }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nama_materi" class="form-label">Nama Materi</label>
+                                            <input type="text" class="form-control" id="nama_materi"
+                                                name="nama_materi" value="{{ $item->nama_materi }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="guru_id" class="form-label">Guru</label>

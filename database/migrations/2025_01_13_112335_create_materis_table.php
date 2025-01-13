@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('materi', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kelas');
-            $table->string('nama_mapel');
+            $table->unsignedBigInteger('mapel_id')->constrained('mapel')->nullable();
+            $table->string('nama_materi')->nullable();
             $table->longText('isi_materi');
             $table->unsignedBigInteger('guru_id');
             $table->timestamps();
@@ -24,6 +25,11 @@ return new class extends Migration
             ->references('id')
             ->on('guru')
             ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
+
+            $table->foreign('mapel_id')
+            ->references('id')
+            ->on('mapel')
+            ->onDelete('cascade');
         });
     }
 

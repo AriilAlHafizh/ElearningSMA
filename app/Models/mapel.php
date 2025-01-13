@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class siswa extends Model
+class mapel extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-    
-    protected $table = "siswa";
+
+    protected $table = "mapel";
     protected $primaryKey = "id";
     protected $fillable = [
-        'nis','nama','tgl_lahir','gender','email','password','no_hp','alamat','foto','materi_id'];
+       'nama_mapel'];
 
     public function materi()
     {
         return $this->hasMany(Materi::class,'materi_id','id');
     }
-    
 
 }
