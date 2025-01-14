@@ -135,7 +135,7 @@
         <!-- End Navbar -->
         <div class="container-fluid">
             <div class="page-header min-height-300 border-radius-xl mt-4"
-                style="background-image: url('../img/SMAN8_1.jpg'); background-position-y: 25%;">
+                style="background-image: url('../img/7.png'); background-position-y: 25%;">
                 <span class="mask bg-gradient-primary opacity-6"></span>
             </div>
             <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
@@ -178,43 +178,52 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="resources/foto_produk/" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text"></p>
-                                <a href="beli_produk.php?id_produk=" class="btn btn-primary">well</a>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card"  style="background-color: #f2e6bf;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Jumlah Siswa</h5>
+                                    <p class="card-text">20</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="card"  style="background-color: #f2e6bf;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Jumlah Guru</h5>
+                                    <p class="card-text">20</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card"  style="background-color: #f2e6bf;">                 
+                                <div class="card-body">
+                                    <h5 class="card-title">Jumlah Kelas</h5>
+                                    <p class="card-text">20</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
 
-
-
-
-
-
-
-                <!--   Core JS Files   -->
-                <script src="../js/core/popper.min.js"></script>
-                <script src="../js/core/bootstrap.min.js"></script>
-                <script src="../js/plugins/perfect-scrollbar.min.js"></script>
-                <script src="../js/plugins/smooth-scrollbar.min.js"></script>
-                <script>
-                    var win = navigator.platform.indexOf('Win') > -1;
-                    if (win && document.querySelector('#sidenav-scrollbar')) {
-                        var options = {
-                            damping: '0.5'
+                    <!--   Core JS Files   -->
+                    <script src="../js/core/popper.min.js"></script>
+                    <script src="../js/core/bootstrap.min.js"></script>
+                    <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+                    <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+                    <script>
+                        var win = navigator.platform.indexOf('Win') > -1;
+                        if (win && document.querySelector('#sidenav-scrollbar')) {
+                            var options = {
+                                damping: '0.5'
+                            }
+                            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
                         }
-                        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                    }
-                </script>
-                <!-- Github buttons -->
-                <script async defer src="https://buttons.github.io/buttons.js"></script>
-                <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-                <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+                    </script>
+                    <!-- Github buttons -->
+                    <script async defer src="https://buttons.github.io/buttons.js"></script>
+                    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+                    <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

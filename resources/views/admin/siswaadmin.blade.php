@@ -148,41 +148,41 @@
                                                 <section class="base">
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label"></label>
-                                                        <input type="hidden" name="id" class="form-control">
+                                                        <input type="hidden" name="id" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="nis" class="form-label">NIS</label>
-                                                        <input type="number" name="nis" class="form-control">
+                                                        <input type="number" name="nis" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Nama</label>
-                                                        <input type="text" name="nama" class="form-control">
+                                                        <input type="text" name="nama" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                                             Lahir</label>
-                                                        <input type="date" name="tgl_lahir" class="form-control">
+                                                        <input type="date" name="tgl_lahir" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Email</label>
-                                                        <input type="text" name="email" class="form-control">
+                                                        <input type="text" name="email" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Password</label>
-                                                        <input type="text" name="password" class="form-control">
+                                                        <input type="text" name="password" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Alamat</label>
-                                                        <input type="text" name="alamat" class="form-control">
+                                                        <input type="text" name="alamat" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">No.Telp</label>
-                                                        <input type="number" name="no_hp" class="form-control">
+                                                        <input type="number" name="no_hp" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="gender" class="form-label">Jenis
@@ -194,12 +194,12 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="foto" class="form-label">Foto</label>
-                                                        <input type="file" name="foto" class="form-control">
+                                                        <input type="file" name="foto" class="form-control" required>
                                                         <br>
                                                     </div>
                                                     <div>
                                                         <input type="submit" name="simpan" value="Tambah Siswa"
-                                                            class="btn btn-outline-primary" id="tambah">
+                                                            class="btn btn-outline-primary" id="tambah" required>
                                                     </div>
                                                 </section>
                                             </form>
