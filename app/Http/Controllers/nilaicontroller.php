@@ -7,32 +7,33 @@ use Illuminate\Http\Request;
 use App\Models\materi;
 use App\Models\nilai;
 use App\Models\siswa;
+use App\Models\mapel;
 
 class nilaicontroller extends Controller
 {
     //
     public function create()
     {   
-        $dtnilai = nilai::with('materi','siswa')->get();
-        $materis = materi::all(); // Mengambil semua data materi
+        $dtnilai = nilai::with('mapel','siswa')->get();
+        $mapels = mapel::all(); // Mengambil semua data materi
         $siswas = siswa::all();
 
 
-        return view('guru.nilaiguru',compact('dtnilai','materis','siswas'));
+        return view('guru.nilaiguru',compact('dtnilai','mapels','siswas'));
     }
 
     public function storenilai(Request $request)
     {
         $request->validate([
             'nilai' => 'required|string|max:255',
-            'materi_id' => 'required|string|max:20',
+            'mapel_id' => 'required|string|max:20',
             'siswa_id' => 'required|string|max:20',
         ]);
 
         // Simpan data ke database (gunakan model jika sudah ada)
         nilai::create([
             'nilai' => $request->nilai,
-            'materi_id' => $request->materi_id,
+            'mapel_id' => $request->mapel_id,
             'siswa_id' => $request->siswa_id,
         ]);
 
@@ -45,7 +46,7 @@ class nilaicontroller extends Controller
         // Validasi data yang masuk
         $request->validate([
             'nilai' => 'required|string|max:255',
-            'materi_id' => 'required|string|max:20',
+            'mapel_id' => 'required|string|max:20',
             'siswa_id' => 'required|string|max:20',
         ]);
 
@@ -53,7 +54,7 @@ class nilaicontroller extends Controller
 
         $nilai->update([
             'nilai' => $request->nilai,
-            'materi_id' => $request->materi_id,
+            'mapel_id' => $request->mapel_id,
             'siswa_id' => $request->siswa_id,
         ]);
 

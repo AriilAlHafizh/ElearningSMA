@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\materi;
 use App\Models\guru;
 use App\Models\jadwal;
+use App\Models\mapel;
 
 
 class matericontroller extends Controller
@@ -16,10 +17,11 @@ class matericontroller extends Controller
      */
     public function index()
     {
-        $dtmateri = Materi::with('guru')->get();
+        $dtmateri = Materi::with('guru','mapel')->get();
         $gurus = Guru::all(); // Mengambil semua data guru
+        $mapels = Mapel::all(); // Mengambil semua data guru
 
-        return view('guru.materiguru', compact('dtmateri', 'gurus'));
+        return view('guru.materiguru', compact('dtmateri', 'gurus','mapels'));
     }
 
     /**
@@ -55,7 +57,8 @@ class matericontroller extends Controller
     {
         $request->validate([
             'nama_kelas' => 'required|string|max:255',
-            'nama_mapel' => 'required|string|max:255',
+            'mapel_id' => 'required|string|max:20',
+            'nama_materi' => 'required|string|max:255',
             'isi_materi' => 'required|file|mimes:pdf,docx|max:2048',
             'guru_id' => 'required|string|max:20',
         ]);
@@ -68,7 +71,8 @@ class matericontroller extends Controller
         // Simpan data ke database (gunakan model jika sudah ada)
         materi::create([
             'nama_kelas' => $request->nama_kelas,
-            'nama_mapel' => $request->nama_mapel,
+            'mapel_id' => $request->mapel_id,
+            'nama_materi' => $request->nama_materi,
             'guru_id' => $request->guru_id,
             'isi_materi' => 'uploads/' . $fileName, // Simpan path relatif
         ]);
@@ -101,7 +105,8 @@ class matericontroller extends Controller
         // Validasi data yang masuk
     $request->validate([
         'nama_kelas' => 'required|string|max:255',
-        'nama_mapel' => 'required|string|max:255',
+        'mapel_id' => 'nullable|exists:mapel,id',
+        'nama_materi' => 'required|string|max:255',
         'guru_id' => 'nullable|exists:guru,id', // Validasi id_guru
         'isi_materi' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx|max:2048', // Validasi file
     ]);
@@ -128,7 +133,8 @@ class matericontroller extends Controller
     // Perbarui data lain
     $materi->update([
         'nama_kelas' => $request->nama_kelas,
-        'nama_mapel' => $request->nama_mapel,
+        'mapel_id' => $request->mapel_id,
+        'nama_materi' => $request->nama_materi,
         'guru_id' => $request->guru_id,
     ]);
 

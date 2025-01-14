@@ -14,7 +14,7 @@ class materi extends Model
     protected $table = "materi";
     protected $primaryKey = "id";
     protected $fillable = [
-       'nama_kelas', 'nama_mapel','isi_materi','guru_id' ];
+       'nama_kelas', 'mapel_id','nama_materi','isi_materi','guru_id' ];
 
     public function guru()
     {
@@ -22,12 +22,17 @@ class materi extends Model
     }
 
     public function nilai()
-        {
-            return $this->hasMany(Nilai::class,'nilai_id','id');
-        }
+    {
+        return $this->hasMany(Nilai::class,'nilai_id','id');
+    }
 
-        public function jadwal()
-        {
-            return $this->hasMany(Jadwal::class,'jadwal_id','id');
-        }
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class,'jadwal_id','id');
+    }
+
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class,'mapel_id','id');
+    }
 }

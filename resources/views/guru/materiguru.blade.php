@@ -145,28 +145,41 @@
                                                         <input type="hidden" name="id" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="nama_kelas"
+                                                        <label for="exampleInputEmail1"
                                                             class="form-label">Kelas</label>
                                                         <input type="text" name="nama_kelas" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="nama_mapel" class="form-label">Mata
-                                                            Pelajaran</label>
-                                                        <input type="text" name="nama_mapel" class="form-control">
+                                                        <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                                        <select class="form-select" id="mapel_id" name="mapel_id">
+                                                            <option value="" selected>Tidak ada Mata Pelajaran</option>
+                                                            @foreach ($mapels as $mapel)
+                                                            <option value="{{ $mapel->id }}"
+                                                                {{ $mapel->id == $mapel->mapel_id ? 'selected' : '' }}>
+                                                                {{ $mapel->nama_mapel }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="nama_materi" class="form-label">Nama
+                                                            Materi</label>
+                                                        <input type="text" name="nama_materi" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="guru_id" class="form-label">Guru</label>
                                                         <select class="form-select" id="guru_id" name="guru_id">
                                                             <option value="" selected>Tidak ada guru</option>
-                                                            @foreach($gurus as $guru)
-                                                            <option value="{{ $guru->id }}" {{ $guru->id == $guru->guru_id ? 'selected' : '' }}>
+                                                            @foreach ($gurus as $guru)
+                                                            <option value="{{ $guru->id }}"
+                                                                {{ $guru->id == $guru->guru_id ? 'selected' : '' }}>
                                                                 {{ $guru->nama }}
                                                             </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="isi_materi"
+                                                        <label for="exampleInputEmail1"
                                                             class="form-label">Materi</label>
                                                         <input type="file" name="isi_materi" class="form-control">
                                                         <br>
@@ -192,6 +205,7 @@
                                             <th>No</th>
                                             <th class="align-middle text-center">Kelas</th>
                                             <th class="align-middle text-center">Nama Pelajaran</th>
+                                            <th class="align-middle text-center">Nama Materi</th>
                                             <th class="align-middle text-center">Guru</th>
                                             <th class="align-middle text-center">Materi</th>
                                             <th class="align-middle text-center">Aksi</th>
@@ -202,16 +216,23 @@
                                         <tr>
                                             <td class="align-middle text-center">{{ $key + 1 }}</td>
                                             <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
-                                            <td class="align-middle text-center">{{ $item->nama_mapel }}</td>
-                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td> <!-- Pastikan relasi ke guru sudah benar -->
-                                            <td class="align-middle text-center"> <a href="{{ route('materi.download', $item->id) }}" class="btn btn-primary" download>{{ $item->isi_materi}}</a></td>
+                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}</td>
+                                            <td class="align-middle text-center">{{ $item->nama_materi }}</td>
+                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
+                                            <!-- Pastikan relasi ke guru sudah benar -->
+                                            <td class="align-middle text-center"> <a href="{{ route('materi.download.admin', $item->id) }}"
+                                                    class="btn btn-primary" download>{{ $item->isi_materi }}</a>
+                                            </td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('materi.guru.destroy', $item->id) }}" method="POST" id="deleteform{{$item->id}}">
+                                                    <a class="btn btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
+                                                    <form action="{{ route('materi.admin.destroy', $item->id) }}"
+                                                        method="POST" id="deleteform{{ $item->id }}">
                                                         @csrf
-                                                        @method("DELETE")
-                                                        <input type="submit" class="btn btn-danger" value="Delete" id="delete">
+                                                        @method('DELETE')
+                                                        <input type="submit" class="btn btn-danger"
+                                                            value="Delete" id="delete">
                                                     </form>
                                                 </div>
                                             </td>
@@ -243,28 +264,47 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="nama_kelas" class="form-label">Nama Kelas</label>
-                                        <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" value="{{ $item->nama_kelas }}" required>
+                                        <input type="text" class="form-control" id="nama_kelas"
+                                            name="nama_kelas" value="{{ $item->nama_kelas }}" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="nama_mapel" class="form-label">Nama Mapel</label>
-                                        <input type="text" class="form-control" id="nama_mapel" name="nama_mapel" value="{{ $item->nama_mapel }}" required>
+                                        <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                        <select class="form-select" id="mapel_id" name="mapel_id">
+                                            <option value="" selected>Tidak ada Mata Pelajaran</option>
+                                            @foreach ($mapels as $mapel)
+                                            <option value="{{ $mapel->id }}"
+                                                {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
+                                                {{ $mapel->nama_mapel }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nama_materi" class="form-label">Nama Materi</label>
+                                        <input type="text" class="form-control" id="nama_materi"
+                                            name="nama_materi" value="{{ $item->nama_materi }}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="guru_id" class="form-label">Guru</label>
                                         <select class="form-select" id="guru_id" name="guru_id">
                                             <option value="" selected>Tidak ada guru</option>
-                                            @foreach($gurus as $guru)
-                                            <option value="{{ $guru->id }}" {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
+                                            @foreach ($gurus as $guru)
+                                            <option value="{{ $guru->id }}"
+                                                {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
                                                 {{ $guru->nama }}
                                             </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="isi_materi" class="form-label">File Materi (PDF/Word/PowerPoint)</label>
-                                        <input type="file" class="form-control" id="isi_materi" name="isi_materi">
-                                        @if($item->isi_materi)
-                                        <small>File saat ini: <a href="{{ asset('uploads/' . $item->isi_materi) }}" target="_blank">{{ $item->isi_materi }}</a></small>
+                                        <label for="isi_materi" class="form-label">File Materi
+                                            (PDF/Word/PowerPoint)</label>
+                                        <input type="file" class="form-control" id="isi_materi"
+                                            name="isi_materi">
+                                        @if ($item->isi_materi)
+                                        <small>File saat ini: <a
+                                                href="{{ asset('uploads/' . $item->isi_materi) }}"
+                                                target="_blank">{{ $item->isi_materi }}</a></small>
                                         @endif
                                     </div>
                                 </div>

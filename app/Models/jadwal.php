@@ -25,4 +25,9 @@ class jadwal extends Model
        {
            return $this->belongsTo(Materi::class,'materi_id','id');
        }
+
+    //    public function mapel()
+    //    {
+    //        return $this->hasmany(Mapel::class,'mapel_id','id');
+    //    }
 }

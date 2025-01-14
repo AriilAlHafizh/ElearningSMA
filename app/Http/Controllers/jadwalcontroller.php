@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\materi;
 use App\Models\jadwal;
+use App\Models\mapel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

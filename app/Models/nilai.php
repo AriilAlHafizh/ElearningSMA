@@ -14,11 +14,11 @@ class nilai extends Model
     protected $table = "nilai";
     protected $primaryKey = "id";
     protected $fillable = [
-       'nilai', 'materi_id', 'siswa_id'];
+       'nilai', 'mapel_id', 'siswa_id'];
 
-    public function materi()
+    public function mapel()
     {
-        return $this->belongsTo(Materi::class,'materi_id','id');
+        return $this->belongsTo(Mapel::class,'mapel_id','id');
     }
 
     public function siswa()

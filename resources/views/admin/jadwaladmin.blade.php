@@ -157,14 +157,20 @@
                                                             <option value="">Pilih Mata Pelajaran</option>
                                                             @foreach ($materis as $materi)
                                                             <option value="{{ $materi->id }}">
-                                                                {{ $materi->nama_mapel }}
+                                                                {{ $materi->mapel->nama_mapel }}
                                                             </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="hari" class="form-label">Hari</label>
-                                                        <input type="text" name="hari" class="form-control">
+                                                        <select name="hari" class="form-select">
+                                                            <option value="senin">SENIN</option>
+                                                            <option value="selasa">SELASA</option>
+                                                            <option value="rabu">RABU</option>
+                                                            <option value="kamis ">KAMIS</option>
+                                                            <option value="jumat">JUMAT</option>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="jam_mulai" class="form-label">Jam Mulai</label>
@@ -208,7 +214,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td>{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td>{{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
                                             <td>{{ $item->materi->guru->nama ?? '-' }}</td>
                                             <td>{{ $item->hari }}</td>
                                             <td>{{ $item->jam_mulai }}</td>
@@ -261,15 +267,20 @@
                                             @foreach ($materis as $materi)
                                             <option value="{{ $materi->id }}"
                                                 {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
-                                                {{ $materi->nama_mapel }}
+                                                {{ $materi->mapel->nama_mapel }}
                                             </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="hari" class="form-label">Hari</label>
-                                        <input type="text" class="form-control" id="hari" name="hari"
-                                            value="{{ $item->hari }}" required>
+                                        <select name="hari" class="form-select" value="{{ $item->hari }}">
+                                            <option value="senin">SENIN</option>
+                                            <option value="selasa">SELASA</option>
+                                            <option value="rabu">RABU</option>
+                                            <option value="kamis ">KAMIS</option>
+                                            <option value="jumat">JUMAT</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="jam_mulai" class="form-label">Jam Mulai</label>
