@@ -5355,7 +5355,7 @@ fieldset:disabled .btn {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 0 solid rgba(0, 0, 0, 0.125);
+  border: 0 solid rgba(242, 230, 191, 0.125);
   border-radius: 1rem;
 }
 

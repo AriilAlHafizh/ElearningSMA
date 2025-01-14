@@ -125,7 +125,7 @@
         <!-- End Navbar -->
         <div class="container-fluid">
             <div class="page-header min-height-300 border-radius-xl mt-4"
-                style="background-image: url('../img/APOTEK_2.jpg'); background-position-y: 50%;">
+                style="background-image: url('../img/7.png'); background-position-y: 50%;">
                 <span class="mask bg-gradient-primary opacity-6"></span>
             </div>
             <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
@@ -138,7 +138,6 @@
                             <p class="mb-0 font-weight-bold text-sm">Siswa</p>
                         </div>
                     </div>
-
                     </a>
                     </li>
                     </ul>
@@ -168,18 +167,16 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <div class="card">
-                            {{-- <img src="resources/foto_produk/" class="card-img-top">
-        <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text"></p>
-        <a href="beli_produk.php?id_produk=" class="btn btn-primary">Beli Obat</a> --}}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card" style="background-color: #f2e6bf;"> 
+                                <div class="card-body" >
+                                    <h5 class="card-title">Jumlah Materi</h5>
+                                    <p class="card-text">20</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
 
 

@@ -154,6 +154,7 @@
             </div>
 
             <!-- Materi Modal -->
+            @foreach ($dtmateriadmin as $key => $item)
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -163,6 +164,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
+
                         <div class="modal-body">
                             <div class="card mb-3">
                                 <div class="card-body">
@@ -176,6 +178,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
 
