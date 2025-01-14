@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('jam_mulai');
             $table->string('jam_selesai');
             $table->unsignedBigInteger('materi_id')->constrained('materi')->nullable();
-            $table->unsignedBigInteger('mapel_id')->constrained('mapel')->nullable();
+            // $table->unsignedBigInteger('mapel_id')->constrained('mapel')->nullable();
             $table->timestamps();
 
             $table->foreign('materi_id')
@@ -26,10 +26,10 @@ return new class extends Migration
             ->on('materi')
             ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
 
-            $table->foreign('mapel_id')
-            ->references('id')
-            ->on('mapel')
-            ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
+            // $table->foreign('mapel_id')
+            // ->references('id')
+            // ->on('mapel')
+            // ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
         });
     }
 

@@ -14,7 +14,7 @@ class jadwal extends Model
     protected $table = "jadwal";
     protected $primaryKey = "id";
     protected $fillable = [
-       'hari', 'jam_mulai','jam_selesai','materi_id','mapel_id'];
+       'hari', 'jam_mulai','jam_selesai','materi_id'];
 
     //    public function guru()
     //    {
@@ -26,8 +26,8 @@ class jadwal extends Model
            return $this->belongsTo(Materi::class,'materi_id','id');
        }
 
-       public function mapel()
-       {
-           return $this->hasmany(Mapel::class,'mapel_id','id');
-       }
+    //    public function mapel()
+    //    {
+    //        return $this->hasmany(Mapel::class,'mapel_id','id');
+    //    }
 }

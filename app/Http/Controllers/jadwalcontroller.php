@@ -12,12 +12,11 @@ class jadwalcontroller extends Controller
 {
     public function jadwaladmin()
     {
-        $dtjadwal = jadwal::with('materi','mapel')->get();
+        $dtjadwal = jadwal::with('materi')->get();
         $materis = materi::all(); // Mengambil semua data materi
-        $mapels = mapel::all(); // Mengambil semua data materi
 
 
-        return view('admin.jadwaladmin', compact('dtjadwal', 'materis','mapels'));
+        return view('admin.jadwaladmin', compact('dtjadwal', 'materis'));
     }
 
     public function storejadwal(Request $request)
@@ -27,7 +26,6 @@ class jadwalcontroller extends Controller
             'jam_mulai' => 'required|string|max:255',
             'jam_selesai' => 'required|string|max:255',
             'materi_id' => 'required|string|max:20',
-            'mapel_id' => 'required|string|max:20',
         ]);
 
         // Simpan data ke database (gunakan model jika sudah ada)
@@ -36,7 +34,6 @@ class jadwalcontroller extends Controller
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
             'materi_id' => $request->materi_id,
-            'mapel_id' => $request->mapel_id,
 
         ]);
 
@@ -52,7 +49,6 @@ class jadwalcontroller extends Controller
             'jam_mulai' => 'required|string|max:255',
             'jam_selesai' => 'required|string|max:255',
             'materi_id' => 'required|string|max:20',
-            'mapel_id' => 'required|string|max:20',
         ]);
 
         $jadwal = jadwal::findOrFail($id);
@@ -62,7 +58,6 @@ class jadwalcontroller extends Controller
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
             'materi_id' => $request->materi_id,
-            'mapel_id' => $request->mapel_id,
         ]);
 
         // Redirect dengan pesan sukses

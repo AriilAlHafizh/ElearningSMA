@@ -151,13 +151,13 @@
                                                 @csrf
                                                 <section class="base">
                                                     <div class="mb-3">
-                                                        <label for="mapel_id" class="form-label">Mata
+                                                        <label for="materi_id" class="form-label">Mata
                                                             Pelajaran</label>
-                                                        <select name="mapel_id" id="mapel_id" class="form-select">
+                                                        <select name="materi_id" id="materi_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
-                                                            @foreach ($mapels as $mapel)
-                                                            <option value="{{ $mapel->id }}">
-                                                                {{ $mapel->nama_mapel }}
+                                                            @foreach ($materis as $materi)
+                                                            <option value="{{ $materi->id }}">
+                                                                {{ $materi->mapel->nama_mapel }}
                                                             </option>
                                                             @endforeach
                                                         </select>
@@ -214,7 +214,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td>{{ $item->mapel->nama_mapel ?? '-' }}</td>
+                                            <td>{{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
                                             <td>{{ $item->materi->guru->nama ?? '-' }}</td>
                                             <td>{{ $item->hari }}</td>
                                             <td>{{ $item->jam_mulai }}</td>
@@ -261,13 +261,13 @@
                                 @method('PUT')
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="mapel_id" class="form-label">Nama Pelajaran</label>
-                                        <select class="form-select" id="mapel_id" name="mapel_id">
+                                        <label for="materi_id" class="form-label">Nama Pelajaran</label>
+                                        <select class="form-select" id="materi_id" name="materi_id">
                                             <option value="" selected>Tidak Mata Pelajaran</option>
-                                            @foreach ($mapels as $mapels)
-                                            <option value="{{ $mapels->id }}"
-                                                {{ $mapels->id == $item->mapel_id ? 'selected' : '' }}>
-                                                {{ $mapels->nama_mapel }}
+                                            @foreach ($materis as $materi)
+                                            <option value="{{ $materi->id }}"
+                                                {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
+                                                {{ $materi->mapel->nama_mapel }}
                                             </option>
                                             @endforeach
                                         </select>
