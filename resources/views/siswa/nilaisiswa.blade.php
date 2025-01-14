@@ -134,7 +134,7 @@
                                             <td class="align-middle text-center">{{ $key + 1 }}</td>
                                             <td class="align-middle text-center">{{ $item->siswa->nis ?? '-' }}</td>
                                             <td class="align-middle text-center">{{ $item->siswa->nama ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel ?? '-' }}</td>
                                             <td class="align-middle text-center">{{ $item->nilai }}</td>
                                         </tr>
                                     </tbody>
