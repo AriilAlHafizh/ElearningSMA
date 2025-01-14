@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\gender;
+use App\Models\jadwal;
 use App\Models\materi;
 use Illuminate\Http\Request;
 use App\Models\nilai;
+use App\Models\guru;
+use App\Models\mapel;
 use App\Models\siswa;
 
 
@@ -13,7 +15,11 @@ class siswacontroller extends Controller
 {
     public function indexsiswa()
     {   
-        return view('siswa.materisiswa');
+        $dtmateriadmin = materi::with('guru','mapel')->get();
+        $guruadmin = Guru::all(); // Mengambil semua data guru
+        $mapeladmin = Mapel::all(); // Mengambil semua data mapel
+
+        return view('siswa.materisiswa',compact('dtmateriadmin','guruadmin','mapeladmin'));
     }
 
     public function dashboardsiswa()
@@ -23,12 +29,23 @@ class siswacontroller extends Controller
 
     public function nilaisiswa()
     {
-        return view('siswa.nilaisiswa');
+        
+        $dtnilai = nilai::with('mapel','siswa')->get();
+        $mapels = mapel::all(); // Mengambil semua data materi
+        $siswas = siswa::all();
+
+
+        return view('siswa.nilaisiswa',compact('dtnilai','mapels','siswas'));
     }
 
     public function jadwalsiswa()
     {
-        return view('siswa.jadwalsiswa');
+        $dtjadwal = jadwal::with('materi')->get();
+        $materis = materi::all(); // Mengambil semua data materi
+        
+
+
+        return view('siswa.jadwalsiswa', compact('dtjadwal', 'materis'));
     }
 
     public function profilesiswa()

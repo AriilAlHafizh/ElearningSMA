@@ -132,20 +132,20 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtmateriadmin as $key => $item)
-                                        <tbody>
-                                            <tr>
-                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                                <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
-                                                <td class="align-middle text-center">{{ $item->nama_mapel }}</td>
-                                                <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
-                                                <td class="align-middle text-center"><button type="button"
-                                                class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                Lihat Materi
-                                            </tr>
-                                    @endforeach
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                            <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
+                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}</td>
+                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
+                                            <td class="align-middle text-center"><button type="button"
+                                                    class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal">
+                                                    Lihat Materi
+                                        </tr>
+                                        @endforeach
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
                         </div>
@@ -166,9 +166,11 @@
                         <div class="modal-body">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">MATEMATIKA</h5>
-                                    <p class="card-text text-justify">Bab 2 matriks 7x7</p>
-                                    <a href="" class="btn btn-primary"  >Download</a>
+                                    <h5 class="card-title text-center">{{ $item->mapel->nama_mapel }}</h5>
+                                    <p class="card-text text-justify">{{ $item->nama_materi }}</p>
+                                    <td class="align-middle text-center"> <a href="{{ route('materi.download.admin', $item->id) }}"
+                                            class="btn btn-primary" download>{{ $item->isi_materi }}</a>
+                                    </td>
                                 </div>
                             </div>
                         </div>

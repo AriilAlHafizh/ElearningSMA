@@ -136,7 +136,7 @@
                                         <tr>
                                             <td class="align-middle text-center">{{ $key + 1 }}</td>
                                             <td class="align-middle text-center">{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->materi->nama_mapel ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
                                             <td class="align-middle text-center">{{ $item->materi->guru->nama ?? '-' }}</td>
                                             <td class="align-middle text-center">{{ $item->hari }}</td>
                                             <td class="align-middle text-center">{{ $item->jam_mulai }}</td>
