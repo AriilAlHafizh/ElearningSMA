@@ -143,6 +143,7 @@
                     </div>
 
                     <!-- biar displaynya flex -->
+                    @foreach ($siswas as $key => $item)
                     <div class="col-12 mt-4">
                         <div class="card mb-4">
                             <div class="profile-container">
@@ -151,41 +152,40 @@
                                 <!-- Biodata -->
                                 <div class="profile-details">
                                     <div class="mb-3">
-                                        <label for="namaLengkap" class="form-label">Nama Lengkap</label>
-                                        <input type="text" id="namaLengkap" name="nama_kelas"
-                                            class="form-control">
+                                        <label for="nama" class="form-label">Nama Lengkap</label>
+                                        <input type="text" id="nama" name="nama"
+                                            class="form-control"  value="{{ $item->nama }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="tanggalLahir" class="form-label">Tanggal Lahir</label>
-                                        <input type="text" id="tanggalLahir" name="nama_mapel"
-                                            class="form-control">
+                                        <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                                        <input type="text" id="tgl_lahir" name="tgl_lahir"
+                                            class="form-control" value="{{ $item->tgl_lahir }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="alamat" class="form-label">Alamat</label>
-                                        <input type="text" id="alamat" name="guru_id" class="form-control">
+                                        <input type="text" id="alamat" name="alamat" class="form-control" value="{{ $item->alamat }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" id="email" name="isi_materi" class="form-control">
+                                        <input type="text" id="email" name="email" class="form-control" value="{{ $item->email }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="telepon" class="form-label">No. Telepon</label>
-                                        <input type="text" id="telepon" name="isi_materi" class="form-control">
+                                        <label for="no_hp" class="form-label">No. Telepon</label>
+                                        <input type="text" id="no_hp" name="no_hp" class="form-control" value="{{ $item->no_hp }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="nis" class="form-label">NIS</label>
-                                        <input type="text" id="nis" name="isi_materi" class="form-control">
+                                        <input type="text" id="nis" name="nis" class="form-control" value="{{ $item->nis }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="kelas" class="form-label">Kelas</label>
-                                        <input type="text" id="kelas" name="isi_materi" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kelas" class="form-label">Gender</label>
-                                        <input type="text" id="kelas" name="isi_materi" class="form-control">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <input type="text" id="gender" name="gender" class="form-control" value="{{ $item->gender }}">
                                     </div>
                                 </div>
                             </div>
+                        </div>  
+                        @endforeach
+                    </div>      
                             <!--   Core JS Files   -->
                             <script src="../js/core/popper.min.js"></script>
                             <script src="../js/core/bootstrap.min.js"></script>

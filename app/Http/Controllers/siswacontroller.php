@@ -50,7 +50,10 @@ class siswacontroller extends Controller
 
     public function profilesiswa()
     {
-        return view('siswa.profilesiswa');
+        $siswas = siswa::all();
+
+
+        return view('siswa.profilesiswa',compact('siswas'));
     }
 
     public function datasiswa()
