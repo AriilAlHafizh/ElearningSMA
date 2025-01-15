@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->foreign('siswa_id')
             ->references('id')
-            ->on('siswa')
+            ->on('users')
             ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
         });
     }

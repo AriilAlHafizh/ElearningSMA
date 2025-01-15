@@ -45,8 +45,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -55,7 +54,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('siswa.dashboard') }}">
+                    <a class="nav-link  " href="">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -64,7 +63,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('materi.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -73,7 +72,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -82,7 +81,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -94,7 +93,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('profile.siswa') }}">
+                    <a class="nav-link  active" href="{{ route('siswa.profile') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-address-card"></i>
@@ -103,14 +102,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/sign-in.html">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Log Out</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
+            </ul>
+        </div>
+
+        </div>
     </aside>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
         <!-- Navbar -->
@@ -144,66 +150,71 @@
 
                     <!-- biar displaynya flex -->
                     @foreach ($siswas as $key => $item)
-                    <div class="col-12 mt-4">
-                        <div class="card mb-4">
-                            <div class="profile-container">
-                                <!-- Foto -->
-                                <img src="img/orang.jpg" alt="Foto Siswa">
-                                <!-- Biodata -->
-                                <div class="profile-details">
-                                    <div class="mb-3">
-                                        <label for="nama" class="form-label">Nama Lengkap</label>
-                                        <input type="text" id="nama" name="nama"
-                                            class="form-control"  value="{{ $item->nama }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                                        <input type="text" id="tgl_lahir" name="tgl_lahir"
-                                            class="form-control" value="{{ $item->tgl_lahir }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="alamat" class="form-label">Alamat</label>
-                                        <input type="text" id="alamat" name="alamat" class="form-control" value="{{ $item->alamat }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="text" id="email" name="email" class="form-control" value="{{ $item->email }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="no_hp" class="form-label">No. Telepon</label>
-                                        <input type="text" id="no_hp" name="no_hp" class="form-control" value="{{ $item->no_hp }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nis" class="form-label">NIS</label>
-                                        <input type="text" id="nis" name="nis" class="form-control" value="{{ $item->nis }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="gender" class="form-label">Gender</label>
-                                        <input type="text" id="gender" name="gender" class="form-control" value="{{ $item->gender }}">
+                        <div class="col-12 mt-4">
+                            <div class="card mb-4">
+                                <div class="profile-container">
+                                    <!-- Foto -->
+                                    <img src="img/orang.jpg" alt="Foto Siswa">
+                                    <!-- Biodata -->
+                                    <div class="profile-details">
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama Lengkap</label>
+                                            <input type="text" id="nama" name="nama" class="form-control"
+                                                value="{{ $item->nama }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                                            <input type="text" id="tgl_lahir" name="tgl_lahir"
+                                                class="form-control" value="{{ $item->tgl_lahir }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="alamat" class="form-label">Alamat</label>
+                                            <input type="text" id="alamat" name="alamat" class="form-control"
+                                                value="{{ $item->alamat }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" id="email" name="email" class="form-control"
+                                                value="{{ $item->email }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="no_hp" class="form-label">No. Telepon</label>
+                                            <input type="text" id="no_hp" name="no_hp" class="form-control"
+                                                value="{{ $item->no_hp }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nis" class="form-label">NIS</label>
+                                            <input type="text" id="nis" name="nis" class="form-control"
+                                                value="{{ $item->nis }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="gender" class="form-label">Gender</label>
+                                            <input type="text" id="gender" name="gender" class="form-control"
+                                                value="{{ $item->gender }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>  
-                        @endforeach
-                    </div>      
-                            <!--   Core JS Files   -->
-                            <script src="../js/core/popper.min.js"></script>
-                            <script src="../js/core/bootstrap.min.js"></script>
-                            <script src="../js/plugins/perfect-scrollbar.min.js"></script>
-                            <script src="../js/plugins/smooth-scrollbar.min.js"></script>
-                            <script>
-                                var win = navigator.platform.indexOf('Win') > -1;
-                                if (win && document.querySelector('#sidenav-scrollbar')) {
-                                    var options = {
-                                        damping: '0.5'
-                                    }
-                                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                                }
-                            </script>
-                            <!-- Github buttons -->
-                            <script async defer src="https://buttons.github.io/buttons.js"></script>
-                            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-                            <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+                    @endforeach
+                </div>
+                <!--   Core JS Files   -->
+                <script src="../js/core/popper.min.js"></script>
+                <script src="../js/core/bootstrap.min.js"></script>
+                <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+                <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+                <script>
+                    var win = navigator.platform.indexOf('Win') > -1;
+                    if (win && document.querySelector('#sidenav-scrollbar')) {
+                        var options = {
+                            damping: '0.5'
+                        }
+                        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                    }
+                </script>
+                <!-- Github buttons -->
+                <script async defer src="https://buttons.github.io/buttons.js"></script>
+                <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+                <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

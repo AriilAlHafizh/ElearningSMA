@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('materi.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  "href="{{ route('nilai.admin') }}">
+                    <a class="nav-link  "href="{{ route('admin.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -96,13 +96,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -180,7 +183,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="card"  style="background-color: #f2e6bf;">
+                            <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Siswa</h5>
                                     <p class="card-text">20</p>
@@ -188,7 +191,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="card"  style="background-color: #f2e6bf;">
+                            <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Guru</h5>
                                     <p class="card-text">20</p>
@@ -196,7 +199,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="card"  style="background-color: #f2e6bf;">                 
+                            <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Kelas</h5>
                                     <p class="card-text">20</p>

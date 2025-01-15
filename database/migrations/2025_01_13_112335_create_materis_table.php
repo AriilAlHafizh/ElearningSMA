@@ -19,12 +19,10 @@ return new class extends Migration
             $table->longText('isi_materi');
             $table->unsignedBigInteger('guru_id');
             $table->timestamps();
-
-            // Membuat hubungan foreign key ke tabel materis
             $table->foreign('guru_id')
             ->references('id')
-            ->on('guru')
-            ->onDelete('cascade'); // Opsional: Menghapus data terkait saat data induk dihapus
+            ->on('users')
+            ->onDelete('cascade');
 
             $table->foreign('mapel_id')
             ->references('id')

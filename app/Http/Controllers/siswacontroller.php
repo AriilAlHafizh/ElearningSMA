@@ -6,17 +6,15 @@ use App\Models\jadwal;
 use App\Models\materi;
 use Illuminate\Http\Request;
 use App\Models\nilai;
-use App\Models\guru;
 use App\Models\mapel;
-use App\Models\siswa;
-
+use App\Models\User;
 
 class siswacontroller extends Controller
 {
     public function indexsiswa()
     {   
         $dtmateriadmin = materi::with('guru','mapel')->get();
-        $guruadmin = Guru::all(); // Mengambil semua data guru
+        $guruadmin = User::where('role', '=', 'guru')->get(); // Mengambil semua data guru
         $mapeladmin = Mapel::all(); // Mengambil semua data mapel
 
         return view('siswa.materisiswa',compact('dtmateriadmin','guruadmin','mapeladmin'));
@@ -32,7 +30,7 @@ class siswacontroller extends Controller
         
         $dtnilai = nilai::with('mapel','siswa')->get();
         $mapels = mapel::all(); // Mengambil semua data materi
-        $siswas = siswa::all();
+        $siswas = User::where('role', '=', 'siswa')->get();
 
 
         return view('siswa.nilaisiswa',compact('dtnilai','mapels','siswas'));
@@ -50,7 +48,7 @@ class siswacontroller extends Controller
 
     public function profilesiswa()
     {
-        $siswas = siswa::all();
+        $siswas = User::where('role', '=', 'siswa')->get();
 
 
         return view('siswa.profilesiswa',compact('siswas'));
@@ -58,9 +56,7 @@ class siswacontroller extends Controller
 
     public function datasiswa()
     {
-        $dtsiswa = siswa::all();
-        // $materis = materi::all(); // Mengambil semua data materi
-        // $nilai = nilai::all(); // Mengambil semua data nilai
+        $dtsiswa = User::where('role', '=', 'siswa')->get();
 
         return view('admin.siswaadmin',compact('dtsiswa'));
     }
@@ -91,7 +87,7 @@ class siswacontroller extends Controller
     }
 
     // Simpan data siswa ke database
-    siswa::create([
+    User::create([
         'nis' => $request->nis,
         'nama' => $request->nama,
         'tgl_lahir' => $request->tgl_lahir,
@@ -123,7 +119,7 @@ public function updatesiswa(Request $request, string $id)
         ]);
 
         // Cari guru berdasarkan ID
-        $siswa = Siswa::findOrFail($id);
+        $siswa = User::findOrFail($id);
 
         // Cek apakah ada file yang diunggah
         if ($request->hasFile('foto')) {
@@ -141,17 +137,29 @@ public function updatesiswa(Request $request, string $id)
             $siswa->foto = $fileName;
         }
 
-        // Perbarui data lain
-        $siswa->update([
-            'nis' => $request->nis,
-            'nama' => $request->nama,
-            'tgl_lahir' => $request->tgl_lahir,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'password' => $request->password,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-        ]);
+        if ($request->password != null) {
+            $siswa->update([
+                'nis' => $request->nis,
+                'nama' => $request->nama,
+                'tgl_lahir' => $request->tgl_lahir,
+                'gender' => $request->gender,
+                'email' => $request->email,
+                'password' => $request->password,
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
+            ]);
+        } else {
+            $siswa->update([
+                'nis' => $request->nis,
+                'nama' => $request->nama,
+                'tgl_lahir' => $request->tgl_lahir,
+                'gender' => $request->gender,
+                'email' => $request->email,
+                'password' => $request->password,
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
+            ]);
+        }
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Data guru berhasil diperbarui.');
@@ -159,7 +167,7 @@ public function updatesiswa(Request $request, string $id)
 
     public function destroysiswa(string $id)
     {
-        $siswa = Siswa::findOrFail($id); // Pastikan model Materi ada
+        $siswa = User::findOrFail($id); // Pastikan model Materi ada
         $siswa->delete();
 
         return redirect()->back()->with('success', 'Siswa berhasil dihapus.');

@@ -27,8 +27,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -37,7 +36,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link " href="{{ route('admin.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -64,7 +63,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('materi.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -73,22 +72,20 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.admin') }}">
+                    <a class="nav-link  "href="{{ route('admin.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Nilai </span>
+                        <span class="nav-link-text ms-1">Nilai</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('jadwal.admin') }}">
+                    <a class="nav-link  active" href="{{ route('admin.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days"></i>
-
                         </div>
-
                         <span class="nav-link-text ms-1">Jadwal</span>
                     </a>
                 </li>
@@ -97,18 +94,21 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
-
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -156,9 +156,9 @@
                                                         <select name="materi_id" id="materi_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
                                                             @foreach ($materis as $materi)
-                                                            <option value="{{ $materi->id }}">
-                                                                {{ $materi->mapel->nama_mapel }}
-                                                            </option>
+                                                                <option value="{{ $materi->id }}">
+                                                                    {{ $materi->mapel->nama_mapel }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -210,31 +210,31 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtjadwal as $key => $item)
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td>{{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
-                                            <td>{{ $item->materi->guru->nama ?? '-' }}</td>
-                                            <td>{{ $item->hari }}</td>
-                                            <td>{{ $item->jam_mulai }}</td>
-                                            <td>{{ $item->jam_selesai }}</td>
-                                            <td>
-                                                <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#EditJadwal{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('admin.jadwal.destroy', $item->id) }}"
-                                                        method="POST" id="deleteform{{$item->id}}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" class="btn btn-danger"
-                                                            value="Delete" id="delete">
-                                                    </form>
-                                                </div>
-                                            </td>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $item->materi->nama_kelas ?? '-' }}</td>
+                                                <td>{{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
+                                                <td>{{ $item->materi->guru->nama ?? '-' }}</td>
+                                                <td>{{ $item->hari }}</td>
+                                                <td>{{ $item->jam_mulai }}</td>
+                                                <td>{{ $item->jam_selesai }}</td>
+                                                <td>
+                                                    <div class="d-flex gap-2">
+                                                        <a class="btn btn-success" data-bs-toggle="modal"
+                                                            data-bs-target="#EditJadwal{{ $item->id }}">Ubah</a>
+                                                        <form action="{{ route('admin.jadwal.destroy', $item->id) }}"
+                                                            method="POST" id="deleteform{{ $item->id }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger"
+                                                                value="Delete" id="delete">
+                                                        </form>
+                                                    </div>
+                                                </td>
 
-                                        </tr>
-                                        @endforeach
+                                            </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -245,64 +245,65 @@
 
             <!-- Edit Modal -->
             @foreach ($dtjadwal as $key => $item)
-            <div class="modal fade" id="EditJadwal{{ $item->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('admin.jadwal.update', $item->id) }}" method="POST"
-                                enctype="multipart/form-data" id="editform{{$item->id}}">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="materi_id" class="form-label">Nama Pelajaran</label>
-                                        <select class="form-select" id="materi_id" name="materi_id">
-                                            <option value="" selected>Tidak Mata Pelajaran</option>
-                                            @foreach ($materis as $materi)
-                                            <option value="{{ $materi->id }}"
-                                                {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
-                                                {{ $materi->mapel->nama_mapel }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                <div class="modal fade" id="EditJadwal{{ $item->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.jadwal.update', $item->id) }}" method="POST"
+                                    enctype="multipart/form-data" id="editform{{ $item->id }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="materi_id" class="form-label">Nama Pelajaran</label>
+                                            <select class="form-select" id="materi_id" name="materi_id">
+                                                <option value="" selected>Tidak Mata Pelajaran</option>
+                                                @foreach ($materis as $materi)
+                                                    <option value="{{ $materi->id }}"
+                                                        {{ $materi->id == $item->materi_id ? 'selected' : '' }}>
+                                                        {{ $materi->mapel->nama_mapel }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="hari" class="form-label">Hari</label>
+                                            <select name="hari" class="form-select" value="{{ $item->hari }}">
+                                                <option value="senin">SENIN</option>
+                                                <option value="selasa">SELASA</option>
+                                                <option value="rabu">RABU</option>
+                                                <option value="kamis ">KAMIS</option>
+                                                <option value="jumat">JUMAT</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="jam_mulai" class="form-label">Jam Mulai</label>
+                                            <input type="time" class="form-control" id="jam_mulai"
+                                                name="jam_mulai" value="{{ $item->jam_mulai }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="jam_selesai" class="form-label">Jam Selesai</label>
+                                            <input type="time" class="form-control" id="jam_selesai"
+                                                name="jam_selesai" value="{{ $item->jam_selesai }}" required>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary" id="edit">Simpan
+                                                Perubahan</button>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="hari" class="form-label">Hari</label>
-                                        <select name="hari" class="form-select" value="{{ $item->hari }}">
-                                            <option value="senin">SENIN</option>
-                                            <option value="selasa">SELASA</option>
-                                            <option value="rabu">RABU</option>
-                                            <option value="kamis ">KAMIS</option>
-                                            <option value="jumat">JUMAT</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="jam_mulai" class="form-label">Jam Mulai</label>
-                                        <input type="time" class="form-control" id="jam_mulai"
-                                            name="jam_mulai" value="{{ $item->jam_mulai }}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="jam_selesai" class="form-label">Jam Selesai</label>
-                                        <input type="time" class="form-control" id="jam_selesai"
-                                            name="jam_selesai" value="{{ $item->jam_selesai }}" required>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
 
@@ -354,7 +355,7 @@
                         icon: "question",
                         showCancelButton: true,
                         confirmButtonText: "Simpan!",
-                            cancelButtonText: "Batalkan"
+                        cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim form secara manual

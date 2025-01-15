@@ -29,8 +29,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -39,7 +38,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('siswa.dashboard') }}">
+                    <a class="nav-link  " href="">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -48,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('materi.siswa') }}">
+                    <a class="nav-link  active" href="{{ route('siswa.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book"></i>
@@ -57,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -66,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -78,7 +77,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('profile.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.profile') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-address-card" style="color: #344767"></i>
@@ -87,18 +86,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
-
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -136,11 +138,13 @@
                                         <tr>
                                             <td class="align-middle text-center">{{ $key + 1 }}</td>
                                             <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
-                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}</td>
-                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
+                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}
+                                            </td>
+                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}
+                                            </td>
                                             <td class="align-middle text-center"><button type="button"
                                                     class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal">
+                                                    data-bs-target="#exampleModal{{ $key }}">
                                                     Lihat Materi
                                         </tr>
                                         @endforeach
@@ -155,22 +159,20 @@
 
             <!-- Materi Modal -->
             @foreach ($dtmateriadmin as $key => $item)
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModal{{ $key }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $key }}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Materi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <h5 class="modal-title" id="exampleModalLabel{{ $key }}">Materi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-
                         <div class="modal-body">
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">{{ $item->mapel->nama_mapel }}</h5>
                                     <p class="card-text text-justify">{{ $item->nama_materi }}</p>
-                                    <td class="align-middle text-center"> <a href="{{ route('materi.download.admin', $item->id) }}"
+                                    <td class="align-middle text-center">
+                                        <a href="{{ asset('storage/' . $item->isi_materi) }}" target="_blank"
                                             class="btn btn-primary" download>{{ $item->isi_materi }}</a>
                                     </td>
                                 </div>
@@ -178,8 +180,10 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
             </div>
+            @endforeach
+
+        </div>
         </div>
 
 
