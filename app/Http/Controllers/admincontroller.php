@@ -243,7 +243,7 @@ class admincontroller extends Controller
         ]);
 
 
-        return redirect()->route('nilai.admin')->with('success', 'Nilai berhasil ditambahkan!');
+        return redirect()->route('admin.nilai')->with('success', 'Nilai berhasil ditambahkan!');
     }
 
     public function updatenilaiadmin(Request $request, string $id)
