@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\materi;
-use App\Models\guru;
 use App\Models\jadwal;
 use App\Models\mapel;
-
+use App\Models\User;
 
 class matericontroller extends Controller
 {
@@ -17,11 +16,11 @@ class matericontroller extends Controller
      */
     public function index()
     {
-        $dtmateri = Materi::with('guru','mapel')->get();
-        $gurus = Guru::all(); // Mengambil semua data guru
+        $dtmateri = Materi::with('guru', 'mapel')->get();
+        $gurus = User::where('role', '=', 'guru')->get(); // Mengambil semua data guru
         $mapels = Mapel::all(); // Mengambil semua data guru
 
-        return view('guru.materiguru', compact('dtmateri', 'gurus','mapels'));
+        return view('guru.materiguru', compact('dtmateri', 'gurus', 'mapels'));
     }
 
     /**
@@ -63,7 +62,7 @@ class matericontroller extends Controller
             'guru_id' => 'required|string|max:20',
         ]);
 
-         // Simpan file materi ke folder public/uploads
+        // Simpan file materi ke folder public/uploads
         $file = $request->file('isi_materi');
         $fileName = time() . '_' . $file->getClientOriginalName(); // Tambahkan timestamp untuk nama unik
         $filePath = $file->move(public_path('uploads'), $fileName);
@@ -78,7 +77,7 @@ class matericontroller extends Controller
         ]);
 
 
-        return redirect()->route('materi.guru')->with('success', 'Materi berhasil ditambahkan!');
+        return redirect()->route('guru.materi')->with('success', 'Materi berhasil ditambahkan!');
     }
 
     /**
@@ -103,40 +102,40 @@ class matericontroller extends Controller
     public function update(Request $request, string $id)
     {
         // Validasi data yang masuk
-    $request->validate([
-        'nama_kelas' => 'required|string|max:255',
-        'mapel_id' => 'nullable|exists:mapel,id',
-        'nama_materi' => 'required|string|max:255',
-        'guru_id' => 'nullable|exists:guru,id', // Validasi id_guru
-        'isi_materi' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx|max:2048', // Validasi file
-    ]);
+        $request->validate([
+            'nama_kelas' => 'required|string|max:255',
+            'mapel_id' => 'nullable|exists:mapel,id',
+            'nama_materi' => 'required|string|max:255',
+            'guru_id' => 'nullable|exists:users,id', // Validasi id_guru
+            'isi_materi' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx|max:2048', // Validasi file
+        ]);
 
-    // Cari materi berdasarkan ID
-    $materi = Materi::findOrFail($id);
+        // Cari materi berdasarkan ID
+        $materi = Materi::findOrFail($id);
 
-    // Cek apakah ada file yang diunggah
-    if ($request->hasFile('isi_materi')) {
-        // Hapus file lama jika ada
-        if ($materi->isi_materi && file_exists(public_path('uploads/' . $materi->isi_materi))) {
-            unlink(public_path('uploads/' . $materi->isi_materi));
+        // Cek apakah ada file yang diunggah
+        if ($request->hasFile('isi_materi')) {
+            // Hapus file lama jika ada
+            if ($materi->isi_materi && file_exists(public_path('uploads/' . $materi->isi_materi))) {
+                unlink(public_path('uploads/' . $materi->isi_materi));
+            }
+
+            // Simpan file materi ke folder public/uploads
+            $file = $request->file('isi_materi');
+            $fileName = time() . '_' . $file->getClientOriginalName(); // Tambahkan timestamp untuk nama unik
+            $filePath = $file->move(public_path('uploads'), $fileName);
+
+            // Update nama file di database
+            $materi->isi_materi = $fileName;
         }
 
-         // Simpan file materi ke folder public/uploads
-         $file = $request->file('isi_materi');
-         $fileName = time() . '_' . $file->getClientOriginalName(); // Tambahkan timestamp untuk nama unik
-         $filePath = $file->move(public_path('uploads'), $fileName);
-
-        // Update nama file di database
-        $materi->isi_materi = $fileName;
-    }
-
-    // Perbarui data lain
-    $materi->update([
-        'nama_kelas' => $request->nama_kelas,
-        'mapel_id' => $request->mapel_id,
-        'nama_materi' => $request->nama_materi,
-        'guru_id' => $request->guru_id,
-    ]);
+        // Perbarui data lain
+        $materi->update([
+            'nama_kelas' => $request->nama_kelas,
+            'mapel_id' => $request->mapel_id,
+            'nama_materi' => $request->nama_materi,
+            'guru_id' => $request->guru_id,
+        ]);
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Materi berhasil diperbarui.');

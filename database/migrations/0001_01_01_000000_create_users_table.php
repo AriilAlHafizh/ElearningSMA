@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\gender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nis')->nullable();
+            $table->string('nama');
+            $table->date('tgl_lahir');
+            $table->enum('gender', [gender::PRIA->value, Gender::WANITA->value]);
             $table->string('email')->unique();
+            $table->string('no_hp');
+            $table->string('alamat');
+            $table->string('foto')->nullable();
+            $table->enum('role', ['siswa', 'guru', 'admin'])->default('siswa');
+            $table->unsignedBigInteger('materi_id')->constrained('materi')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

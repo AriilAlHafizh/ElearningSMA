@@ -38,7 +38,7 @@ class jadwalcontroller extends Controller
         ]);
 
 
-        return redirect()->route('jadwal.admin')->with('success', 'Jadwal berhasil ditambahkan!');
+        return redirect()->route('admin.jadwal')->with('success', 'Jadwal berhasil ditambahkan!');
     }
 
     public function updatejadwal(Request $request, string $id)

@@ -29,8 +29,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -39,7 +38,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link " href="{{ route('admin.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -66,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('materi.admin') }}">
+                    <a class="nav-link  active" href="{{ route('admin.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book"></i>
@@ -75,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.admin') }}">
+                    <a class="nav-link  "href="{{ route('admin.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -84,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -95,19 +94,23 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
-                </li>
 
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -130,9 +133,6 @@
                                 data-bs-target="#exampleModal">
                                 Tambah Materi
                             </button>
-                            <form action="" method="post">
-                                @csrf
-                            </form>
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -145,7 +145,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="{{ route('materi.admin.store') }}"
+                                            <form method="POST" action="{{ route('admin.materi.store') }}"
                                                 enctype="multipart/form-data" id="tambahform">
                                                 @csrf
                                                 <section class="base">
@@ -159,9 +159,11 @@
                                                         <input type="text" name="nama_kelas" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                                        <label for="mapel_id" class="form-label">Mata
+                                                            Pelajaran</label>
                                                         <select class="form-select" id="mapel_id" name="mapel_id">
-                                                            <option value="" selected>Tidak ada Mata Pelajaran</option>
+                                                            <option value="" selected>Tidak ada Mata Pelajaran
+                                                            </option>
                                                             @foreach ($mapeladmin as $mapel)
                                                                 <option value="{{ $mapel->id }}"
                                                                     {{ $mapel->id == $mapel->mapel_id ? 'selected' : '' }}>
@@ -173,7 +175,8 @@
                                                     <div class="mb-3">
                                                         <label for="nama_materi" class="form-label">Nama
                                                             Materi</label>
-                                                        <input type="text" name="nama_materi" class="form-control">
+                                                        <input type="text" name="nama_materi"
+                                                            class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="guru_id" class="form-label">Guru</label>
@@ -203,7 +206,6 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
                         </div>
 
                         <div class="card-body px-0 pt-0 pb-2">
@@ -225,18 +227,22 @@
                                             <tr>
                                                 <td class="align-middle text-center">{{ $key + 1 }}</td>
                                                 <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
-                                                <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}</td>
+                                                <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}
+                                                </td>
                                                 <td class="align-middle text-center">{{ $item->nama_materi }}</td>
-                                                <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
+                                                <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}
+                                                </td>
                                                 <!-- Pastikan relasi ke guru sudah benar -->
-                                                <td class="align-middle text-center"> <a href="{{ route('materi.download.admin', $item->id) }}"
-                                                        class="btn btn-primary" download>{{ $item->isi_materi }}</a>
+                                                <td class="align-middle text-center"> <a
+                                                        href="{{ asset('storage/' . $item->isi_materi) }}"
+                                                        target="_blank" class="btn btn-primary"
+                                                        download>{{ $item->isi_materi }}</a>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex gap-2">
                                                         <a class="btn btn-success" data-bs-toggle="modal"
                                                             data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
-                                                        <form action="{{ route('materi.admin.destroy', $item->id) }}"
+                                                        <form action="{{ route('admin.materi.destroy', $item->id) }}"
                                                             method="POST" id="deleteform{{ $item->id }}">
                                                             @csrf
                                                             @method('DELETE')
@@ -267,7 +273,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{ route('materi.admin.update', $item->id) }}" method="POST"
+                                <form action="{{ route('admin.materi.update', $item->id) }}" method="POST"
                                     enctype="multipart/form-data" id="editform{{ $item->id }}">
                                     @csrf
                                     @method('PUT')
@@ -313,7 +319,7 @@
                                                 name="isi_materi">
                                             @if ($item->isi_materi)
                                                 <small>File saat ini: <a
-                                                        href="{{ asset('uploads/' . $item->isi_materi) }}"
+                                                        href="{{ asset('storage/' . $item->isi_materi) }}"
                                                         target="_blank">{{ $item->isi_materi }}</a></small>
                                             @endif
                                         </div>
@@ -321,7 +327,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
+                                        <button type="submit" class="btn btn-primary" id="edit">Simpan
+                                            Perubahan</button>
                                     </div>
                                 </form>
                             </div>

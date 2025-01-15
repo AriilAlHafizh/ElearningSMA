@@ -29,8 +29,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -66,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('materi.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -75,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.admin') }}">
+                    <a class="nav-link  "href="{{ route('admin.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -84,11 +83,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
-
                         </div>
                         <span class="nav-link-text ms-1">Jadwal</span>
                     </a>
@@ -98,18 +96,21 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link  " href="#">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
-
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -132,9 +133,6 @@
                                 data-bs-target="#exampleModal">
                                 Tambah Guru
                             </button>
-                            <form action="materi.guru.create" method="post">
-                                @csrf
-                            </form>
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -164,6 +162,11 @@
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Email</label>
                                                         <input type="text" name="email" class="form-control">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Tanggal
+                                                            Lahir</label>
+                                                        <input type="date" name="tgl_lahir" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
@@ -207,7 +210,6 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -226,39 +228,39 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtguru as $key => $item)
-                                    <tbody>
-                                        <tr>
-                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                            <td class="align-middle text-center">{{ $item->nama }}</td>
-                                            <td class="align-middle text-center">{{ $item->email }}</td>
-                                            <td class="align-middle text-center">{{ $item->password }}</td>
-                                            <td class="align-middle text-center">{{ $item->alamat }}</td>
-                                            <td class="align-middle text-center">{{ $item->no_hp }}</td>
-                                            <td class="align-middle text-center">{{ $item->gender }}</td>
-                                            <td class="align-middle text-center">
-                                                @if ($item->foto)
-                                                <img src="{{ asset('storage/photos/' . $item->foto) }}"
-                                                    alt="Foto Guru"
-                                                    style="width: 50px; height: 50px; object-fit: cover;">
-                                                @else
-                                                <span>No Photo</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-xs font-weight-bold">
-                                                <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#EditGuru{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('admin.guru.destroy', $item->id) }}"
-                                                        method="POST" id="deleteform{{$item->id}}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" class="btn btn-danger"
-                                                            value="Delete" id="delete">
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                <td class="align-middle text-center">{{ $item->nama }}</td>
+                                                <td class="align-middle text-center">{{ $item->email }}</td>
+                                                <td class="align-middle text-center">{{ $item->password }}</td>
+                                                <td class="align-middle text-center">{{ $item->alamat }}</td>
+                                                <td class="align-middle text-center">{{ $item->no_hp }}</td>
+                                                <td class="align-middle text-center">{{ $item->gender }}</td>
+                                                <td class="align-middle text-center">
+                                                    @if ($item->foto)
+                                                        <img src="{{ asset('storage/' . $item->foto) }}"
+                                                            alt="Foto Guru"
+                                                            style="width: 50px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <span>No Photo</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-xs font-weight-bold">
+                                                    <div class="d-flex gap-2">
+                                                        <a class="btn btn-success" data-bs-toggle="modal"
+                                                            data-bs-target="#EditGuru{{ $item->id }}">Ubah</a>
+                                                        <form action="{{ route('admin.guru.destroy', $item->id) }}"
+                                                            method="POST" id="deleteform{{ $item->id }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger"
+                                                                value="Delete" id="delete">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -268,74 +270,78 @@
             </div>
             <!-- Edit Modal -->
             @foreach ($dtguru as $key => $guru)
-            <div class="modal fade" id="EditGuru{{ $guru->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="{{ route('admin.guru.update', $guru->id) }}"
-                                enctype="multipart/form-data" id="editform{{$guru->id}}">
-                                @csrf
-                                @method('PUT')
-                                <section class="base">
-                                    <div class="mb-3">
-                                        <label for="nama" class="form-label">Nama</label>
-                                        <input type="text" name="nama" class="form-control"
-                                            value="{{ $guru->nama }}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="text" name="email" class="form-control"
-                                            value="{{ $guru->email }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="Text" name="password" class="form-control"
-                                            value="{{ $guru->password }}"> <br>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="alamat" class="form-label">Alamat</label>
-                                        <input type="Text" name="alamat" class="form-control"
-                                            value="{{ $guru->alamat }}"> <br>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="no_hp" class="form-label">No.Telp</label>
-                                        <input type="Text" name="no_hp" class="form-control"
-                                            value="{{ $guru->no_hp }}"> <br>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="gender" class="form-label">Jenis
-                                            Kelamin</label>
-                                        <select name="gender" class="form-select" value="{{ $guru->gender }}">
-                                            <option value="pria">PRIA</option>
-                                            <option value="wanita">WANITA</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="foto" class="form-label">Foto</label>
-                                        <input type="file" name="foto" class="form-control"
-                                            value="{{ $guru->foto }}">
-                                        <br>
-                                        @if ($guru->foto)
-                                        <img src="{{ asset('storage/' . $guru->foto) }}" alt="Guru Foto"
-                                            width="100">
-                                        @endif
-                                    </div>
-                                    <div>
-                                        <input type="submit" name="simpan" value="Simpan"
-                                            class="btn btn-outline-primary" id="edit">
-                                    </div>
-                                </section>
-                            </form>
+                <div class="modal fade" id="EditGuru{{ $guru->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="{{ route('admin.guru.update', $guru->id) }}"
+                                    enctype="multipart/form-data" id="editform{{ $guru->id }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <section class="base">
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama</label>
+                                            <input type="text" name="nama" class="form-control"
+                                                value="{{ $guru->nama }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" name="email" class="form-control"
+                                                value="{{ $guru->email }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Tanggal Lahir</label>
+                                            <input type="date" name="tgl_lahir" class="form-control"
+                                                value="{{ $guru->tgl_lahir }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="Text" name="password" class="form-control"> <br>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="alamat" class="form-label">Alamat</label>
+                                            <input type="Text" name="alamat" class="form-control"
+                                                value="{{ $guru->alamat }}"> <br>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="no_hp" class="form-label">No.Telp</label>
+                                            <input type="Text" name="no_hp" class="form-control"
+                                                value="{{ $guru->no_hp }}"> <br>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="gender" class="form-label">Jenis
+                                                Kelamin</label>
+                                            <select name="gender" class="form-select" value="{{ $guru->gender }}">
+                                                <option value="pria">PRIA</option>
+                                                <option value="wanita">WANITA</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="foto" class="form-label">Foto</label>
+                                            <input type="file" name="foto" class="form-control"
+                                                value="{{ $guru->foto }}">
+                                            <br>
+                                            @if ($guru->foto)
+                                                <img src="{{ asset('storage/' . $guru->foto) }}" alt="Guru Foto"
+                                                    width="100">
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <input type="submit" name="simpan" value="Simpan"
+                                                class="btn btn-outline-primary" id="edit">
+                                        </div>
+                                    </section>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
 

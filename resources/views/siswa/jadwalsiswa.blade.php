@@ -27,8 +27,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -37,7 +36,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('siswa.dashboard') }}">
+                    <a class="nav-link  " href="">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -46,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('materi.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -55,21 +54,20 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Nilai </span>
+                        <span class="nav-link-text ms-1">Nilai</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('jadwal.siswa') }}">
+                    <a class="nav-link  active" href="{{ route('siswa.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days"></i>
                         </div>
-
                         <span class="nav-link-text ms-1">Jadwal</span>
                     </a>
                 </li>
@@ -77,7 +75,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('profile.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.profile') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-address-card" style="color: #344767"></i>
@@ -86,18 +84,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
-
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -132,17 +133,20 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtjadwal as $key => $item)
-                                    <tbody>
-                                        <tr>
-                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                            <td class="align-middle text-center">{{ $item->materi->nama_kelas ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->materi->guru->nama ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->hari }}</td>
-                                            <td class="align-middle text-center">{{ $item->jam_mulai }}</td>
-                                            <td class="align-middle text-center">{{ $item->jam_selesai }}</td>
-                                        </tr>
-                                        @endforeach
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                <td class="align-middle text-center">
+                                                    {{ $item->materi->nama_kelas ?? '-' }}</td>
+                                                <td class="align-middle text-center">
+                                                    {{ $item->materi->mapel->nama_mapel ?? '-' }}</td>
+                                                <td class="align-middle text-center">
+                                                    {{ $item->materi->guru->nama ?? '-' }}</td>
+                                                <td class="align-middle text-center">{{ $item->hari }}</td>
+                                                <td class="align-middle text-center">{{ $item->jam_mulai }}</td>
+                                                <td class="align-middle text-center">{{ $item->jam_selesai }}</td>
+                                            </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -29,8 +29,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -39,7 +38,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guru.dashboard') }}">
+                    <a class="nav-link " href="{{ route('guru.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -48,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('materi.guru') }}">
+                    <a class="nav-link  active" href="{{ route('guru.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book"></i>
@@ -57,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.guru') }}">
+                    <a class="nav-link  "href="{{ route('guru.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -66,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.dashboard') }}">
+                    <a class="nav-link  " href="{{ route('guru.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -78,7 +77,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('profile.dashboard') }}">
+                    <a class="nav-link  " href="{{ route('guru.profile') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-address-card" style="color: #344767"></i>
@@ -87,18 +86,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
-
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -136,7 +138,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="{{ route('materi.guru.store') }}"
+                                            <form method="POST" action="{{ route('guru.materi.store') }}"
                                                 enctype="multipart/form-data" id="tambahform">
                                                 @csrf
                                                 <section class="base">
@@ -150,31 +152,34 @@
                                                         <input type="text" name="nama_kelas" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                                        <label for="mapel_id" class="form-label">Mata
+                                                            Pelajaran</label>
                                                         <select class="form-select" id="mapel_id" name="mapel_id">
-                                                            <option value="" selected>Tidak ada Mata Pelajaran</option>
-                                                            @foreach ($mapels as $mapel)
-                                                            <option value="{{ $mapel->id }}"
-                                                                {{ $mapel->id == $mapel->mapel_id ? 'selected' : '' }}>
-                                                                {{ $mapel->nama_mapel }}
+                                                            <option value="" selected>Tidak ada Mata Pelajaran
                                                             </option>
+                                                            @foreach ($mapels as $mapel)
+                                                                <option value="{{ $mapel->id }}"
+                                                                    {{ $mapel->id == $mapel->mapel_id ? 'selected' : '' }}>
+                                                                    {{ $mapel->nama_mapel }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="nama_materi" class="form-label">Nama
                                                             Materi</label>
-                                                        <input type="text" name="nama_materi" class="form-control">
+                                                        <input type="text" name="nama_materi"
+                                                            class="form-control">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="guru_id" class="form-label">Guru</label>
                                                         <select class="form-select" id="guru_id" name="guru_id">
                                                             <option value="" selected>Tidak ada guru</option>
                                                             @foreach ($gurus as $guru)
-                                                            <option value="{{ $guru->id }}"
-                                                                {{ $guru->id == $guru->guru_id ? 'selected' : '' }}>
-                                                                {{ $guru->nama }}
-                                                            </option>
+                                                                <option value="{{ $guru->id }}"
+                                                                    {{ $guru->id == $guru->guru_id ? 'selected' : '' }}>
+                                                                    {{ $guru->nama }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -212,32 +217,36 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtmateri as $key => $item)
-                                    <tbody>
-                                        <tr>
-                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                            <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
-                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}</td>
-                                            <td class="align-middle text-center">{{ $item->nama_materi }}</td>
-                                            <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}</td>
-                                            <!-- Pastikan relasi ke guru sudah benar -->
-                                            <td class="align-middle text-center"> <a href="{{ route('materi.download.admin', $item->id) }}"
-                                                    class="btn btn-primary" download>{{ $item->isi_materi }}</a>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('materi.admin.destroy', $item->id) }}"
-                                                        method="POST" id="deleteform{{ $item->id }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" class="btn btn-danger"
-                                                            value="Delete" id="delete">
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                <td class="align-middle text-center">{{ $item->nama_kelas }}</td>
+                                                <td class="align-middle text-center">{{ $item->mapel->nama_mapel }}
+                                                </td>
+                                                <td class="align-middle text-center">{{ $item->nama_materi }}</td>
+                                                <td class="align-middle text-center">{{ $item->guru->nama ?? '-' }}
+                                                </td>
+                                                <!-- Pastikan relasi ke guru sudah benar -->
+                                                <td class="align-middle text-center"> <a
+                                                        href="{{ asset('storage/' . $item->isi_materi) }}"
+                                                        target="_blank" class="btn btn-primary"
+                                                        download>{{ $item->isi_materi }}</a>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <div class="d-flex gap-2">
+                                                        <a class="btn btn-success" data-bs-toggle="modal"
+                                                            data-bs-target="#EditMateri{{ $item->id }}">Ubah</a>
+                                                        <form action="{{ route('guru.materi.destroy', $item->id) }}"
+                                                            method="POST" id="deleteform{{ $item->id }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger"
+                                                                value="Delete" id="delete">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -248,75 +257,78 @@
 
             <!-- Edit Modal -->
             @foreach ($dtmateri as $key => $item)
-            <div class="modal fade" id="EditMateri{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Materi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('materi.guru.update', $item->id) }}" method="POST" enctype="multipart/form-data" id="editform{{$item->id}}">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="nama_kelas" class="form-label">Nama Kelas</label>
-                                        <input type="text" class="form-control" id="nama_kelas"
-                                            name="nama_kelas" value="{{ $item->nama_kelas }}" required>
+                <div class="modal fade" id="EditMateri{{ $item->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Materi</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('guru.materi.update', $item->id) }}" method="POST"
+                                    enctype="multipart/form-data" id="editform{{ $item->id }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama_kelas" class="form-label">Nama Kelas</label>
+                                            <input type="text" class="form-control" id="nama_kelas"
+                                                name="nama_kelas" value="{{ $item->nama_kelas }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mapel_id" class="form-label">Mata Pelajaran</label>
+                                            <select class="form-select" id="mapel_id" name="mapel_id">
+                                                <option value="" selected>Tidak ada Mata Pelajaran</option>
+                                                @foreach ($mapels as $mapel)
+                                                    <option value="{{ $mapel->id }}"
+                                                        {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
+                                                        {{ $mapel->nama_mapel }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nama_materi" class="form-label">Nama Materi</label>
+                                            <input type="text" class="form-control" id="nama_materi"
+                                                name="nama_materi" value="{{ $item->nama_materi }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="guru_id" class="form-label">Guru</label>
+                                            <select class="form-select" id="guru_id" name="guru_id">
+                                                <option value="" selected>Tidak ada guru</option>
+                                                @foreach ($gurus as $guru)
+                                                    <option value="{{ $guru->id }}"
+                                                        {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
+                                                        {{ $guru->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="isi_materi" class="form-label">File Materi
+                                                (PDF/Word/PowerPoint)</label>
+                                            <input type="file" class="form-control" id="isi_materi"
+                                                name="isi_materi">
+                                            @if ($item->isi_materi)
+                                                <small>File saat ini: <a
+                                                        href="{{ asset('uploads/' . $item->isi_materi) }}"
+                                                        target="_blank">{{ $item->isi_materi }}</a></small>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="mapel_id" class="form-label">Mata Pelajaran</label>
-                                        <select class="form-select" id="mapel_id" name="mapel_id">
-                                            <option value="" selected>Tidak ada Mata Pelajaran</option>
-                                            @foreach ($mapels as $mapel)
-                                            <option value="{{ $mapel->id }}"
-                                                {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
-                                                {{ $mapel->nama_mapel }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary" id="edit">Simpan
+                                            Perubahan</button>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="nama_materi" class="form-label">Nama Materi</label>
-                                        <input type="text" class="form-control" id="nama_materi"
-                                            name="nama_materi" value="{{ $item->nama_materi }}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="guru_id" class="form-label">Guru</label>
-                                        <select class="form-select" id="guru_id" name="guru_id">
-                                            <option value="" selected>Tidak ada guru</option>
-                                            @foreach ($gurus as $guru)
-                                            <option value="{{ $guru->id }}"
-                                                {{ $guru->id == $item->guru_id ? 'selected' : '' }}>
-                                                {{ $guru->nama }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="isi_materi" class="form-label">File Materi
-                                            (PDF/Word/PowerPoint)</label>
-                                        <input type="file" class="form-control" id="isi_materi"
-                                            name="isi_materi">
-                                        @if ($item->isi_materi)
-                                        <small>File saat ini: <a
-                                                href="{{ asset('uploads/' . $item->isi_materi) }}"
-                                                target="_blank">{{ $item->isi_materi }}</a></small>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
 

@@ -27,8 +27,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -37,7 +36,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link " href="{{ route('admin.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -64,7 +63,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('materi.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -73,7 +72,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('nilai.admin') }}">
+                    <a class="nav-link  active"href="{{ route('admin.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star"></i>
@@ -82,7 +81,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -93,19 +92,23 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
-                </li>
 
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -143,7 +146,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="{{ route('nilai.admin.store') }}"
+                                            <form method="POST" action="{{ route('admin.nilai.store') }}"
                                                 enctype="multipart/form-data" id="tambahform">
                                                 @csrf
                                                 <section class="base">
@@ -156,8 +159,8 @@
                                                         <select name="siswa_id" id="siswa_id" class="form-select">
                                                             <option value="">Pilih NIS Siswa</option>
                                                             @foreach ($siswas as $siswa)
-                                                            <option value="{{ $siswa->id }}">{{ $siswa->nis }}
-                                                            </option>
+                                                                <option value="{{ $siswa->id }}">{{ $siswa->nis }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -167,9 +170,9 @@
                                                         <select name="mapel_id" id="mapel_id" class="form-select">
                                                             <option value="">Pilih Mata Pelajaran</option>
                                                             @foreach ($mapels as $mapel)
-                                                            <option value="{{ $mapel->id }}">
-                                                                {{ $mapel->nama_mapel }}
-                                                            </option>
+                                                                <option value="{{ $mapel->id }}">
+                                                                    {{ $mapel->nama_mapel }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -202,28 +205,31 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtnilai as $key => $item)
-                                    <tbody>
-                                        <tr>
-                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                            <td class="align-middle text-center">{{ $item->siswa->nis ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->siswa->nama ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->mapel->nama_mapel ?? '-' }}</td>
-                                            <td class="align-middle text-center">{{ $item->nilai }}</td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#EditNilai{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('nilai.admin.destroy', $item->id) }}"
-                                                        method="POST" id="deleteform{{ $item->id }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" class="btn btn-danger"
-                                                            value="Delete" id="delete">
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                <td class="align-middle text-center">{{ $item->siswa->nis ?? '-' }}
+                                                </td>
+                                                <td class="align-middle text-center">{{ $item->siswa->nama ?? '-' }}
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    {{ $item->mapel->nama_mapel ?? '-' }}</td>
+                                                <td class="align-middle text-center">{{ $item->nilai }}</td>
+                                                <td class="align-middle text-center">
+                                                    <div class="d-flex gap-2">
+                                                        <a class="btn btn-success" data-bs-toggle="modal"
+                                                            data-bs-target="#EditNilai{{ $item->id }}">Ubah</a>
+                                                        <form action="{{ route('admin.nilai.destroy', $item->id) }}"
+                                                            method="POST" id="deleteform{{ $item->id }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger"
+                                                                value="Delete" id="delete">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     @endforeach
                                 </table>
                             </div>
@@ -234,61 +240,62 @@
 
             <!-- Edit Modal -->
             @foreach ($dtnilai as $key => $item)
-            <div class="modal fade" id="EditNilai{{ $item->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('nilai.admin.update', $item->id) }}" method="POST"
-                                enctype="multipart/form-data" id="editform{{ $item->id }}">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="mapel_id" class="form-label">Nama Pelajaran</label>
-                                        <select class="form-select" id="mapel_id" name="mapel_id">
-                                            <option value="" selected>Tidak Mata Pelajaran</option>
-                                            @foreach ($mapels as $mapel)
-                                            <option value="{{ $mapel->id }}"
-                                                {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
-                                                {{ $mapel->nama_mapel }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                <div class="modal fade" id="EditNilai{{ $item->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.nilai.update', $item->id) }}" method="POST"
+                                    enctype="multipart/form-data" id="editform{{ $item->id }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="mapel_id" class="form-label">Nama Pelajaran</label>
+                                            <select class="form-select" id="mapel_id" name="mapel_id">
+                                                <option value="" selected>Tidak Mata Pelajaran</option>
+                                                @foreach ($mapels as $mapel)
+                                                    <option value="{{ $mapel->id }}"
+                                                        {{ $mapel->id == $item->mapel_id ? 'selected' : '' }}>
+                                                        {{ $mapel->nama_mapel }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="siswa_id" class="form-label">NIS</label>
+                                            <select class="form-select" id="siswa_id" name="siswa_id">
+                                                <option value="" selected>Tidak NIS</option>
+                                                @foreach ($siswas as $siswa)
+                                                    <option value="{{ $siswa->id }}"
+                                                        {{ $siswa->id == $item->siswa_id ? 'selected' : '' }}>
+                                                        {{ $siswa->nis }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nilai" class="form-label">Nilai</label>
+                                            <input type="text" class="form-control" id="nilai" name="nilai"
+                                                value="{{ $item->nilai }}" required>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary" id="edit">Simpan
+                                                Perubahan</button>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="siswa_id" class="form-label">NIS</label>
-                                        <select class="form-select" id="siswa_id" name="siswa_id">
-                                            <option value="" selected>Tidak NIS</option>
-                                            @foreach ($siswas as $siswa)
-                                            <option value="{{ $siswa->id }}"
-                                                {{ $siswa->id == $item->siswa_id ? 'selected' : '' }}>
-                                                {{ $siswa->nis }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nilai" class="form-label">Nilai</label>
-                                        <input type="text" class="form-control" id="nilai" name="nilai"
-                                            value="{{ $item->nilai }}" required>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="edit">Simpan Perubahan</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
 
@@ -340,8 +347,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                       confirmButtonText: "Simpan!",
-                            cancelButtonText: "Batalkan"
+                        confirmButtonText: "Simpan!",
+                        cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim form secara manual
@@ -364,8 +371,8 @@
                         title: "Apakah Anda Yakin?",
                         icon: "question",
                         showCancelButton: true,
-                       confirmButtonText: "Simpan!",
-                            cancelButtonText: "Batalkan"
+                        confirmButtonText: "Simpan!",
+                        cancelButtonText: "Batalkan"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#' + formId).submit();

@@ -29,8 +29,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="../pages/dashboard.php">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span class="ms-1 font-weight-bold">Elearning</span>
             </a>
@@ -39,7 +38,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link  " href="{{ route('admin.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-table-columns" style="color: #344767"></i>
@@ -48,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.guru') }}">
+                    <a class="nav-link  " href="{{ route('admin.guru') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-user-tie" style="color: #344767"></i>
@@ -57,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('admin.siswa') }}">
+                    <a class="nav-link  active" href="{{ route('admin.siswa') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-users"></i>
@@ -66,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('materi.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -75,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.admin') }}">
+                    <a class="nav-link  "href="{{ route('admin.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -84,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.admin') }}">
+                    <a class="nav-link  " href="{{ route('admin.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -95,19 +94,23 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
-                </li>
 
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
 
+        </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -148,41 +151,49 @@
                                                 <section class="base">
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label"></label>
-                                                        <input type="hidden" name="id" class="form-control" required>
+                                                        <input type="hidden" name="id" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="nis" class="form-label">NIS</label>
-                                                        <input type="number" name="nis" class="form-control" required>
+                                                        <input type="number" name="nis" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Nama</label>
-                                                        <input type="text" name="nama" class="form-control" required>
+                                                        <input type="text" name="nama" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                                             Lahir</label>
-                                                        <input type="date" name="tgl_lahir" class="form-control" required>
+                                                        <input type="date" name="tgl_lahir" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Email</label>
-                                                        <input type="text" name="email" class="form-control" required>
+                                                        <input type="text" name="email" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Password</label>
-                                                        <input type="text" name="password" class="form-control" required>
+                                                        <input type="text" name="password" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Alamat</label>
-                                                        <input type="text" name="alamat" class="form-control" required>
+                                                        <input type="text" name="alamat" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">No.Telp</label>
-                                                        <input type="number" name="no_hp" class="form-control" required>
+                                                        <input type="number" name="no_hp" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="gender" class="form-label">Jenis
@@ -194,7 +205,8 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="foto" class="form-label">Foto</label>
-                                                        <input type="file" name="foto" class="form-control" required>
+                                                        <input type="file" name="foto" class="form-control"
+                                                            required>
                                                         <br>
                                                     </div>
                                                     <div>
@@ -227,41 +239,41 @@
                                         </tr>
                                     </thead>
                                     @foreach ($dtsiswa as $key => $item)
-                                    <tbody>
-                                        <tr>
-                                            <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                            <td class="align-middle text-center">{{ $item->nis }}</td>
-                                            <td class="align-middle text-center">{{ $item->nama }}</td>
-                                            <td class="align-middle text-center">{{ $item->tgl_lahir }}</td>
-                                            <td class="align-middle text-center">{{ $item->email }}</td>
-                                            <td class="align-middle text-center">{{ $item->password }}</td>
-                                            <td class="align-middle text-center">{{ $item->alamat }}</td>
-                                            <td class="align-middle text-center">{{ $item->no_hp }}</td>
-                                            <td class="align-middle text-center">{{ $item->gender }}</td>
-                                            <td class="align-middle text-center">
-                                                @if ($item->foto)
-                                                <img src="{{ asset('storage/photos/' . $item->foto) }}"
-                                                    alt="Foto Siswa"
-                                                    style="width: 50px; height: 50px; object-fit: cover;">
-                                                @else
-                                                <span>No Photo</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-xs font-weight-bold">
-                                                <div class="d-flex gap-2">
-                                                    <a class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#EditSiswa{{ $item->id }}">Ubah</a>
-                                                    <form action="{{ route('admin.siswa.destroy', $item->id) }}"
-                                                        method="POST" id="deleteform{{ $item->id }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" class="btn btn-danger"
-                                                            value="Delete" id="delete">
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                <td class="align-middle text-center">{{ $item->nis }}</td>
+                                                <td class="align-middle text-center">{{ $item->nama }}</td>
+                                                <td class="align-middle text-center">{{ $item->tgl_lahir }}</td>
+                                                <td class="align-middle text-center">{{ $item->email }}</td>
+                                                <td class="align-middle text-center">{{ $item->password }}</td>
+                                                <td class="align-middle text-center">{{ $item->alamat }}</td>
+                                                <td class="align-middle text-center">{{ $item->no_hp }}</td>
+                                                <td class="align-middle text-center">{{ $item->gender }}</td>
+                                                <td class="align-middle text-center">
+                                                    @if ($item->foto)
+                                                        <img src="{{ asset('storage/' . $item->foto) }}"
+                                                            alt="Foto Siswa"
+                                                            style="width: 50px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <span>No Photo</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-xs font-weight-bold">
+                                                    <div class="d-flex gap-2">
+                                                        <a class="btn btn-success" data-bs-toggle="modal"
+                                                            data-bs-target="#EditSiswa{{ $item->id }}">Ubah</a>
+                                                        <form action="{{ route('admin.siswa.destroy', $item->id) }}"
+                                                            method="POST" id="deleteform{{ $item->id }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger"
+                                                                value="Delete" id="delete">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     @endforeach
                                 </table>
                             </div>
@@ -272,84 +284,83 @@
 
             <!-- Edit Modal -->
             @foreach ($dtsiswa as $key => $item)
-            <div class="modal fade" id="EditSiswa{{ $item->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="{{ route('admin.siswa.update', $item->id) }}"
-                                enctype="multipart/form-data" id="editform{{ $item->id }}">
-                                @csrf
-                                @method('PUT')
-                                <section class="base">
-                                    <div class="mb-3">
-                                        <label for="nis" class="form-label">NIS</label>
-                                        <input type="text" name="nis" class="form-control"
-                                            value="{{ $item->nis }}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                        <input type="text" name="nama" class="form-control"
-                                            value="{{ $item->nama }}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                                        <input type="text" name="tgl_lahir" class="form-control"
-                                            value="{{ $item->tgl_lahir }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="text" name="email" class="form-control"
-                                            value="{{ $item->email }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Password</label>
-                                        <input type="text" name="password" class="form-control"
-                                            value="{{ $item->password }}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                        <input type="Text" name="alamat" class="form-control"
-                                            value="{{ $item->alamat }}"> <br>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">No.Telp</label>
-                                        <input type="Text" name="no_hp" class="form-control"
-                                            value="{{ $item->no_hp }}"> <br>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="gender" class="form-label">Jenis
-                                            Kelamin</label>
-                                        <select name="gender" class="form-select" value="{{ $item->gender }}">
-                                            <option value="pria">PRIA</option>
-                                            <option value="wanita">WANITA</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Foto</label>
-                                        <input type="file" name="file" class="form-control"
-                                            value="{{ $item->foto }}">
-                                        <br>
-                                        @if ($item->foto)
-                                        <img src="{{ asset('storage/' . $item->foto) }}" alt="Siswa Foto"
-                                            width="100">
-                                        @endif
-                                    </div>
-                                    <div>
-                                        <input type="submit" name="simpan" value="Simpan"
-                                            class="btn btn-outline-primary" id="edit">
-                                    </div>
-                                </section>
-                            </form>
+                <div class="modal fade" id="EditSiswa{{ $item->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="{{ route('admin.siswa.update', $item->id) }}"
+                                    enctype="multipart/form-data" id="editform{{ $item->id }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <section class="base">
+                                        <div class="mb-3">
+                                            <label for="nis" class="form-label">NIS</label>
+                                            <input type="text" name="nis" class="form-control"
+                                                value="{{ $item->nis }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Nama</label>
+                                            <input type="text" name="nama" class="form-control"
+                                                value="{{ $item->nama }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                                            <input type="text" name="tgl_lahir" class="form-control"
+                                                value="{{ $item->tgl_lahir }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                                            <input type="text" name="email" class="form-control"
+                                                value="{{ $item->email }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Password</label>
+                                            <input type="text" name="password" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                                            <input type="Text" name="alamat" class="form-control"
+                                                value="{{ $item->alamat }}"> <br>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">No.Telp</label>
+                                            <input type="Text" name="no_hp" class="form-control"
+                                                value="{{ $item->no_hp }}"> <br>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="gender" class="form-label">Jenis
+                                                Kelamin</label>
+                                            <select name="gender" class="form-select" value="{{ $item->gender }}">
+                                                <option value="pria">PRIA</option>
+                                                <option value="wanita">WANITA</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Foto</label>
+                                            <input type="file" name="file" class="form-control"
+                                                value="{{ $item->foto }}">
+                                            <br>
+                                            @if ($item->foto)
+                                                <img src="{{ asset('storage/' . $item->foto) }}" alt="Siswa Foto"
+                                                    width="100">
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <input type="submit" name="simpan" value="Simpan"
+                                                class="btn btn-outline-primary" id="edit">
+                                        </div>
+                                    </section>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
 

@@ -23,7 +23,7 @@ class nilai extends Model
 
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class,'siswa_id','id');
+        return $this->belongsTo(User::class,'siswa_id','id');
     }
 
 

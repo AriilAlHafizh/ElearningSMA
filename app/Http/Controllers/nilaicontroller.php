@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\materi;
 use App\Models\nilai;
-use App\Models\siswa;
 use App\Models\mapel;
+use App\Models\User;
 
 class nilaicontroller extends Controller
 {
@@ -16,7 +16,7 @@ class nilaicontroller extends Controller
     {   
         $dtnilai = nilai::with('mapel','siswa')->get();
         $mapels = mapel::all(); // Mengambil semua data materi
-        $siswas = siswa::all();
+        $siswas = User::where('role', '=', 'siswa')->get();
 
 
         return view('guru.nilaiguru',compact('dtnilai','mapels','siswas'));
@@ -38,7 +38,7 @@ class nilaicontroller extends Controller
         ]);
 
 
-        return redirect()->route('nilai.guru')->with('success', 'Nilai berhasil ditambahkan!');
+        return redirect()->route('guru.nilai')->with('success', 'Nilai berhasil ditambahkan!');
     }
 
     public function updatenilai(Request $request, string $id)

@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('materi.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.materi') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-book" style="color: #344767"></i>
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('nilai.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.nilai') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-star" style="color: #344767"></i>
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('jadwal.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.jadwal') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-regular fa-calendar-days" style="color: #344767"></i>
@@ -77,7 +77,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('profile.siswa') }}">
+                    <a class="nav-link  " href="{{ route('siswa.profile') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-address-card" style="color: #344767"></i>
@@ -86,13 +86,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/logout.php">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="nav-link" type="submit">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #344767"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Logout</span>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -169,8 +172,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="card" style="background-color: #f2e6bf;"> 
-                                <div class="card-body" >
+                            <div class="card" style="background-color: #f2e6bf;">
+                                <div class="card-body">
                                     <h5 class="card-title">Jumlah Materi</h5>
                                     <p class="card-text">20</p>
                                 </div>
@@ -184,24 +187,24 @@
 
 
 
-            <!--   Core JS Files   -->
-            <script src="../js/core/popper.min.js"></script>
-            <script src="../js/core/bootstrap.min.js"></script>
-            <script src="../js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../js/plugins/smooth-scrollbar.min.js"></script>
-            <script>
-                var win = navigator.platform.indexOf('Win') > -1;
-                if (win && document.querySelector('#sidenav-scrollbar')) {
-                    var options = {
-                        damping: '0.5'
-                    }
-                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                }
-            </script>
-            <!-- Github buttons -->
-            <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+                    <!--   Core JS Files   -->
+                    <script src="../js/core/popper.min.js"></script>
+                    <script src="../js/core/bootstrap.min.js"></script>
+                    <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+                    <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+                    <script>
+                        var win = navigator.platform.indexOf('Win') > -1;
+                        if (win && document.querySelector('#sidenav-scrollbar')) {
+                            var options = {
+                                damping: '0.5'
+                            }
+                            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                        }
+                    </script>
+                    <!-- Github buttons -->
+                    <script async defer src="https://buttons.github.io/buttons.js"></script>
+                    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+                    <script src="../js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>
