@@ -302,7 +302,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="password" class="form-label">Password</label>
-                                            <input type="Text" name="password" class="form-control"> <br>
+                                            <input type="Text" name="password" class="form-control" required> <br>
                                         </div>
                                         <div class="mb-3">
                                             <label for="alamat" class="form-label">Alamat</label>

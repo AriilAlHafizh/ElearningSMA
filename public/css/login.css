@@ -89,10 +89,15 @@ body {
     font-size: 16px;
     color: #ffffff;
     font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 /* Navbar*/
 nav {
-    display: flex;
+    display: flex-center;
     justify-content: space-between;
     align-items: center;
     background-color: #fffaf0;
