@@ -16,8 +16,9 @@ class siswacontroller extends Controller
         $dtmateriadmin = materi::with('guru','mapel')->get();
         $guruadmin = User::where('role', '=', 'guru')->get(); // Mengambil semua data guru
         $mapeladmin = Mapel::all(); // Mengambil semua data mapel
+        $profile = User::where('role', 'siswa')->get();
 
-        return view('siswa.materisiswa',compact('dtmateriadmin','guruadmin','mapeladmin'));
+        return view('siswa.materisiswa',compact('dtmateriadmin','guruadmin','mapeladmin','profile'));
     }
 
     public function dashboardsiswa()
