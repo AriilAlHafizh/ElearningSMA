@@ -186,7 +186,7 @@
                             <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Siswa</h5>
-                                    <p class="card-text">20</p>
+                                    <p class="card-text">{{ App\Models\User::where('role', 'siswa')->count() }}</p>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                             <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Guru</h5>
-                                    <p class="card-text">20</p>
+                                    <p class="card-text">{{ App\Models\User::where('role', 'guru')->count() }}</p>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                             <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Kelas</h5>
-                                    <p class="card-text">20</p>
+                                    <p class="card-text">{{ App\Models\Materi::whereNotNull('id')->count() }}</p>
                                 </div>
                             </div>
                         </div>
