@@ -1,18 +1,3 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.3
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -154,7 +139,8 @@
                             <div class="card mb-4">
                                 <div class="profile-container">
                                     <!-- Foto -->
-                                    <img src="img/orang.jpg" alt="Foto Siswa">
+                                    <img src="{{ asset('storage/' . $item->foto) }}"
+                                    alt="Foto Siswa" >
                                     <!-- Biodata -->
                                     <div class="profile-details">
                                         <div class="mb-3">

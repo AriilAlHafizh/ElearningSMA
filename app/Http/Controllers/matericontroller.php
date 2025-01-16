@@ -47,7 +47,8 @@ class matericontroller extends Controller
 
     public function profile()
     {
-        return view('guru.profileguru');
+        $gurus = User::where('role', 'guru')->get();
+        return view('guru.profileguru',compact('gurus'));
     }
     /**
      * Store a newly created resource in storage.
