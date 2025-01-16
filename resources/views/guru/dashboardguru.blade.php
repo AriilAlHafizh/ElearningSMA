@@ -176,7 +176,7 @@
                             <div class="card" style="background-color: #f2e6bf;">
                                 <div class="card-body">
                                     <h5 class="card-title">Jumlah Materi</h5>
-                                    <p class="card-text">20</p>
+                                    <p class="card-text">{{ App\Models\Materi::whereNotNull('id')->count() }}</p>
                                 </div>
                             </div>
                         </div>
